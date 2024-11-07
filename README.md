@@ -35,7 +35,5 @@ your repo access and to practice PR'ing with your team _before_ you start
 coding!
 
 - Lindsay Allen: [GitHub](https://github.com/lkallen)
-
-  ...
-
-- Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Peter Eyong: [GitHub](https://github.com/pteyong577)
+- Benjamin Corbett: [GitHub](https://github.com/bcsurf2822) [LinkedIn](https://www.linkedin.com/in/benjamin-corbett-84822424a/)
