@@ -37,3 +37,4 @@ coding!
 - Lindsay Allen: [GitHub](https://github.com/lkallen)
 - Peter Eyong: [GitHub](https://github.com/pteyong577)
 - Benjamin Corbett: [GitHub](https://github.com/bcsurf2822) [LinkedIn](https://www.linkedin.com/in/benjamin-corbett-84822424a/)
+- Lidia Prado: [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
