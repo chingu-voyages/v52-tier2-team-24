@@ -39,3 +39,4 @@ coding!
 - Benjamin Corbett: [GitHub](https://github.com/bcsurf2822) [LinkedIn](https://www.linkedin.com/in/benjamin-corbett-84822424a/)
 - Lidia Prado: [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
 - Dana Jeon: [GitHub](https://github.com/danajeon) [LinkedIn](https://www.linkedin.com/in/dana-jeon-dev/)
+- Alicia Guirand: [GitHub](https://github.com/aliciaguirand) [LinkedIn](https://www.linkedin.com/in/aliciaguirand)
