@@ -40,3 +40,4 @@ coding!
 - Lidia Prado: [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
 - Dana Jeon: [GitHub](https://github.com/danajeon) [LinkedIn](https://www.linkedin.com/in/dana-jeon-dev/)
 - Alicia Guirand: [GitHub](https://github.com/aliciaguirand) [LinkedIn](https://www.linkedin.com/in/aliciaguirand)
+- Anna Bowen:  [GitHub](https://github.com/bowenanna) [LinkedIn](https://www.linkedin.com/in/realannabowen/)
