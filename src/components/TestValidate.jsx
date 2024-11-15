@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 
 export default function TestValidate() {
 
-  const {register, handleSubmit} = useForm();
+  const {register, handleSubmit, formState: {errors}} = useForm();
+  console.log("Errors", errors)
 
   const [inputs, setInputs] = useState({});
 
@@ -45,15 +46,16 @@ export default function TestValidate() {
               className="border border-slate-300 rounded-lg pl-2"
               type="text"
               // register is a callback function that will return props and inject into inputs
-             {...register("firstName")}
+             {...register("firstName", {required: "This is required"})}
               placeholder="First Name"
               value={inputs.firstName || ""}
               onChange={handleChange}
             />
+            <p>{errors.firstname?.message}</p>
             <input
               className=" border border-slate-300 rounded-lg pl-2"
               type="text"
-              {...register("lastName")}
+              {...register("lastName", {required: true})}
               placeholder="Last Name"
               value={inputs.lastName || ""}
               onChange={handleChange}
@@ -63,7 +65,7 @@ export default function TestValidate() {
           <input
             className=" border border-slate-300 rounded-lg pl-2 "
             type="text"
-            {...register("email")}
+            {...register("email", {required: true})}
             placeholder="Email"
             value={inputs.email || ""}
             onChange={handleChange}
@@ -72,7 +74,7 @@ export default function TestValidate() {
           <input
             className=" border border-slate-300 rounded-lg pl-2"
             type="text"
-            {...register("address")}
+            {...register("address", {required: true, minLength: 4})}
             placeholder="Address"
             value={inputs.address || ""}
             onChange={handleChange}
