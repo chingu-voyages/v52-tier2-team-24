@@ -21,8 +21,8 @@ export default function TestValidate() {
     resolver: yupResolver(userSchema),
   });
 
-  if (errors) {
-    console.log("Errors", errors);
+  const handleFormSubmit = (data) => {
+    console.log(data)
   }
 
   return (
@@ -40,7 +40,7 @@ export default function TestValidate() {
         </h1>
         <form
           onSubmit={handleSubmit((data) => {
-            console.log("valdata:", data);
+           handleFormSubmit(data)
           })}
           className="flex flex-col gap-6 items-start ml-5"
         >
@@ -78,6 +78,11 @@ export default function TestValidate() {
             {...register("email")}
             placeholder={errors.email?.message || "Email"}
           />
+          {errors.email?.message && (
+					<div className='alert alert-danger'>
+						{errors.email?.message}
+					</div>
+				)}
           <input
             className={`border rounded-lg pl-2 ${
               errors.address
