@@ -1,21 +1,29 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+// import { object, string } from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-export default function LandingForm() {
-  const [inputs, setInputs] = useState({});
+export default function TestValidate() {
+  let userSchema = yup
+    .object({
+      firstName: yup.string().required("First Name Required"),
+      lastName: yup.string().required("Last Name Required"),
+      email: yup.string().email().required("Email  Required"),
+      address: yup.string().required("Address Required"),
+    })
+    .required();
 
-  const handleChange = (e) => {
-    const name = e.target.name;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(userSchema),
+  });
 
-    const value = e.target.value;
-
-    setInputs((values) => ({ ...values, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputs);
-    setInputs("")
-  };
+  if (errors) {
+    console.log("Errors", errors);
+  }
 
   return (
     <div className="w-1/2 h-[90vh] flex flex-col gap-4 items-center justify-between  bg-slate-50 pt-8">
@@ -31,44 +39,54 @@ export default function LandingForm() {
           Request an Appointment
         </h1>
         <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-4 items-start ml-5"
+          onSubmit={handleSubmit((data) => {
+            console.log("valdata:", data);
+          })}
+          className="flex flex-col gap-6 items-start ml-5"
         >
           <div className="flex gap-3">
             <input
-              className="border border-slate-300 rounded-lg pl-2"
+              className={`border rounded-lg pl-2 ${
+                errors.firstName
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300"
+              }`}
               type="text"
-              name="firstName"
-              placeholder="First Name"
-              value={inputs.firstName || ""}
-              onChange={handleChange}
+              {...register("firstName")}
+              placeholder={errors.firstName?.message || "First Name"}
             />
+
             <input
-              className=" border border-slate-300 rounded-lg pl-2"
+              className={`border rounded-lg pl-2 ${
+                errors.lastName
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300"
+              }`}
               type="text"
-              name="lastName"
-              placeholder="Last Name"
-              value={inputs.lastName || ""}
-              onChange={handleChange}
+              {...register("lastName")}
+              placeholder={errors.lastName?.message || "Last Name"}
             />
           </div>
 
           <input
-            className=" border border-slate-300 rounded-lg pl-2 "
+            className={`border rounded-lg pl-2 ${
+              errors.email
+                ? "border-red-500 placeholder-red-500"
+                : "border-slate-300"
+            }`}
             type="text"
-            name="email"
-            placeholder="Email"
-            value={inputs.email || ""}
-            onChange={handleChange}
+            {...register("email")}
+            placeholder={errors.email?.message || "Email"}
           />
-          {/* Will this be where auto-complete component or section will go? */}
           <input
-            className=" border border-slate-300 rounded-lg pl-2"
+            className={`border rounded-lg pl-2 ${
+              errors.address
+                ? "border-red-500 placeholder-red-500"
+                : "border-slate-300"
+            }`}
             type="text"
-            name="address"
-            placeholder="Address"
-            value={inputs.address || ""}
-            onChange={handleChange}
+            {...register("address")}
+            placeholder={errors.address?.message || "Address"}
           />
           <button
             type="submit"
