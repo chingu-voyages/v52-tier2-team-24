@@ -42,7 +42,7 @@ export default function TestValidate() {
           onSubmit={handleSubmit((data) => {
            handleFormSubmit(data)
           })}
-          className=" sm:ml-5 sm:items-start flex flex-col gap-10  w-11/12 mx-auto"
+          className=" sm:ml-5 sm:items-start flex flex-col space-y-10  w-11/12 mx-auto"
         >
           <div className="sm:flex sm:gap-3 flex-grow w-full flex flex-col gap-6">
             <input
