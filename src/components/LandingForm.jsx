@@ -26,16 +26,16 @@ export default function TestValidate() {
   }
 
   return (
-    <div className="w-1/2 h-[90vh] flex flex-col gap-4 items-center justify-between  bg-slate-50 pt-8">
+    <div className="sm:w-1/2 w-full h-[90vh] flex flex-col gap-4 items-center justify-between  bg-slate-50 pt-8">
       <header className="text-center">
-        <h1 className="text-8xl text-green-800 mb-4 font-extrabold">
+        <h1 className="sm:text-8xl text-4xl text-green-800 mb-4 font-extrabold">
           Solar Title
         </h1>
         <p>Basic info about the app in subtitle under web name</p>
       </header>
 
-      <div className="border-2 w-cd  h-contain  items-center border-slate-300 rounded-md bg-green-100">
-        <h1 className="text-center text-4xl my-10  text-green-800 font-bold underline">
+      <div className="border-2 w-full  h-full  items-center border-slate-300 rounded-md bg-green-100">
+        <h1 className="text-center sm:text-4xl text-lg my-10  text-green-800 font-bold underline">
           Request an Appointment
         </h1>
         <form
@@ -101,12 +101,12 @@ export default function TestValidate() {
           </button>
         </form>
       </div>
-      <p className="mb-4 text-lg">
+      {/* <p className="mb-4 text-lg">
         City Hall Employee?{" "}
         <a className="underline text-blue-500" href="/">
           Sign In
         </a>
-      </p>
+      </p> */}
     </div>
   );
 }
