@@ -1,19 +1,25 @@
-
 import { useForm } from "react-hook-form";
-import {object, string, number} from "yup"
+import { object, string } from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export default function TestValidate() {
-  let userSchema = object({
-    firstName: string().required(),
-    lastName: string().required(),
-    email: string().email()
-  })
-  
+  let userSchema = yup
+    .object({
+      firstName: string().required("First Name Required"),
+      lastName: string().required("Last Name Required"),
+      email: string().email().required("Email  Required"),
+      address: string().required("Address Required"),
+    })
+    .required();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(userSchema),
+  });
 
   if (errors) {
     console.log("Errors", errors);
@@ -40,34 +46,48 @@ export default function TestValidate() {
         >
           <div className="flex gap-3">
             <input
-              className="border border-slate-300 rounded-lg pl-2"
+              className={`border rounded-lg pl-2 ${
+                errors.firstName
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300"
+              }`}
               type="text"
-              // register is a callback function that will return props and inject into inputs
-              {...register("firstName", { required: "This is required" })}
-              placeholder="First Name"
+              {...register("firstName")}
+              placeholder={errors.firstName?.message || "First Name"}
             />
 
-            <input
-              className=" border border-slate-300 rounded-lg pl-2"
+<input
+              className={`border rounded-lg pl-2 ${
+                errors.lastName
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300"
+              }`}
               type="text"
-              {...register("lastName", { required: true })}
-              placeholder="Last Name"
+              {...register("lastName")}
+              placeholder={errors.lastName?.message || "Last Name"}
             />
           </div>
 
           <input
-            className=" border border-slate-300 rounded-lg pl-2 "
-            type="text"
-            {...register("email", { required: true })}
-            placeholder="Email"
-          />
-          {/* Will this be where auto-complete component or section will go? */}
-          <input
-            className=" border border-slate-300 rounded-lg pl-2"
-            type="text"
-            {...register("address", { required: true, minLength: 4 })}
-            placeholder="Address"
-          />
+              className={`border rounded-lg pl-2 ${
+                errors.email
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300"
+              }`}
+              type="text"
+              {...register("email")}
+              placeholder={errors.email?.message || "Email"}
+            />
+            <input
+              className={`border rounded-lg pl-2 ${
+                errors.address
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300"
+              }`}
+              type="text"
+              {...register("address")}
+              placeholder={errors.address?.message || "Address"}
+            />
           <button
             type="submit"
             className="bg-slate-800 rounded-lg text-slate-50 text-md py-2 px-4 ml-auto m-4"
