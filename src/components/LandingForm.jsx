@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function WebForm() {
+export default function LandingForm() {
   const [inputs, setInputs] = useState({});
 
   const handleChange = (e) => {
