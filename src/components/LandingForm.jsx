@@ -26,7 +26,7 @@ export default function TestValidate() {
   }
 
   return (
-    <div className="sm:w-1/2 w-full h-[90vh] flex flex-col gap-4 items-center justify-between  bg-slate-50 pt-8">
+    <div className="sm:w-1/2 w-full h-[100vh] flex flex-col gap-4 items-center justify-between  bg-slate-50 pt-8">
       <header className="text-center">
         <h1 className="sm:text-8xl text-4xl text-green-800 mb-4 font-extrabold">
           Solar Title
@@ -35,18 +35,18 @@ export default function TestValidate() {
       </header>
 
       <div className="border-2 w-full  h-full  items-center border-slate-300 rounded-md bg-green-100">
-        <h1 className="text-center sm:text-4xl text-lg my-10  text-green-800 font-bold underline">
+        <h1 className="sm:text-4xl text-center l text-2xl my-10  text-green-800 font-bold underline">
           Request an Appointment
         </h1>
         <form
           onSubmit={handleSubmit((data) => {
            handleFormSubmit(data)
           })}
-          className="flex flex-col gap-6 items-start ml-5"
+          className=" sm:ml-5 sm:items-start flex flex-col gap-10  w-11/12 mx-auto"
         >
-          <div className="flex gap-3">
+          <div className="sm:flex sm:gap-3 flex-grow w-full flex flex-col gap-6">
             <input
-              className={`border rounded-lg pl-2 ${
+              className={`p-2 border rounded-lg  ${
                 errors.firstName
                   ? "border-red-500 placeholder-red-500"
                   : "border-slate-300"
@@ -57,7 +57,7 @@ export default function TestValidate() {
             />
 
             <input
-              className={`border rounded-lg pl-2 ${
+              className={`border rounded-lg p-2 ${
                 errors.lastName
                   ? "border-red-500 placeholder-red-500"
                   : "border-slate-300"
@@ -69,7 +69,7 @@ export default function TestValidate() {
           </div>
 
           <input
-            className={`border rounded-lg pl-2 ${
+            className={`flex-grow w-full border rounded-lg p-2 ${
               errors.email
                 ? "border-red-500 placeholder-red-500"
                 : "border-slate-300"
@@ -84,7 +84,7 @@ export default function TestValidate() {
 					</div>
 				)}
           <input
-            className={`border rounded-lg pl-2 ${
+            className={`flex-grow w-full border rounded-lg p-2 ${
               errors.address
                 ? "border-red-500 placeholder-red-500"
                 : "border-slate-300"
@@ -95,18 +95,18 @@ export default function TestValidate() {
           />
           <button
             type="submit"
-            className="bg-slate-800 rounded-lg text-slate-50 text-md py-2 px-4 ml-auto m-4"
+            className="sm:ml-auto flex-grow w-full  bg-slate-800 rounded-lg text-slate-50 text-md py-4 mt-6 mx-auto"
           >
             Select a time{" "}
           </button>
         </form>
       </div>
-      {/* <p className="mb-4 text-lg">
+      <p className="mb-4 text-lg">
         City Hall Employee?{" "}
         <a className="underline text-blue-500" href="/">
           Sign In
         </a>
-      </p> */}
+      </p>
     </div>
   );
 }
