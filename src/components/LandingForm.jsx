@@ -5,13 +5,19 @@ import * as yup from "yup";
 
 export default function TestValidate() {
   let userSchema = yup
-    .object({
-      firstName: yup.string().required("First Name Required"),
-      lastName: yup.string().required("Last Name Required"),
-      email: yup.string().email().required("Email  Required"),
-      address: yup.string().required("Address Required"),
-    })
-    .required();
+  .object({
+    firstName: yup.string().required("First Name Required"),
+    lastName: yup.string().required("Last Name Required"),
+    email: yup
+      .string()
+      .email("Invalid Email Format")
+      .required("Email Required"),
+    address: yup
+      .string()
+      .min(5, "Address must be at least 10 characters long")
+      .required("Address Required"),
+  })
+  .required();
 
   const {
     register,
