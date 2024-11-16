@@ -84,11 +84,7 @@ export default function TestValidate() {
             {...register("email")}
             placeholder={errors.email?.message || "Email"}
           />
-          {errors.email?.message && (
-					<div className='alert alert-danger'>
-						{errors.email?.message}
-					</div>
-				)}
+  
           <input
             className={`flex-grow w-full border rounded-lg p-2 ${
               errors.address
