@@ -32,26 +32,23 @@ export default function TestValidate() {
   };
 
   return (
-    <div className="w-full h-[97vh] flex flex-col gap-4 items-center justify-between  bg-slate-50 pt-8">
+    <div className="w-full h-scree flex flex-col gap-4 items-center justify-between  bg-slate-50 pt-8">
       <header className="text-center">
-
         <h1 className="~text-3xl/6xl text-green-800 mb-4 font-extrabold">
-          Solar Title
+          Schedule an Appointment
         </h1>
-        <p>Basic info about the app in subtitle under web name</p>
+        <p>Please fill out the form to request and appointment</p>
       </header>
 
-      <div className="border-2 w-full  items-center flex flex-col gap-10 justify-center border-slate-300 rounded-md bg-green-100">
-        <h1 className=" ~text-xl/4xl text-center my-5  text-green-800 font-bold ">
-          Request an Appointment
-        </h1>
+      <div className="border-2 w-full sm:pb-2 py-2  items-center flex flex-col gap-10 justify-center border-slate-300 rounded-md bg-green-100">
+
         <form
           onSubmit={handleSubmit((data) => {
             handleFormSubmit(data);
           })}
-          className=" sm:ml-5 sm:items-start flex flex-col space-y-10  w-11/12 mx-auto"
+          className=" sm:ml-5 sm:items-start flex text-lg flex-col space-y-10  w-11/12 mx-auto"
         >
-          <div className="sm:flex sm:gap-3 flex-grow w-full flex flex-col gap-10 ">
+          <div className="md:flex-row md:w-1/2 flex-grow w-full flex flex-col gap-10 ">
             <input
               className={` pl-2 py-3 border rounded-lg  ${
                 errors.firstName
@@ -74,34 +71,38 @@ export default function TestValidate() {
               placeholder={errors.lastName?.message || "Last Name"}
             />
           </div>
+          <div className="md:flex-row md:w-1/2 flex-grow w-full flex flex-col gap-10 ">
+            <input
+              className={` pl-2 py-3 border rounded-lg  ${
+                errors.email
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300"
+              }`}
+              type="text"
+              {...register("email")}
+              placeholder={errors.email?.message || "Email"}
+            />
 
-          <input
-            className={`flex-grow w-full border rounded-lg  pl-2 py-3  ${
-              errors.email
-                ? "border-red-500 placeholder-red-500"
-                : "border-slate-300"
-            }`}
-            type="text"
-            {...register("email")}
-            placeholder={errors.email?.message || "Email"}
-          />
+            <input
+              className={` pl-2 py-3 border rounded-lg  ${
+                errors.address
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300 "
+              }`}
+              type="text"
+              {...register("address")}
+              placeholder={errors.address?.message || "Address"}
+            />
+          </div>
 
-          <input
-            className={`flex-grow w-full border rounded-lg pl-2 py-3  ${
-              errors.address
-                ? "border-red-500 placeholder-red-500"
-                : "border-slate-300 "
-            }`}
-            type="text"
-            {...register("address")}
-            placeholder={errors.address?.message || "Address"}
-          />
-
+          <div>
+            <p>Preferred Timeslot</p>
+          </div>
           <button
             type="submit"
-            className="sm:ml-auto w-full  bg-slate-800 rounded-lg text-slate-50 text-xl uppercase py-7 "
+            className="sm:ml-auto sm:w-1/2  sm:py-2 w-full  bg-slate-800 rounded-lg text-slate-50 text-xl uppercase py-7 "
           >
-            Select a time{" "}
+            Submit{" "}
           </button>
         </form>
       </div>
