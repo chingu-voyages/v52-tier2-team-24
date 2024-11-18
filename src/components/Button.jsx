@@ -8,6 +8,6 @@ export const Button = ({text, isTransparent, isButtonLarge}) => {
   }
 
   return (
-    <button className={`bg-blue-500 text-white hover:bg-blue-600 rounded-3xl ${size}`}>{text}</button>
+    <button className={`flex align-center bg-blue-500 text-white hover:bg-blue-600 rounded-3xl ${size}`}>{text}</button>
   )
 }

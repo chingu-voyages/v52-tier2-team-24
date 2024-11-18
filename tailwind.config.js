@@ -57,6 +57,9 @@ export default {
 =======
 >>>>>>> 96368ad (hero layout created)
       },
+      rotate: {
+        315: '315deg',
+      },
     },
   },
   plugins: [fluid],

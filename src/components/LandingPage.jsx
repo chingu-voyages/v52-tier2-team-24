@@ -2,36 +2,44 @@ import LandingForm from './LandingForm';
 import { NavBar } from './NavBar';
 import { Button } from './Button';
 import {Arrow} from './Arrow';
+import installationPic from '../images/solar.jpg';
+import nextIcon from '../images/next-black.png';
+import solarHouse from '../images/solar-cell.png'
+import wfhPic from '../images/workinginhome2.svg';
 // import installationPic from '../images/pexels-kindelmedia-9875415.jpg';
-import installationPic from '../images/solar-panel-multicolor.png';
+// import installationPic from '../images/solar-panel-multicolor.png';
 
 export const LandingPage = () => {
   return (
     <div className=''>
-      <div className='bg-gradient-to-t from-white to-landing-blue'>
+      <div className='bg-gradient-to-t from-white to-landing-blue w-full'>
         <NavBar />
 
-        <div className='flex sm:flex-col sm:flex-wrap lg:flex-row justify-around'>
-          <div className='flex flex-col justify-center sm:w-full md:w-1/2 py-20 px-32 text-center'>
-            <h1 className='text-6xl text-gray-900 mb-20 leading-tight font-semibold'>Make the switch to <br/>solar energy</h1>
+        <div className='flex flex-col flex-wrap lg:flex-row justify-around items-center'>
+          <div className='flex flex-col w-full lg:w-3/6 px-12 py-14 md:py-20 md:px-56 sm:mt-28 text-center xl:text-start'>
+            <h1 className='text-4xl md:text-5xl min-w-full text-gray-900 mb-5 align-center md:leading-snug'>Power Your World with Solar Energy</h1>
             
-            <div className='flex flex-col self-center w-1/2 -mt-14'>
-              <h2 className='text-2xl mb-20 leading-normal font-extralight text-gray-700'>Saving the planet. Saving your wallet.</h2>
+            <div className='flex flex-col min-w-max'>
+              <h2 className='text-xl md:text-2xl mb-12 leading-normal font-extralight text-gray-700'>Learn more about installation and maintenance <br/>costs with a free evaluation.</h2>
               {/* <p>Save both the planet and your wallet. <br/> Schedule an appointment with a specialist to learn more.</p> */}
 
-              <div className='flex items-center'>
-                <Button text={'Schedule an appointment'} isButtonLarge={true} />
+              <div className='flex justify-center lg:justify-normal'>
+                <Button text={'Schedule an appointment'} isButtonLarge={true}/>
+                {/* <Button text={'Contact Us'} isTransparent={true} /> */}
                 <span className='flex items-center'>
                   <a href='' className='text-xl ml-8'>Contact Us</a>
-                  <Arrow />
+                  <img src={nextIcon} className='w-5'/>
                 </span>
               </div>
             </div>
           </div>
-
-          <div className=''>
-            <img src={installationPic} className='self-center size-80 max-w-80 rounded-lg'/>
+          <div className='flex w-full lg:w-3/6 justify-center'>
+            <img src={wfhPic} className='size-4/6 ' />
           </div>
+
+          {/* <div className=''>
+          </div> */}
+            {/* <img src={installationPic} className='self-center w-1/2 rounded-lg'/> */}
         </div>
       </div>
 
