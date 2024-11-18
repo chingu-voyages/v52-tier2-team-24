@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { GiSolarPower } from "react-icons/gi";
 // import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,105 +9,138 @@ export default function TestValidate() {
     .object({
       firstName: yup.string().required("First Name Required"),
       lastName: yup.string().required("Last Name Required"),
-      email: yup.string().email().required("Email  Required"),
-      address: yup.string().required("Address Required"),
+      email: yup
+        .string()
+        .email("Invalid Email Format")
+        .required("Email Required"),
+      address: yup
+        .string()
+        .min(5, "Address must be at least 10 characters long")
+        .required("Address Required"),
     })
     .required();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(userSchema),
   });
 
   const handleFormSubmit = (data) => {
-    console.log(data)
-  }
+    console.log(data);
+    localStorage.setItem("userInput", JSON.stringify(data));
+  };
 
   return (
-    <div className="w-1/2 h-[90vh] flex flex-col gap-4 items-center justify-between  bg-slate-50 pt-8">
-      <header className="text-center">
-        <h1 className="text-8xl text-green-800 mb-4 font-extrabold">
-          Solar Title
-        </h1>
-        <p>Basic info about the app in subtitle under web name</p>
+    <div className="w-full  flex flex-col gap-4 items-start justify-between   pt-8">
+      <header className="h-[20vh] flex items-center gap-5 ">
+        <GiSolarPower className="w-28 h-28" />
+        <div>
+          <h1 className="text-2xl mb-4 font-extrabold">
+            Schedule an Appointment
+          </h1>
+          <p>Please fill out the form to request and appointment</p>
+        </div>
       </header>
 
-      <div className="border-2 w-cd  h-contain  items-center border-slate-300 rounded-md bg-green-100">
-        <h1 className="text-center text-4xl my-10  text-green-800 font-bold underline">
-          Request an Appointment
-        </h1>
+      <div className="w-full  py-10  items-center flex flex-col justify-center">
         <form
           onSubmit={handleSubmit((data) => {
-           handleFormSubmit(data)
+            handleFormSubmit(data);
           })}
-          className="flex flex-col gap-6 items-start ml-5"
+          className=" sm:ml-5 sm:items-start flex text-lg  flex-col w-11/12 mx-auto"
         >
-          <div className="flex gap-3">
-            <input
-              className={`border rounded-lg pl-2 ${
-                errors.firstName
-                  ? "border-red-500 placeholder-red-500"
-                  : "border-slate-300"
-              }`}
-              type="text"
-              {...register("firstName")}
-              placeholder={errors.firstName?.message || "First Name"}
-            />
-
-            <input
-              className={`border rounded-lg pl-2 ${
-                errors.lastName
-                  ? "border-red-500 placeholder-red-500"
-                  : "border-slate-300"
-              }`}
-              type="text"
-              {...register("lastName")}
-              placeholder={errors.lastName?.message || "Last Name"}
-            />
+          <div className="sm:flex-row gap-2  flex-grow w-full flex flex-col   ">
+            <div className="sm:w-1/2 ">
+              <p className="ml-2 font-bold mb-2">First Name *</p>
+              <input
+                className={`w-full pl-2 border mb-4  py-2 rounded-lg  focus:outline-slate-400 ${
+                  errors.firstName
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-slate-300"
+                }`}
+                type="text"
+                {...register("firstName")}
+                placeholder={errors.firstName?.message || "Enter Your Name"}
+              />
+            </div>
+            <div className="sm:w-1/2 ">
+              <p className="ml-2 font-bold mb-2">Last Name *</p>
+              <input
+                className={`w-full  border mb-4   rounded-lg pl-2 py-2 focus:outline-slate-400 ${
+                  errors.lastName
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-slate-300"
+                }`}
+                type="text"
+                {...register("lastName")}
+                placeholder={errors.lastName?.message || "Enter Your Last Name"}
+              />
+            </div>
           </div>
 
-          <input
-            className={`border rounded-lg pl-2 ${
-              errors.email
-                ? "border-red-500 placeholder-red-500"
-                : "border-slate-300"
-            }`}
-            type="text"
-            {...register("email")}
-            placeholder={errors.email?.message || "Email"}
-          />
-          {errors.email?.message && (
-					<div className='alert alert-danger'>
-						{errors.email?.message}
-					</div>
-				)}
-          <input
-            className={`border rounded-lg pl-2 ${
-              errors.address
-                ? "border-red-500 placeholder-red-500"
-                : "border-slate-300"
-            }`}
-            type="text"
-            {...register("address")}
-            placeholder={errors.address?.message || "Address"}
-          />
-          <button
-            type="submit"
-            className="bg-slate-800 rounded-lg text-slate-50 text-md py-2 px-4 ml-auto m-4"
-          >
-            Select a time{" "}
-          </button>
+          <div className="sm:flex-row gap-2 flex-grow w-full flex flex-col  ">
+            <div className="sm:w-1/2 ">
+              <p className="ml-2 font-bold mb-2">Email *</p>
+              <input
+                className={`w-full  pl-2 py-2 mb-4    border rounded-lg focus:outline-slate-400  ${
+                  errors.email
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-slate-300 "
+                }`}
+                type="text"
+                {...register("email")}
+                placeholder={errors.email?.message || "Enter Your  Email"}
+              />
+            </div>
+            <div className="sm:w-1/2 ">
+              <p className="ml-2 font-bold mb-2">Address *</p>
+              <input
+                className={`w-full  pl-2 py-2 border mb-4   rounded-lg focus:outline-slate-400  ${
+                  errors.address
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-slate-300 "
+                }`}
+                type="text"
+                {...register("address")}
+                placeholder={errors.address?.message || "Enter Your Address"}
+              />
+            </div>
+          </div>
+
+          <p className="ml-2 font-bold mb-2">Preferred Timeslot</p>
+          <div className="sm:flex-row sm:w-1/2 flex flex-col w-full gap-2  ">
+            <select
+              className="sm:w-1/2 py-3 rounded-lg bg-slate-300 border border-slate-400"
+              name=""
+              id="0"
+            ></select>
+            <select
+              className="sm:w-1/2 py-3 rounded-lg bg-slate-300 border border-slate-400"
+              name=""
+              id=""
+            ></select>
+          </div>
+          <div className="sm:flex-row sm:w-1/2 sm:mx-auto sm:mt-10  flex flex-col gap-2  mt-5">
+            <button
+              type="submit"
+              className=" w-full font-bold  bg-green-600 rounded-lg text-slate-50 text-xl  py-4 "
+            >
+              Submit{" "}
+            </button>
+            <button
+              type="button"
+              onClick={() => reset()}
+              className=" border-2 border-slate-600  w-full  rounded-lg  text-xl font-bold  py-4 "
+            >
+              Cancel{" "}
+            </button>
+          </div>
         </form>
       </div>
-      <p className="mb-4 text-lg">
-        City Hall Employee?{" "}
-        <a className="underline text-blue-500" href="/">
-          Sign In
-        </a>
-      </p>
     </div>
   );
 }
