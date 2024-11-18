@@ -46,7 +46,7 @@ export default function TestValidate() {
         </div>
       </header>
 
-      <div className="border-2 w-full  py-10  items-center flex flex-col justify-center border-slate-300 rounded-md">
+      <div className="w-full  py-10  items-center flex flex-col justify-center">
         <form
           onSubmit={handleSubmit((data) => {
             handleFormSubmit(data);
@@ -60,7 +60,7 @@ export default function TestValidate() {
                 className={`w-full pl-2 border mb-4  py-2 rounded-lg   ${
                   errors.firstName
                     ? "border-red-500 placeholder-red-500"
-                    : "border-slate-400"
+                    : "border-slate-300"
                 }`}
                 type="text"
                 {...register("firstName")}
@@ -73,7 +73,7 @@ export default function TestValidate() {
                 className={`w-full  border mb-4   rounded-lg pl-2 py-2  ${
                   errors.lastName
                     ? "border-red-500 placeholder-red-500"
-                    : "border-slate-400"
+                    : "border-slate-300"
                 }`}
                 type="text"
                 {...register("lastName")}
@@ -89,7 +89,7 @@ export default function TestValidate() {
                 className={`w-full  pl-2 py-2 mb-4    border rounded-lg  ${
                   errors.email
                     ? "border-red-500 placeholder-red-500"
-                    : "border-slate-400"
+                    : "border-slate-300"
                 }`}
                 type="text"
                 {...register("email")}
@@ -102,7 +102,7 @@ export default function TestValidate() {
                 className={`w-full  pl-2 py-2 border mb-4   rounded-lg  ${
                   errors.address
                     ? "border-red-500 placeholder-red-500"
-                    : "border-slate-400 "
+                    : "border-slate-300 "
                 }`}
                 type="text"
                 {...register("address")}
