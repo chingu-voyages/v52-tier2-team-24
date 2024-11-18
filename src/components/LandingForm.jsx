@@ -40,17 +40,17 @@ export default function TestValidate() {
         <p>Please fill out the form to request and appointment</p>
       </header>
 
-      <div className="border-2 w-full sm:pb-2 py-2  items-center flex flex-col gap-10 justify-center border-slate-300 rounded-md bg-green-100">
+      <div className="border-2 w-full  py-10  items-center flex flex-col gap-8 justify-center border-slate-300 rounded-md bg-green-100">
 
         <form
           onSubmit={handleSubmit((data) => {
             handleFormSubmit(data);
           })}
-          className=" sm:ml-5 sm:items-start flex text-lg flex-col space-y-10  w-11/12 mx-auto"
+          className=" sm:ml-5 sm:items-start flex text-lg  flex-col space-y-10  w-11/12 mx-auto"
         >
-          <div className="md:flex-row md:w-1/2 flex-grow w-full flex flex-col gap-10 ">
+          <div className="md:flex-row md:w-1/2  flex-grow w-full flex flex-col gap-10 ">
             <input
-              className={` pl-2 py-3 border rounded-lg  ${
+              className={` pl-2 border  py-3 rounded-lg  ${
                 errors.firstName
                   ? "border-red-500 placeholder-red-500"
                   : "border-slate-300"
@@ -94,9 +94,10 @@ export default function TestValidate() {
               placeholder={errors.address?.message || "Address"}
             />
           </div>
-
-          <div>
-            <p>Preferred Timeslot</p>
+    <p>Preferred Timeslot</p>
+          <div className="md:flex-row flex flex-col w-full gap-2 ">
+        <select className="md:w-1/2 py-2" name="" id="0"></select>
+        <select className="md:w-1/2 py-2" name="" id=""></select>
           </div>
           <button
             type="submit"
