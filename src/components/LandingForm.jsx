@@ -29,6 +29,7 @@ export default function TestValidate() {
 
   const handleFormSubmit = (data) => {
     console.log(data);
+    localStorage.setItem("userInput", JSON.stringify(data))
   };
 
   return (
