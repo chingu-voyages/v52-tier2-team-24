@@ -57,7 +57,7 @@ export default function TestValidate() {
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">First Name *</p>
               <input
-                className={`w-full pl-2 border mb-4  py-2 rounded-lg   ${
+                className={`w-full pl-2 border mb-4  py-2 rounded-lg  focus:outline-slate-400 ${
                   errors.firstName
                     ? "border-red-500 placeholder-red-500"
                     : "border-slate-300"
@@ -70,7 +70,7 @@ export default function TestValidate() {
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">Last Name *</p>
               <input
-                className={`w-full  border mb-4   rounded-lg pl-2 py-2  ${
+                className={`w-full  border mb-4   rounded-lg pl-2 py-2 focus:outline-slate-400 ${
                   errors.lastName
                     ? "border-red-500 placeholder-red-500"
                     : "border-slate-300"
@@ -86,10 +86,10 @@ export default function TestValidate() {
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">Email *</p>
               <input
-                className={`w-full  pl-2 py-2 mb-4    border rounded-lg  ${
+                className={`w-full  pl-2 py-2 mb-4    border rounded-lg focus:outline-slate-400  ${
                   errors.email
                     ? "border-red-500 placeholder-red-500"
-                    : "border-slate-300"
+                    : "border-slate-300 "
                 }`}
                 type="text"
                 {...register("email")}
@@ -97,9 +97,9 @@ export default function TestValidate() {
               />
             </div>
             <div className="sm:w-1/2 ">
-              <p className="ml-2 font-bold mb-2">Address</p>
+              <p className="ml-2 font-bold mb-2">Address *</p>
               <input
-                className={`w-full  pl-2 py-2 border mb-4   rounded-lg  ${
+                className={`w-full  pl-2 py-2 border mb-4   rounded-lg focus:outline-slate-400  ${
                   errors.address
                     ? "border-red-500 placeholder-red-500"
                     : "border-slate-300 "
@@ -132,7 +132,7 @@ export default function TestValidate() {
               Submit{" "}
             </button>
             <button
-            type="button"
+              type="button"
               onClick={() => reset()}
               className=" border-2 border-slate-600  w-full  rounded-lg  text-xl font-bold  py-4 "
             >
