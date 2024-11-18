@@ -9,7 +9,7 @@ function App() {
           Hello from Solar App!
         </h1> */}
 
-        <LandingForm />
+        {/* <LandingForm /> */}
       </div>
     </>
   );
