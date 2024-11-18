@@ -1,16 +1,23 @@
+import { useState } from "react";
 import "./App.css";
-import LandingForm from "./components/LandingForm";
+import {LandingPage} from './components/LandingPage';
+import {LandingPageOriginal} from './components/LandingPageOriginal';
 
 function App() {
+  const [newLayout, setNewLayout] = useState(false);
+
   return (
     <>
-      <div className=" flex justify-center items-center">
-        {/* <h1 className="text-4xl font-bold text-gray-800">
-          Hello from Solar App!
-        </h1> */}
+      <button 
+        className='fixed right-10 bottom-10 border-black bg-orange-100 p-5 rounded-xl'
+        onClick={() => newLayout ? setNewLayout(false) : setNewLayout(true)}
+      >{newLayout ? 'View OG Layout' : 'View Layout V2'}</button>
 
-        {/* <LandingForm /> */}
-      </div>
+       {newLayout ?
+        <LandingPage />
+        :
+        <LandingPageOriginal />
+      }
     </>
   );
 }
