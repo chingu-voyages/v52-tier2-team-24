@@ -2,7 +2,6 @@ import LandingForm from './LandingForm';
 import { NavBar } from './NavBar';
 import { Button } from './Button';
 import {Arrow} from './Arrow';
-// import nextIcon from '../images/next-black.png';
 import wfhPic from '../images/workinginhome-cropped.svg';
 import piggyBankImg from '../images/piggy-bank.png';
 import billImg from '../images/bill.png';
@@ -29,7 +28,6 @@ export const LandingPage = () => {
                 
                 <span className='flex items-center'>
                   <a href='' className='text-xl ml-8'>Contact Us</a>
-                  {/* <img src={nextIcon} className='w-5'/> */}
                   <Arrow/>
                 </span>
               </div>

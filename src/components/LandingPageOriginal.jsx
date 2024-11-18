@@ -1,7 +1,7 @@
 import wfhPic from '../images/workinginhome.svg';
 import LandingForm from './LandingForm';
 import { NavBar } from './NavBar';
-// bg-landing-img
+
 export const LandingPageOriginal = () => {
   return (
     <div className='flex'>
