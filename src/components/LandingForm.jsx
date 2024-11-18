@@ -134,7 +134,7 @@ export default function TestValidate() {
             <button
             type="button"
               onClick={() => reset()}
-              className=" border-2 border-slate-600  w-full  rounded-lg  text-xl font-bold uppercase py-4 "
+              className=" border-2 border-slate-600  w-full  rounded-lg  text-xl font-bold  py-4 "
             >
               Cancel{" "}
             </button>
