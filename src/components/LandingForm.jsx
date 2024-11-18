@@ -36,7 +36,7 @@ export default function TestValidate() {
 
   return (
     <div className="w-full  flex flex-col gap-4 items-start justify-between   pt-8">
-      <header className="h-[20vh] flex items-center gap-5 ">
+      {/* <header className="h-[20vh] flex items-center gap-5 ">
         <GiSolarPower className="w-28 h-28" />
         <div>
           <h1 className="text-2xl mb-4 font-extrabold">
@@ -44,7 +44,7 @@ export default function TestValidate() {
           </h1>
           <p>Please fill out the form to request and appointment</p>
         </div>
-      </header>
+      </header> */}
 
       <div className="w-full  py-10  items-center flex flex-col justify-center">
         <form

@@ -10,15 +10,15 @@ function App() {
   return (
     <>
       <button 
-        className='absolute right-10 bottom-10 border-black'
+        className='fixed right-10 bottom-10 border-black bg-orange-100 p-5 rounded-xl'
         onClick={() => newLayout ? setNewLayout(false) : setNewLayout(true)}
       >{newLayout ? 'View OG Layout' : 'View Layout V2'}</button>
-      {/* <div className="min-h-screen bg-blue-100 flex justify-center items-center"> */}
-      <div>
-        {/* <h1 className="text-4xl font-bold text-gray-800">Hello from Solar App!</h1> */}
+
+       {newLayout ?
         <LandingPage />
-        {/* <LandingForm /> */}
-      </div>
+        :
+        <LandingPageOriginal />
+      }
     </>
   );
 }
