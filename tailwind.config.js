@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-import fluid, { extract, screens, fontSize } from 'fluid-tailwind';
+// import fluid, { extract, screens, fontSize } from 'fluid-tailwind';
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    screens,
-    fontSize,
+    // screens,
+    // fontSize,
     extend: {
       colors: {
         'red-button': '#FFF1F1',
@@ -36,5 +36,5 @@ export default {
       },
     },
   },
-  plugins: [fluid],
+  // plugins: [fluid],
 };

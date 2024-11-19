@@ -3,6 +3,7 @@ import { GiSolarPower } from "react-icons/gi";
 // import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import DateForm from "./DateForm";
 
 export default function TestValidate() {
   let userSchema = yup
@@ -112,7 +113,7 @@ export default function TestValidate() {
           </div>
 
           <p className="ml-2 font-bold mb-2">Preferred Timeslot</p>
-          <div className="sm:flex-row sm:w-1/2 flex flex-col w-full gap-2  ">
+          {/* <div className="sm:flex-row sm:w-1/2 flex flex-col w-full gap-2  ">
             <select
               className="sm:w-1/2 py-3 rounded-lg bg-slate-300 border border-slate-400"
               name=""
@@ -123,7 +124,8 @@ export default function TestValidate() {
               name=""
               id=""
             ></select>
-          </div>
+          </div> */}
+          <DateForm/>
           <div className="sm:flex-row sm:w-1/2 sm:mx-auto sm:mt-10  flex flex-col gap-2  mt-5">
             <button
               type="submit"
