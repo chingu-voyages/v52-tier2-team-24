@@ -4,41 +4,66 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DateForm = ({ setValue, clearErrors, register }) => {
-  const [appointmentDate, setAppointmentDate] = useState(null);
-  const [appointmentTime, setAppointmentTime] = useState('');
-
-  const handleDateChange = (date) => {
-    setAppointmentDate(date);
-    combineDateTime(date, appointmentTime);
-  };
-
-  const handleTimeChange = (e) => {
-    const time = e.target.value;
-    setAppointmentTime(time);
-    combineDateTime(appointmentDate, time);
-  };
-
-  const combineDateTime = (date, time) => {
-    if (date && time) {
-      const formattedDate = date.toISOString().split("T")[0];
-      const combinedDateTime = `${formattedDate} ${time}`;
-      setValue("dateTime", combinedDateTime);
-      clearErrors("dateTime");
-    }
-  };
-
-  //Adding a manual time picking instead of the time picker
-  const generateTimeOptions = () => {
-    const times = [];
-    for (let hour = 9; hour <= 17; hour++) {
-      const suffix = hour < 12 ? "AM" : "PM";
-      const hour12 = hour > 12 ? hour - 12 : hour; // Convert to 12-hour format
-      const formattedTime = `${hour12}:00 ${suffix}`;
-      times.push(formattedTime);
-    }
-    return times;
-  };
-
+    const [appointmentDate, setAppointmentDate] = useState(new Date());
+    const [appointmentTime, setAppointmentTime] = useState("");
+  
+    //   const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log("Appointment Date:", appointmentDate);
+    //     console.log("Appointment Time:", appointmentTime);
+    //   };
+  
+    useEffect(() => {
+      // initial time
+      const initialTime = getNextAvailableTime(new Date());
+      setAppointmentTime(initialTime);
+      combineDateTime(appointmentDate, initialTime);
+    }, []);
+  
+    const handleDateChange = (date) => {
+      setAppointmentDate(date);
+      const nextAvailableTime = getNextAvailableTime(date);
+      setAppointmentTime(nextAvailableTime);
+      combineDateTime(date, nextAvailableTime);
+    };
+  
+    const handleTimeChange = (e) => {
+      const time = e.target.value;
+      setAppointmentTime(time);
+      combineDateTime(appointmentDate, time);
+    };
+  
+    const combineDateTime = (date, time) => {
+      if (date && time) {
+        const formattedDate = date.toISOString().split("T")[0];
+        const combinedDateTime = `${formattedDate} ${time}`;
+        setValue("dateTime", combinedDateTime);
+        clearErrors("dateTime");
+      }
+    };
+  
+    const getNextAvailableTime = (date) => {
+      const now = new Date();
+      const isToday = date.toDateString() === now.toDateString();
+      let hour = isToday ? now.getHours() + 1 : 9; // if today, starting from next hour, otherwise next day 9am
+      hour = Math.max(9, Math.min(18, hour)); // hours between 9 and 18
+      return `${hour % 12 || 12}:00 ${hour >= 12 ? "PM" : "AM"}`;
+    };
+  
+    const generateTimeOptions = () => {
+      const times = [];
+      const now = new Date();
+      const isToday = appointmentDate.toDateString() === now.toDateString();
+      const startHour = isToday ? now.getHours() + 1 : 9; // starting from next hour if today
+  
+      for (let hour = startHour; hour <= 18; hour++) {
+        const suffix = hour < 12 ? "AM" : "PM";
+        const hour12 = hour > 12 ? hour - 12 : hour;
+        const formattedTime = `${hour12}:00 ${suffix}`;
+        times.push(formattedTime);
+      }
+      return times;
+    };
 
   return (
     <div className="sm:flex-row sm:w-1/2 flex flex-col w-full gap-2">
@@ -47,8 +72,9 @@ const DateForm = ({ setValue, clearErrors, register }) => {
           selected={appointmentDate}
           onChange={handleDateChange}
           dateFormat="MMMM d, yyyy"
-          placeholderText="Select a date"
+          placeholderText="Select Date"
         //   required
+        minDate={new Date()}
         />
       </div>
       <div  className="w-full sm:w-1/2">
@@ -59,7 +85,7 @@ const DateForm = ({ setValue, clearErrors, register }) => {
           onChange={handleTimeChange}
         //   required
         >
-             <option value="">Select Time</option>
+             {/* <option value="">Select Time</option> */}
           {generateTimeOptions().map((time) => (
             <option key={time} value={time}>
               {time}
