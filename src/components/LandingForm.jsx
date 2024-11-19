@@ -18,6 +18,8 @@ export default function TestValidate() {
         .string()
         .min(5, "Address must be at least 10 characters long")
         .required("Address Required"),
+      // Adding date and time validation for the dateform
+      dateTime: yup.string().required ("Date and time are required")
     })
     .required();
 
@@ -26,11 +28,22 @@ export default function TestValidate() {
     handleSubmit,
     reset,
     formState: { errors },
+    setError, //to manually set errors
+    clearErrors,//to clear erros
+    setValue,//to set value
   } = useForm({
     resolver: yupResolver(userSchema),
   });
 
   const handleFormSubmit = (data) => {
+    //checking if the time was picked
+    if(!data.dateTime){
+      setError("dateTime",{
+        type: "manual",
+        message: "Date and time slot required",
+      });
+      return;
+    }
     console.log(data);
     localStorage.setItem("userInput", JSON.stringify(data));
   };
@@ -113,7 +126,15 @@ export default function TestValidate() {
           </div>
 
           <p className="ml-2 font-bold mb-2">Preferred Timeslot</p>
-          <DateForm/>
+          <DateForm
+           setValue={setValue} //passing setValues and registering function to DateFomr
+           clearErrors={clearErrors}
+           register={register}
+           />
+           {/* Error message will pop up if date/time hasn't been picket */}
+           {errors.dateTime && (
+            <p className="text-red-500 ml-2 mt-1">{errors.dateTime?.message}</p>
+          )}
           <div className="sm:flex-row sm:w-1/2 sm:mx-auto sm:mt-10  flex flex-col gap-2  mt-5">
             <button
               type="submit"
