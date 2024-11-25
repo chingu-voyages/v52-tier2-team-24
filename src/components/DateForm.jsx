@@ -32,10 +32,17 @@ const DateForm = ({ setValue, clearErrors, register }) => {
       setAppointmentTime(time);
       combineDateTime(appointmentDate, time);
     };
+
+    const formatDate = (date) => {
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${month}/${day}/${year}`;
+  };
   
     const combineDateTime = (date, time) => {
       if (date && time) {
-        const formattedDate = date.toISOString().split("T")[0];
+        const formattedDate = formatDate(date);
         const combinedDateTime = `${formattedDate} ${time}`;
         setValue("dateTime", combinedDateTime);
         clearErrors("dateTime");

@@ -9,18 +9,25 @@ const AdminPage = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    const userInput = localStorage.getItem("userInput");
-    if (userInput) {
-      const data = JSON.parse(userInput);
-      const appointment = {
+    const existingAppointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+    const  newUserInput = localStorage.getItem("userInput");
+    if (newUserInput) {
+      const data = JSON.parse(newUserInput);
+      const newAppointment = {
         id: Date.now(),
         name: `${data.firstName} ${data.lastName}`,
         time: data.dateTime,
         address: data.address,
       };
-      setAppointments([appointment]);
+      
+  const updatedAppointments = [newAppointment, ...existingAppointments ];
+  localStorage.setItem('appointments', JSON.stringify(updatedAppointments));
+  setAppointments(updatedAppointments);
+  localStorage.removeItem('userInput');
+    } else {
+      setAppointments(existingAppointments);
     }
-  }, []);
+}, []);
 
   const handleLogout = () => {
     navigate("/");
@@ -32,7 +39,7 @@ const AdminPage = () => {
 
       <div className="p-8">
         <h2 className="text-xl font-medium mb-8">New Appointment Requests</h2>
-        <div className="flex gap-6 mb-12">
+        <div className="flex mb-12">
           {/* New appointments */}
           {appointments.map((appointment) => (
             <div
@@ -40,7 +47,7 @@ const AdminPage = () => {
               className="flex items-start gap-4 bg-white p-6 min-w-[300px]"
             >
               <div className="flex flex-col items-center">
-                <div className="flex items-center justify-center bg-gray-100 rounded-full h-[50px] w-[50px] mb-3">
+                <div className="flex items-center justify-center bg-gray-100 rounded-full h-[55px] w-[55px] mb-3">
                   <img
                     src="src\images\calendar-image-png-3.png"
                     alt="Calendar"
