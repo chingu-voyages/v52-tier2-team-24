@@ -9,8 +9,10 @@ const AdminPage = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    const existingAppointments = JSON.parse(localStorage.getItem('appointments') || '[]');
-    const  newUserInput = localStorage.getItem("userInput");
+    const existingAppointments = JSON.parse(
+      localStorage.getItem("appointments") || "[]"
+    );
+    const newUserInput = localStorage.getItem("userInput");
     if (newUserInput) {
       const data = JSON.parse(newUserInput);
       const newAppointment = {
@@ -19,18 +21,27 @@ const AdminPage = () => {
         time: data.dateTime,
         address: data.address,
       };
-      
-  const updatedAppointments = [newAppointment, ...existingAppointments ];
-  localStorage.setItem('appointments', JSON.stringify(updatedAppointments));
-  setAppointments(updatedAppointments);
-  localStorage.removeItem('userInput');
+
+      const updatedAppointments = [newAppointment, ...existingAppointments];
+      localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+      setAppointments(updatedAppointments);
+      localStorage.removeItem("userInput");
     } else {
       setAppointments(existingAppointments);
     }
-}, []);
+  }, []);
 
   const handleLogout = () => {
     navigate("/");
+  };
+  const toggleVisitStatus = (id) => {
+    setAppointments(
+      appointments.map((appointment) =>
+        appointment.id === id
+          ? { ...appointment, isVisited: !appointment.isVisited }
+          : appointment
+      )
+    );
   };
 
   return (
@@ -88,7 +99,35 @@ const AdminPage = () => {
             </button>
           </div>
 
-          <div className="space-y-6">{/* Current Appointments */}</div>
+          <div className="space-y-6">
+            {/* Current Appointments */}
+
+            {appointments.map((appointment) => (
+              <div
+                key={appointment.id}
+                className="flex justify-between items-center"
+              >
+                <div className="flex items-center gap-4">
+                  <img src="src\images\weather.png" className="h-[30px]" />
+                  <div>
+                    <p className="font-medium">{appointment.name}</p>
+                    <p className="text-gray-500">{appointment.address}</p>
+                  </div>
+                </div>
+                <div className="text-gray-500">{appointment.time}</div>
+                <button
+                 className="w-12 h-6 rounded-full relative bg-gray-200 transition-colors"
+                  onClick={() => toggleVisitStatus(appointment.id)}>
+                    <div 
+        className={`absolute w-5 h-5 rounded-full top-0.5 left-0.5 transition-transform ${
+          appointment.isVisited ? 'transform translate-x-6 bg-green-500' : 'bg-red-500'
+        }`}
+      />
+      {/* {appointment.isVisited ? 'Visited' : 'Not Visited'} */}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
