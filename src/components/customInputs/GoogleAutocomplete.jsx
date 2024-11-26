@@ -33,7 +33,8 @@ const PlaceAutocompleteClassic = () => {
     placeAutocomplete.addListener("place_changed", () => {
       const selectedPlace = placeAutocomplete.getPlace();
       console.log("Selected Place:", selectedPlace);
-      getFormattedAddress(selectedPlace)
+      const validAddress = getFormattedAddress(selectedPlace)
+      console.log("Valid", validAddress)
     });
   }, [placeAutocomplete]);
 
