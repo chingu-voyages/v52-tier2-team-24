@@ -42,3 +42,4 @@ coding!
 - Alicia Guirand: [GitHub](https://github.com/aliciaguirand) [LinkedIn](https://www.linkedin.com/in/aliciaguirand)
 - Anna Bowen: [GitHub](https://github.com/bowenanna) [LinkedIn](https://www.linkedin.com/in/realannabowen/)
 - Jessica Beazer [GitHub](https://github.com/jessanagilepmp) [LinkedIn](https://www.linkedin.com/in/jessicabeazer/)
+- Sierra Swaby [GitHub](https://github.com/starkspark) [LinkedIn](https://www.linkedin.com/in/sierra-swaby)
