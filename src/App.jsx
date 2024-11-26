@@ -40,13 +40,6 @@ function App() {
     }
   ]);
   return (
-  //   <Router>
-  //   <Routes>
-  //     <Route path="/" element={<LandingPage />} />
-  //     <Route path="/admin" element={<AdminPage />} />
-  //     <Route path="*" element={<Navigate to="/" />} />
-  //   </Routes>
-  // </Router>
   <RouterProvider router={router} />
   );
 }
