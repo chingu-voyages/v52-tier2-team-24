@@ -6,7 +6,7 @@ import { NavBar } from "../components/NavBar";
 const AdminPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("appointments");
-  const [appointments, setAppointments] = useState([]);
+  const [newAppointments, setNewAppointments] = useState([]);
   const [acceptedAppointments, setAcceptedAppointments] = useState([]);
 
   useEffect(() => {
@@ -24,12 +24,12 @@ const AdminPage = () => {
         isVisited: false
       };
 
-      const updatedAppointments = [newAppointment, ...existingAppointments];
-      localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
-      setAppointments(updatedAppointments);
+      setNewAppointments ([newAppointment, ...existingAppointments]);
+    //   localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+    //   setAppointments(updatedAppointments);
       localStorage.removeItem("userInput");
     } else {
-      setAppointments(existingAppointments);
+      setNewAppointments(existingAppointments);
     }
   }, []);
 
@@ -37,9 +37,26 @@ const AdminPage = () => {
     //logout logic
     navigate("/");
   };
+
+  const handleApprove = (id) => {
+    const appointmentToAccept = newAppointments.find(app => app.id === id);
+    if (appointmentToAccept) {
+      setAcceptedAppointments(prev => [...prev, appointmentToAccept]);
+      setNewAppointments(prev => prev.filter(app => app.id !== id));
+      const updatedAppointments = [...acceptedAppointments, appointmentToAccept];
+      localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+    }
+  };
+
+  const handleCancel = (id) => {
+    setNewAppointments(prev => prev.filter(app => app.id !== id));
+    const updatedAppointments = newAppointments.filter(app => app.id !== id ? { ...appointment, isVisited: !appointment.isVisited }
+        : appointment);
+    localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+  };
   const toggleVisitStatus = (id) => {
-    setAppointments(
-      appointments.map((appointment) =>
+    setAcceptedAppointments(
+      acceptedAppointments.map((appointment) =>
         appointment.id === id
           ? { ...appointment, isVisited: !appointment.isVisited }
           : appointment
@@ -55,7 +72,7 @@ const AdminPage = () => {
         <h2 className="text-xl font-medium mb-8">New Appointment Requests</h2>
         <div className="flex flex-wrap mb-12">
           {/* New appointments */}
-          {appointments.map((appointment) => (
+          {newAppointments.map((appointment) => (
             <div
               key={appointment.id}
               className="flex items-start gap-4 bg-white p-2 min-w-[250px]"
@@ -119,7 +136,7 @@ const AdminPage = () => {
           <div className="space-y-6">
             {/* Current Appointments */}
 
-            {appointments.map((appointment) => (
+            {acceptedAppointments.map((appointment) => (
               <div
                 key={appointment.id}
                 className="flex justify-between items-center"
