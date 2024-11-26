@@ -87,7 +87,7 @@ const AdminPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="p-8">
         <h2 className="text-xl font-medium mb-8">New Appointment Requests</h2>
         <div className="flex flex-wrap mb-12">
@@ -176,7 +176,8 @@ const AdminPage = () => {
                       <p className="text-gray-500">{appointment.address}</p>
                     </div>
                   </div>
-                  <div className="text-gray-500">{appointment.time}</div>
+                  <div className="flex">
+                  <div className="text-gray-500 mr-3">{appointment.time}</div>
                   <button
                     className="w-12 h-6 rounded-full relative bg-gray-200 transition-colors"
                     onClick={() => toggleVisitStatus(appointment.id)}
@@ -189,7 +190,7 @@ const AdminPage = () => {
                       }`}
                     />
                     {/* {appointment.isVisited ? 'Visited' : 'Not Visited'} */}
-                  </button>
+                  </button></div>
                 </div>
               ))
             )}
