@@ -2,12 +2,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.address-input {
-  /* on focus */
-  --gmpx-color-primary: rgb(94, 94, 94);
-  width: 100%;
-
-  border-radius: 8px;
-  --gmpx-font-size-base: 1rem;
-}

@@ -6,7 +6,6 @@ import * as yup from "yup";
 import DateForm from "./DateForm";
 import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
 
-
 export default function TestValidate() {
   let userSchema = yup
     .object({
@@ -21,7 +20,7 @@ export default function TestValidate() {
         .min(5, "Address must be at least 10 characters long")
         .required("Address Required"),
       // Adding date and time validation for the dateform
-      dateTime: yup.string().required ("Date and time are required")
+      dateTime: yup.string().required("Date and time are required"),
     })
     .required();
 
@@ -31,16 +30,16 @@ export default function TestValidate() {
     reset,
     formState: { errors },
     setError, //to manually set errors
-    clearErrors,//to clear erros
-    setValue,//to set value
+    clearErrors, //to clear erros
+    setValue, //to set value
   } = useForm({
     resolver: yupResolver(userSchema),
   });
 
   const handleFormSubmit = (data) => {
     //checking if the time was picked
-    if(!data.dateTime){
-      setError("dateTime",{
+    if (!data.dateTime) {
+      setError("dateTime", {
         type: "manual",
         message: "Date and time slot required",
       });
@@ -115,7 +114,7 @@ export default function TestValidate() {
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">Address *</p>
               <GoogleAutoComplete />
-              
+              {/* keeping now just for reference, i pretty much have the styling down but want to leave until im done w auto c */}
               {/* <input
                 className={`w-full  pl-2 py-2 border mb-4   rounded-lg focus:outline-slate-400  ${
                   errors.address
@@ -131,12 +130,12 @@ export default function TestValidate() {
 
           <p className="ml-2 font-bold mb-2">Preferred Timeslot</p>
           <DateForm
-           setValue={setValue} //passing setValues and registering function to DateFomr
-           clearErrors={clearErrors}
-           register={register}
-           />
-           {/* Error message will pop up if date/time hasn't been picket */}
-           {errors.dateTime && (
+            setValue={setValue} //passing setValues and registering function to DateFomr
+            clearErrors={clearErrors}
+            register={register}
+          />
+          {/* Error message will pop up if date/time hasn't been picket */}
+          {errors.dateTime && (
             <p className="text-red-500 ml-2 mt-1">{errors.dateTime?.message}</p>
           )}
           <div className="sm:flex-row sm:w-1/2 sm:mx-auto sm:mt-10  flex flex-col gap-2  mt-5">

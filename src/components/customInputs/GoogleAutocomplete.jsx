@@ -2,6 +2,8 @@ import { useRef, useEffect, useState } from "react";
 import { APIProvider, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { getFormattedAddress } from "../../helpers/formatAddress";
 
+import { searchAddress } from "../../utils/axios-data";
+
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
 const PlaceAutocompleteClassic = () => {
@@ -9,11 +11,22 @@ const PlaceAutocompleteClassic = () => {
   const inputRef = useRef(null);
   const places = useMapsLibrary("places");
 
+  //still need strict bounds this starts in LA but was difficult for me to figure out. the libraries use different terms or maybe are on different versions vs the OG google api
   const cityLimits = {
-    north: 34.342452, 
-    south: 33.692558,  
-    east: -117.679592, 
-    west: -118.682393 
+    north: 34.342452,
+    south: 33.692558,
+    east: -117.679592,
+    west: -118.682393,
+  };
+
+  const mockAddress = {
+    street_number: "16907",
+    street_name: "BASSETT",
+    zip_code: "91406",
+  };
+
+  const testFunction = () => {
+    searchAddress(mockAddress);
   };
 
   useEffect(() => {
@@ -33,8 +46,9 @@ const PlaceAutocompleteClassic = () => {
     placeAutocomplete.addListener("place_changed", () => {
       const selectedPlace = placeAutocomplete.getPlace();
       console.log("Selected Place:", selectedPlace);
-      const validAddress = getFormattedAddress(selectedPlace)
-      console.log("Valid", validAddress)
+      const validAddress = getFormattedAddress(selectedPlace);
+      console.log("Valid", validAddress);
+      searchAddress(validAddress);
     });
   }, [placeAutocomplete]);
 
@@ -45,6 +59,10 @@ const PlaceAutocompleteClassic = () => {
         ref={inputRef}
         placeholder="Enter Your Address"
       />
+      <button className="p-5 bg-green-500" onClick={testFunction}>
+        {" "}
+        Button
+      </button>
     </div>
   );
 };

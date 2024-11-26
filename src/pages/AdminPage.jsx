@@ -116,14 +116,17 @@ const AdminPage = () => {
                 </div>
                 <div className="text-gray-500">{appointment.time}</div>
                 <button
-                 className="w-12 h-6 rounded-full relative bg-gray-200 transition-colors"
-                  onClick={() => toggleVisitStatus(appointment.id)}>
-                    <div 
-        className={`absolute w-5 h-5 rounded-full top-0.5 left-0.5 transition-transform ${
-          appointment.isVisited ? 'transform translate-x-6 bg-green-500' : 'bg-red-500'
-        }`}
-      />
-      {/* {appointment.isVisited ? 'Visited' : 'Not Visited'} */}
+                  className="w-12 h-6 rounded-full relative bg-gray-200 transition-colors"
+                  onClick={() => toggleVisitStatus(appointment.id)}
+                >
+                  <div
+                    className={`absolute w-5 h-5 rounded-full top-0.5 left-0.5 transition-transform ${
+                      appointment.isVisited
+                        ? "transform translate-x-6 bg-green-500"
+                        : "bg-red-500"
+                    }`}
+                  />
+                  {/* {appointment.isVisited ? 'Visited' : 'Not Visited'} */}
                 </button>
               </div>
             ))}
