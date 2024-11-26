@@ -4,27 +4,30 @@ import { getFormattedAddress } from "../../helpers/formatAddress";
 
 import { searchAddress } from "../../utils/axios-data";
 
+// need to gen new api for production and need to debounce to restict # of calls
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+
 
 const PlaceAutocompleteClassic = () => {
   const [placeAutocomplete, setPlaceAutocomplete] = useState(null);
   const inputRef = useRef(null);
   const places = useMapsLibrary("places");
 
-  //still need strict bounds this starts in LA but was difficult for me to figure out. the libraries use different terms or maybe are on different versions vs the OG google api
+  //still need strict bounds this starts in LA but was difficult for me to figure out. the libraries use different terms or maybe are on different versions vs regular googleapi call
   const cityLimits = {
     north: 34.342452,
     south: 33.692558,
     east: -117.679592,
     west: -118.682393,
   };
-
+//do we need more data then this from the autocomplete?
   const mockAddress = {
     street_number: "16907",
     street_name: "BASSETT",
     zip_code: "91406",
   };
 
+//Used for testinging against mock addresses
   const testFunction = () => {
     searchAddress(mockAddress);
   };
@@ -59,10 +62,11 @@ const PlaceAutocompleteClassic = () => {
         ref={inputRef}
         placeholder="Enter Your Address"
       />
-      <button className="p-5 bg-green-500" onClick={testFunction}>
+      {/* button is strictly for testing mock data */}
+      {/* <button className="p-5 bg-green-500" onClick={testFunction}>
         {" "}
         Button
-      </button>
+      </button> */}
     </div>
   );
 };
