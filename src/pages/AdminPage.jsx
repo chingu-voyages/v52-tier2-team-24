@@ -7,6 +7,7 @@ const AdminPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("appointments");
   const [appointments, setAppointments] = useState([]);
+  const [acceptedAppointments, setAcceptedAppointments] = useState([]);
 
   useEffect(() => {
     const existingAppointments = JSON.parse(
@@ -20,6 +21,7 @@ const AdminPage = () => {
         name: `${data.firstName} ${data.lastName}`,
         time: data.dateTime,
         address: data.address,
+        isVisited: false
       };
 
       const updatedAppointments = [newAppointment, ...existingAppointments];
@@ -32,6 +34,7 @@ const AdminPage = () => {
   }, []);
 
   const handleLogout = () => {
+    //logout logic
     navigate("/");
   };
   const toggleVisitStatus = (id) => {
@@ -50,12 +53,12 @@ const AdminPage = () => {
 
       <div className="p-8">
         <h2 className="text-xl font-medium mb-8">New Appointment Requests</h2>
-        <div className="flex mb-12">
+        <div className="flex flex-wrap mb-12">
           {/* New appointments */}
           {appointments.map((appointment) => (
             <div
               key={appointment.id}
-              className="flex items-start gap-4 bg-white p-6 min-w-[300px]"
+              className="flex items-start gap-4 bg-white p-2 min-w-[250px]"
             >
               <div className="flex flex-col items-center">
                 <div className="flex items-center justify-center bg-gray-100 rounded-full h-[55px] w-[55px] mb-3">
@@ -70,6 +73,20 @@ const AdminPage = () => {
                 </h3>
                 <p className="text-gray-500 text-sm mb-2">{appointment.time}</p>
                 <p className="font-medium text-lg">{appointment.address}</p>
+                <div className="flex gap-4 mt-4">
+          <button 
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors"
+            onClick={() => handleApprove(appointment.id)}
+          >
+            ✓
+          </button>
+          <button 
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
+            onClick={() => handleCancel(appointment.id)}
+          >
+            ✕
+          </button>
+        </div>
               </div>
             </div>
           ))}
