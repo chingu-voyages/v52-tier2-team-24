@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { NavBar } from "../components/NavBar";
+import { useNavigate, NavLink, Outlet } from "react-router-dom";
+// import { NavBar } from "../components/NavBar";
+import calendar from "../images/calendar.png";
+
 
 const AdminPage = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("appointments");
+//   const [activeTab, setActiveTab] = useState("appointments");
   const [newAppointments, setNewAppointments] = useState([]);
-  const [acceptedAppointments, setAcceptedAppointments] = useState([]);
+//   const [acceptedAppointments, setAcceptedAppointments] = useState([]);
 
   useEffect(() => {
     const existingAppointments = JSON.parse(
@@ -31,9 +33,9 @@ const AdminPage = () => {
       localStorage.removeItem("userInput");
     } else {
       const newApps = existingAppointments.filter((app) => app.isNew);
-      const acceptedApps = existingAppointments.filter((app) => !app.isNew);
+    //   const acceptedApps = existingAppointments.filter((app) => !app.isNew);
       setNewAppointments(newApps);
-      setAcceptedAppointments(acceptedApps);
+    //   setAcceptedAppointments(acceptedApps);
     }
   }, []);
 
@@ -46,7 +48,7 @@ const AdminPage = () => {
     const appointmentToAccept = newAppointments.find((app) => app.id === id);
     if (appointmentToAccept) {
       const updatedAppointment = { ...appointmentToAccept, isNew: false };
-      setAcceptedAppointments((prev) => [...prev, updatedAppointment]);
+    //   setAcceptedAppointments((prev) => [...prev, updatedAppointment]);
       setNewAppointments((prev) => prev.filter((app) => app.id !== id));
       const allAppointments = JSON.parse(
         localStorage.getItem("appointments") || "[]"
@@ -67,23 +69,26 @@ const AdminPage = () => {
     localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
   };
 
-  const toggleVisitStatus = (id) => {
-    setAcceptedAppointments((prev) =>
-      prev.map((appointment) =>
-        appointment.id === id
-          ? { ...appointment, isVisited: !appointment.isVisited }
-          : appointment
-      )
-    );
+//   const toggleVisitStatus = (id) => {
+//     setAcceptedAppointments((prev) =>
+//       prev.map((appointment) =>
+//         appointment.id === id
+//           ? { ...appointment, isVisited: !appointment.isVisited }
+//           : appointment
+//       )
+//     );
 
-    const allAppointments = JSON.parse(
-      localStorage.getItem("appointments") || "[]"
-    );
-    const updatedAppointments = allAppointments.map((app) =>
-      app.id === id ? { ...app, isVisited: !app.isVisited } : app
-    );
-    localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
-  };
+//     const allAppointments = JSON.parse(
+//       localStorage.getItem("appointments") || "[]"
+//     );
+//     const updatedAppointments = allAppointments.map((app) =>
+//       app.id === id ? { ...app, isVisited: !app.isVisited } : app
+//     );
+//     localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+//   };
+
+  const getNavLinkClass = ({ isActive }) => 
+  `${isActive ? "bg-gray-100 p-2 mr-2 rounded" : "bg-white mr-2 p-2"} hover:text-tab-text`
 
   return (
     <div className="min-h-screen bg-white">
@@ -103,7 +108,7 @@ const AdminPage = () => {
                 <div className="flex flex-col items-center">
                   <div className="flex items-center justify-center bg-gray-100 rounded-full h-[55px] w-[55px] mb-3">
                     <img
-                      src="src\images\calendar-image-png-3.png"
+                      src={calendar}
                       alt="Calendar"
                       className="h-[40px] w-[40px]"
                     />
@@ -137,7 +142,13 @@ const AdminPage = () => {
 
         <div className="border-t">
           <div className="flex mb-8">
-            <button
+          <NavLink className={getNavLinkClass} to={`appointments`}>
+            Appointments
+          </NavLink>   
+          <NavLink className={getNavLinkClass} to={`planning`}>
+            Planning
+          </NavLink>
+            {/* <button
               className={`${
                 activeTab === "appointments"
                   ? "bg-gray-100 p-2 mr-2 rounded"
@@ -156,11 +167,12 @@ const AdminPage = () => {
               onClick={() => setActiveTab("planning")}
             >
               Planning
-            </button>
+            </button> */}
           </div>
-
+          <Outlet/>
+{/* 
           <div className="space-y-6">
-            {/* Current Appointments */}
+          
             {acceptedAppointments.length === 0 ? (
               <p className="text-gray-500">No appointments.</p>
             ) : (
@@ -189,12 +201,13 @@ const AdminPage = () => {
                           : "bg-red-500"
                       }`}
                     />
-                    {/* {appointment.isVisited ? 'Visited' : 'Not Visited'} */}
-                  </button></div>
+                    
+                  </button>
+                  </div>
                 </div>
               ))
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

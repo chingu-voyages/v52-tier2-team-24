@@ -9,7 +9,7 @@ export default function RootLayout() {
         <main className="flex-grow">
           <Outlet />
         </main>
-        <Footer />
+        <Footer/>
       </div>
     );
   }
