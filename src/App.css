@@ -7,7 +7,7 @@
   /* on focus */
   --gmpx-color-primary: rgb(94, 94, 94);
   width: 100%;
-  border: 1px solid rgb(140, 139, 139);
+
   border-radius: 8px;
   --gmpx-font-size-base: 1rem;
 }

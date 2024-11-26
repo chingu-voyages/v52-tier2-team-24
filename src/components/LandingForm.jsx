@@ -4,7 +4,8 @@ import { GiSolarPower } from "react-icons/gi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DateForm from "./DateForm";
-import GoogleNew from "./AutoComplete";
+import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
+
 
 export default function TestValidate() {
   let userSchema = yup
@@ -113,9 +114,9 @@ export default function TestValidate() {
             </div>
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">Address *</p>
-              {/* commented out in prod */}
-              {/* <GoogleNew /> */}
-              <input
+              <GoogleAutoComplete />
+              
+              {/* <input
                 className={`w-full  pl-2 py-2 border mb-4   rounded-lg focus:outline-slate-400  ${
                   errors.address
                     ? "border-red-500 placeholder-red-500"
@@ -124,7 +125,7 @@ export default function TestValidate() {
                 type="text"
                 {...register("address")}
                 placeholder={errors.address?.message || "Enter Your Address"}
-              />
+              /> */}
             </div>
           </div>
 
