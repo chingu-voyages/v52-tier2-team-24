@@ -7,6 +7,7 @@ export default function Planning () {
   const [newOutputType, setNewOutputType] = useState('list'); 
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [hasInitialFetch, setHasInitialFetch] = useState(false);
+
   const handleRetrievePlanning = () => {
     const appointments = JSON.parse(localStorage.getItem("appointments") || "[]");
     const acceptedAppointments = appointments.filter(app => !app.isNew);
@@ -43,11 +44,6 @@ export default function Planning () {
     setHasInitialFetch(true); 
     setOutputType(newOutputType);
   };
-
-  // const handleRetrievePlanning = () => {
-  //   const filtered = filterAppointmentsByPeriod();
-  //   setFilteredAppointments(filtered);
-  // };
 
   const renderContent = () => {
     if (!hasInitialFetch) {
@@ -113,95 +109,48 @@ export default function Planning () {
     }
   };
 
-
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex justify-between items-center">
+    <div className="flex flex-col gap-8 p-8">
+      <div className="flex justify-between items-start">
         <div>
           <h3 className="text-gray-700 mb-2">Select Time Period</h3>
           <div className="flex gap-2">
-            <button
-              className={`px-4 py-2 rounded ${
-                timePeriod === 'daily' ? 'bg-gray-100' : 'bg-white'
-              }`}
-              onClick={() => setTimePeriod('daily')}
-            >
-              Daily
-            </button>
-            <button
-              className={`px-4 py-2 rounded ${
-                timePeriod === 'weekly' ? 'bg-gray-100' : 'bg-white'
-              }`}
-              onClick={() => setTimePeriod('weekly')}
-            >
-              Weekly
-            </button>
-            <button
-              className={`px-4 py-2 rounded ${
-                timePeriod === 'monthly' ? 'bg-gray-100' : 'bg-white'
-              }`}
-              onClick={() => setTimePeriod('monthly')}
-            >
-              Monthly
-            </button>
+            {['daily', 'weekly', 'monthly'].map(period => (
+              <button
+                key={period}
+                className={`px-4 py-2 rounded ${timePeriod === period ? 'bg-gray-100' : 'bg-white'}`}
+                onClick={() => setTimePeriod(period)} 
+              >
+                {period.charAt(0).toUpperCase() + period.slice(1)}
+              </button>
+            ))}
           </div>
         </div>
 
         <div>
           <h3 className="text-gray-700 mb-2">Output Type</h3>
           <div className="flex gap-2">
-            <button
-              className={`px-4 py-2 rounded ${
-                outputType === 'list' ? 'bg-gray-100' : 'bg-white'
-              }`}
-              onClick={() => setOutputType('list')}
-            >
-              List View
-            </button>
-            <button
-              className={`px-4 py-2 rounded ${
-                outputType === 'map' ? 'bg-gray-100' : 'bg-white'
-              }`}
-              onClick={() => setOutputType('map')}
-            >
-              Map View
-            </button>
-            <button
-              className={`px-4 py-2 rounded ${
-                outputType === 'both' ? 'bg-gray-100' : 'bg-white'
-              }`}
-              onClick={() => setOutputType('both')}
-            >
-              Both
-            </button>
+            {['list', 'map', 'both'].map(type => (
+              <button
+                key={type}
+                className={`px-4 py-2 rounded ${newOutputType === type ? 'bg-gray-100' : 'bg-white'}`}
+                onClick={() => setNewOutputType(type)}
+              >
+                {type === 'both' ? 'Both' : `${type.charAt(0).toUpperCase() + type.slice(1)} View`}
+              </button>
+            ))}
           </div>
         </div>
 
         <button
-        onClick={handleRetrievePlanning}
-         className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+          onClick={handleRetrievePlanning} 
+          className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+        >
           Retrieve Planning
         </button>
       </div>
-      <div className="space-y-4">
-            {filteredAppointments.length === 0 ? (
-              <p className="text-center text-gray-500">No appointments found for selected period.</p>
-            ) : (
-              filteredAppointments.map(appointment => (
-                <div key={appointment.id} className="flex justify-between items-center p-4 bg-white rounded-lg">
-                  <div className="flex items-center gap-4">
-                  <img src={sun} className="h-[30px]" />
-                    <div>
-                      <p className="font-medium">{appointment.name}</p>
-                      <p className="text-gray-500">{appointment.address}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-500">{appointment.time}</p>
-                </div>
-              ))
-            )}
-          </div>
-          {renderContent()}
+
+      {renderContent()}
     </div>
   );
 };
