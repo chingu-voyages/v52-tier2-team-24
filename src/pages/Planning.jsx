@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import sun from "../images/weather.png"
+// import sun from "../images/weather.png";
+import AppointmentsList from "../helper functions/AppointmentsList"
 
 export default function Planning () {
   const [timePeriod, setTimePeriod] = useState('daily');
@@ -54,53 +55,23 @@ export default function Planning () {
       case 'list':
         return (
           <div className="space-y-4">
-            {filteredAppointments.length === 0 ? (
-              <p className="text-center text-gray-500">No appointments found for selected period.</p>
-            ) : (
-              filteredAppointments.map(appointment => (
-                <div key={appointment.id} className="flex justify-between items-center p-4 bg-white rounded-lg">
-                  <div className="flex items-center gap-4">
-                  <img src={sun} className="h-[30px]" />
-                    <div>
-                      <p className="font-medium">{appointment.name}</p>
-                      <p className="text-gray-500">{appointment.address}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-500">{appointment.time}</p>
-                </div>
-              ))
-            )}
+           <AppointmentsList appointments={filteredAppointments}/>
           </div>
         );
       case 'map':
         return (
           <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
-            <p className="text-gray-500">Map view</p>
+            <p>Map view</p>
           </div>
         );
       case 'both':
         return (
           <div>
             <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
-              <p className="text-gray-500">Map view</p>
+              <p>Map view</p>
             </div>
             <div className="space-y-4">
-              {filteredAppointments.length === 0 ? (
-                <p className="text-center text-gray-500">No appointments found for selected period.</p>
-              ) : (
-                filteredAppointments.map(appointment => (
-                  <div key={appointment.id} className="flex justify-between items-center p-4 bg-white rounded-lg">
-                    <div className="flex items-center gap-4">
-                    <img src={sun} className="h-[30px]" />
-                      <div>
-                        <p className="font-medium">{appointment.name}</p>
-                        <p className="text-gray-500">{appointment.address}</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-500">{appointment.time}</p>
-                  </div>
-                ))
-              )}
+          <AppointmentsList appointments={filteredAppointments}/>
             </div>
           </div>
         );
