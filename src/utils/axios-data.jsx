@@ -2,9 +2,8 @@ import axios from "axios";
 
 const baseURL = "https://la-active-addresses.s3.us-east-2.amazonaws.com";
 
-
 const datasets = {
-  "A-E":  `${baseURL}/a_e.json`,
+  "A-E": `${baseURL}/a_e.json`,
   "F-N": `${baseURL}/f_m.json`,
   "N-Z": `${baseURL}/n_z.json`,
   "0-9": `${baseURL}/0_9.json`,
@@ -31,14 +30,14 @@ const getDatasetUrl = (streetName) => {
 export const searchAddress = async (address) => {
   const { house_number, street_name, zip_code } = address;
   const datasetUrl = getDatasetUrl(street_name);
-console.log("URL", datasetUrl)
+  console.log("URL", datasetUrl);
   if (!datasetUrl) {
     console.error("Please Enter a valid los angelos address");
     return;
   }
 
   try {
-    console.log("To Res")
+    console.log("To Res");
     const response = await axios.get(datasetUrl);
     console.log("Response", response);
     const data = response.data;
