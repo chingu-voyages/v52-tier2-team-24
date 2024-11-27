@@ -7,6 +7,7 @@ import piggyBankImg from '../images/piggy-bank.png';
 import billImg from '../images/bill.png';
 import hugImg from '../images/hug.png';
 import lightbulbImg from '../images/renewable-energy.png'
+import Footer from '../pages/Footer';
 
 export const LandingPage = () => {
   return (
@@ -83,9 +84,10 @@ export const LandingPage = () => {
 
         <h2 className='flex text-3xl self-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mt-20'>Save the planet. Save your wallet.</h2>
       </div>
-      <div className='flex border-t border-t-gray-300 w-screen mt-8 p-8 justify-end items-center'>
+      {/* <div className='flex border-t border-t-gray-300 w-screen mt-8 p-8 justify-end items-center'>
         <p className='font-extralight'>© Chingu Team24 F/W 2024</p>
-      </div>
+      </div> */}
+      <Footer/>
     </div>
   )
 }
