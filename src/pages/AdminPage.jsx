@@ -70,8 +70,9 @@ const AdminPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="pl-8 pr-8">
+        <div className="">
         <h2 className="text-lg font-small mb-4">New Appointment Requests</h2>
-        <div className="flex flex-wrap mb-12">
+        <div className="flex flex-wrap mb-12 h-[200px]">
           {/* New appointments */}
           {newAppointments.length === 0 ? (
             <p className="text-gray-500">No new appointments.</p>
@@ -115,7 +116,7 @@ const AdminPage = () => {
             ))
           )}
         </div>
-
+        </div>
         <div className="border-t">
           <div className="flex mb-8">
             <NavLink className={getNavLinkClass} to={`appointments`}>

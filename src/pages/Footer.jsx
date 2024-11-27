@@ -2,7 +2,7 @@ import github from "../images/github.svg";
 
 export default function Footer() {
     return (
-      <footer className="flex justify-center items-center text-button text-md m-2">
+      <footer className="flex justify-center items-center text-button text-md mt-10 m-4">
         © 2024 Team 24 of Voyage 52
         <a href="https://github.com/chingu-voyages/v52-tier2-team-24" target="_blank">
           <img
