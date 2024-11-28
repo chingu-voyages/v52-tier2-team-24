@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { APIProvider, useMapsLibrary } from "@vis.gl/react-google-maps";
-import { getFormattedAddress } from "../../helpers/formatAddress";
+import { formatStreet } from "../../helpers/formatAddress";
 
 import { searchAddress } from "../../utils/axios-data";
 
@@ -9,12 +9,10 @@ const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
 const PlaceAutocompleteClassic = () => {
   const [placeAutocomplete, setPlaceAutocomplete] = useState(null);
-  const [number, setNumber] = useState("");
-  const [zip, setZip] = useState("");
   const inputRef = useRef(null);
   const places = useMapsLibrary("places");
 
-  //need bounds to be better and strict
+  // bounds strict now just need to make sure we are only querying the correct area as per the dataset
   const cityLimits = {
     north: 34.342452,
     south: 33.692558,
@@ -40,8 +38,8 @@ const PlaceAutocompleteClassic = () => {
 
     placeAutocomplete.addListener("place_changed", () => {
       const selectedPlace = placeAutocomplete.getPlace();
+      const stName = formatStreet(selectedPlace.name);
       let streetNumber = "";
-      let streetName = ""
       let postcode = "";
 
       for (const component of selectedPlace.address_components) {
@@ -49,11 +47,8 @@ const PlaceAutocompleteClassic = () => {
 
         switch (componentType) {
           case "street_number":
-           streetNumber = `${component.long_name} ${streetNumber}`;
+            streetNumber = `${component.long_name}${streetNumber}`;
             break;
-            case "route":
-          streetName = component.short_name;
-              break;
           case "postal_code":
             postcode = `${component.long_name}${postcode}`;
             break;
@@ -62,27 +57,23 @@ const PlaceAutocompleteClassic = () => {
         }
       }
 
-      console.log("Select PL", selectedPlace);
-      console.log("Number", streetNumber)
-      console.log("Number", streetName)
-      console.log("Postal", postcode)
-      const validAddress = getFormattedAddress(selectedPlace);
-      searchAddress(validAddress);
+      const validationAddress = {
+        house_number: streetNumber,
+        street_name: stName,
+        zip_code: postcode,
+      };
+// would really like to set up react query here or osmething similar to easily handle errors
+      searchAddress(validationAddress);
     });
   }, [placeAutocomplete]);
 
   return (
     <div>
       <input
-        className="w-full pl-2 border mb-4  py-2 rounded-lg  focus:outline-slate-400 "
+        className="w-full pl-2 border mb-4  py-2 rounded-lg border-slate-300  focus:outline-slate-400 "
         ref={inputRef}
         placeholder="Enter Your Address"
       />
-      {/* button is strictly for testing mock data */}
-      {/* <button className="p-5 bg-green-500" onClick={testFunction}>
-        {" "}
-        Button
-      </button> */}
     </div>
   );
 };
