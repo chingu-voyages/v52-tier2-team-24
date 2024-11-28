@@ -7,9 +7,11 @@ import {
   Navigate,
 } from "react-router-dom";
 import AdminPage from "./pages/AdminPage";
+import GooglePlacesAutocomplete from "./components/customInputs/AutoForm";
 
 function App() {
   return (
+    // <GooglePlacesAutocomplete />
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />

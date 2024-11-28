@@ -9,6 +9,8 @@ const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
 const PlaceAutocompleteClassic = () => {
   const [placeAutocomplete, setPlaceAutocomplete] = useState(null);
+  const [number, setNumber] = useState("");
+  const [zip, setZip] = useState("");
   const inputRef = useRef(null);
   const places = useMapsLibrary("places");
 
@@ -24,9 +26,10 @@ const PlaceAutocompleteClassic = () => {
     if (!places || !inputRef.current) return;
 
     const options = {
-      // this is where i need to figure how to get mroe data, is there a places to see avail option for @vis.gl could not find much on site but alot of the google props were not working
-      fields: ["geometry", "name", "formatted_address"],
+      fields: ["address_components", "name", "formatted_address"],
       bounds: cityLimits,
+      strictBounds: true,
+      types: ["address"],
     };
 
     setPlaceAutocomplete(new places.Autocomplete(inputRef.current, options));
@@ -37,6 +40,32 @@ const PlaceAutocompleteClassic = () => {
 
     placeAutocomplete.addListener("place_changed", () => {
       const selectedPlace = placeAutocomplete.getPlace();
+      let streetNumber = "";
+      let streetName = ""
+      let postcode = "";
+
+      for (const component of selectedPlace.address_components) {
+        const componentType = component.types[0];
+
+        switch (componentType) {
+          case "street_number":
+           streetNumber = `${component.long_name} ${streetNumber}`;
+            break;
+            case "route":
+          streetName = component.short_name;
+              break;
+          case "postal_code":
+            postcode = `${component.long_name}${postcode}`;
+            break;
+          default:
+            break;
+        }
+      }
+
+      console.log("Select PL", selectedPlace);
+      console.log("Number", streetNumber)
+      console.log("Number", streetName)
+      console.log("Postal", postcode)
       const validAddress = getFormattedAddress(selectedPlace);
       searchAddress(validAddress);
     });
