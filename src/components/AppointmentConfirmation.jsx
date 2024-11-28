@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from './Button.jsx'
 
-export const AppointmentConfirmation = () => {
+export const AppointmentConfirmation = ({ closeModal }) => {
     return (
         <div className='fixed inset-0 bg-white-500 bg-opacity-50 flex justify-center items-center'>
             <div className='bg-white p-10 rounded-lg shadow-lg w-11/12 sm:w-3/4 md:w-1/2'>
@@ -11,6 +11,9 @@ export const AppointmentConfirmation = () => {
                 <Button
                     text={'Ok'}
                     isTransparent={true}
+                    onClick={() => {
+                        closeModal();
+                    }}
                 />
             </div>
         </div>

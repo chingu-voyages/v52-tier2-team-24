@@ -1,12 +1,19 @@
 import { useForm } from "react-hook-form";
+import { useState } from 'react';
 import { GiSolarPower } from "react-icons/gi";
 // import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DateForm from "./DateForm";
 import GoogleNew from "./AutoComplete";
+import { AppointmentConfirmation } from './AppointmentConfirmation'
+import { TimeslotConfirmation } from './TimeslotConfirmation'
 
 export default function TestValidate() {
+  //states for appointment and timeslot modals
+  const [isTimeslotModalOpen, setIsTimeslotModalOpen] = useState(false);
+  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
+
   let userSchema = yup
     .object({
       firstName: yup.string().required("First Name Required"),
@@ -20,7 +27,7 @@ export default function TestValidate() {
         .min(5, "Address must be at least 10 characters long")
         .required("Address Required"),
       // Adding date and time validation for the dateform
-      dateTime: yup.string().required ("Date and time are required")
+      dateTime: yup.string().required("Date and time are required")
     })
     .required();
 
@@ -30,7 +37,7 @@ export default function TestValidate() {
     reset,
     formState: { errors },
     setError, //to manually set errors
-    clearErrors,//to clear erros
+    clearErrors,//to clear errors
     setValue,//to set value
   } = useForm({
     resolver: yupResolver(userSchema),
@@ -38,8 +45,8 @@ export default function TestValidate() {
 
   const handleFormSubmit = (data) => {
     //checking if the time was picked
-    if(!data.dateTime){
-      setError("dateTime",{
+    if (!data.dateTime) {
+      setError("dateTime", {
         type: "manual",
         message: "Date and time slot required",
       });
@@ -47,6 +54,13 @@ export default function TestValidate() {
     }
     console.log(data);
     localStorage.setItem("userInput", JSON.stringify(data));
+
+    //show appointment confirmation modal after form submission
+    setIsAppointmentModalOpen(true);
+  };
+
+  const openTimeSlotModal = () => {
+    setIsTimeslotModalOpen(true);
   };
 
   return (
@@ -72,11 +86,10 @@ export default function TestValidate() {
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">First Name *</p>
               <input
-                className={`w-full pl-2 border mb-4  py-2 rounded-lg  focus:outline-slate-400 ${
-                  errors.firstName
-                    ? "border-red-500 placeholder-red-500"
-                    : "border-slate-300"
-                }`}
+                className={`w-full pl-2 border mb-4  py-2 rounded-lg  focus:outline-slate-400 ${errors.firstName
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300"
+                  }`}
                 type="text"
                 {...register("firstName")}
                 placeholder={errors.firstName?.message || "Enter Your Name"}
@@ -85,11 +98,10 @@ export default function TestValidate() {
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">Last Name *</p>
               <input
-                className={`w-full  border mb-4   rounded-lg pl-2 py-2 focus:outline-slate-400 ${
-                  errors.lastName
-                    ? "border-red-500 placeholder-red-500"
-                    : "border-slate-300"
-                }`}
+                className={`w-full  border mb-4   rounded-lg pl-2 py-2 focus:outline-slate-400 ${errors.lastName
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300"
+                  }`}
                 type="text"
                 {...register("lastName")}
                 placeholder={errors.lastName?.message || "Enter Your Last Name"}
@@ -101,11 +113,10 @@ export default function TestValidate() {
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">Email *</p>
               <input
-                className={`w-full  pl-2 py-2 mb-4    border rounded-lg focus:outline-slate-400  ${
-                  errors.email
-                    ? "border-red-500 placeholder-red-500"
-                    : "border-slate-300 "
-                }`}
+                className={`w-full  pl-2 py-2 mb-4    border rounded-lg focus:outline-slate-400  ${errors.email
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300 "
+                  }`}
                 type="text"
                 {...register("email")}
                 placeholder={errors.email?.message || "Enter Your  Email"}
@@ -116,11 +127,10 @@ export default function TestValidate() {
               {/* commented out in prod */}
               {/* <GoogleNew /> */}
               <input
-                className={`w-full  pl-2 py-2 border mb-4   rounded-lg focus:outline-slate-400  ${
-                  errors.address
-                    ? "border-red-500 placeholder-red-500"
-                    : "border-slate-300 "
-                }`}
+                className={`w-full  pl-2 py-2 border mb-4   rounded-lg focus:outline-slate-400  ${errors.address
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-slate-300 "
+                  }`}
                 type="text"
                 {...register("address")}
                 placeholder={errors.address?.message || "Enter Your Address"}
@@ -130,12 +140,13 @@ export default function TestValidate() {
 
           <p className="ml-2 font-bold mb-2">Preferred Timeslot</p>
           <DateForm
-           setValue={setValue} //passing setValues and registering function to DateFomr
-           clearErrors={clearErrors}
-           register={register}
-           />
-           {/* Error message will pop up if date/time hasn't been picket */}
-           {errors.dateTime && (
+            setValue={setValue} //passing setValues and registering function to DateFomr
+            clearErrors={clearErrors}
+            register={register}
+            openTimeSlotModal={openTimeSlotModal}
+          />
+          {/* Error message will pop up if date/time hasn't been picket */}
+          {errors.dateTime && (
             <p className="text-red-500 ml-2 mt-1">{errors.dateTime?.message}</p>
           )}
           <div className="sm:flex-row sm:w-1/2 sm:mx-auto sm:mt-10  flex flex-col gap-2  mt-5">
@@ -147,14 +158,22 @@ export default function TestValidate() {
             </button>
             <button
               type="button"
-              onClick={() => reset()}
+              onClick={() => {
+                reset();
+                setIsAppointmentModalOpen(false);
+              }}
               className=" border-2 border-slate-600  w-full  rounded-lg  text-xl font-bold  py-4 "
             >
               Cancel{" "}
             </button>
           </div>
         </form>
-      </div>
-    </div>
+        {/* Show TimeslotConfirmation Modal after date selection */}
+        {isTimeslotModalOpen && <TimeslotConfirmation closeModal={() => setIsTimeslotModalOpen(false)} />}
+
+        {/* Show AppointmentConfirmation Modal after form submission */}
+        {isAppointmentModalOpen && <AppointmentConfirmation closeModal={() => setIsAppointmentModalOpen(false)} />}
+      </div >
+    </div >
   );
 }
