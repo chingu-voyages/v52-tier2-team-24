@@ -1,18 +1,18 @@
 import { useRef, useEffect, useState } from "react";
-import { APIProvider, useMapsLibrary } from "@vis.gl/react-google-maps";
+import { useMapsLibrary } from "@vis.gl/react-google-maps";
 import { formatStreet } from "../../helpers/formatAddress";
 
 import { searchAddress } from "../../utils/axios-data";
 
-// need to gen new api for production and need to debounce to restict # of calls
-const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
-
-const PlaceAutocompleteClassic = () => {
+const GoogleAutoComplete = (setAddress) => {
   const [placeAutocomplete, setPlaceAutocomplete] = useState(null);
+
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState(null);
+
   const inputRef = useRef(null);
   const places = useMapsLibrary("places");
 
-  // bounds strict now just need to make sure we are only querying the correct area as per the dataset
   const cityLimits = {
     north: 34.342452,
     south: 33.692558,
@@ -36,15 +36,15 @@ const PlaceAutocompleteClassic = () => {
   useEffect(() => {
     if (!placeAutocomplete) return;
 
-    placeAutocomplete.addListener("place_changed", () => {
+    const handlePlaceChanged = async () => {
       const selectedPlace = placeAutocomplete.getPlace();
+      console.log("Sel place", selectedPlace);
       const stName = formatStreet(selectedPlace.name);
       let streetNumber = "";
       let postcode = "";
 
       for (const component of selectedPlace.address_components) {
         const componentType = component.types[0];
-
         switch (componentType) {
           case "street_number":
             streetNumber = `${component.long_name}${streetNumber}`;
@@ -62,26 +62,47 @@ const PlaceAutocompleteClassic = () => {
         street_name: stName,
         zip_code: postcode,
       };
-// would really like to set up react query here or osmething similar to easily handle errors
-      searchAddress(validationAddress);
-    });
+
+      try {
+        const results = await searchAddress(validationAddress);
+        if (results) {
+          setStatus(true);
+          setMessage("Address Validated");
+        } else {
+          setStatus(false);
+          setMessage("Address Not Found in Dataset");
+        }
+      } catch (error) {
+        console.error("Error:", error.message);
+        setStatus(false);
+        setMessage("Address Not Found in Dataset");
+      }
+    };
+    placeAutocomplete.addListener("place_changed", handlePlaceChanged);
+
+    return () => placeAutocomplete.unbindAll();
   }, [placeAutocomplete]);
+
+  const handleInputChange = () => {
+    setMessage("");
+    setStatus(null);
+  };
 
   return (
     <div>
       <input
+        onInput={handleInputChange}
         className="w-full pl-2 border mb-4  py-2 rounded-lg border-slate-300  focus:outline-slate-400 "
         ref={inputRef}
         placeholder="Enter Your Address"
       />
+      {message && (
+        <p className={`mt-2 ${status ? "text-green-500" : "text-red-500"}`}>
+          {message}
+        </p>
+      )}
     </div>
   );
 };
-
-const GoogleAutoComplete = () => (
-  <APIProvider apiKey={GOOGLE_API_KEY}>
-    <PlaceAutocompleteClassic />
-  </APIProvider>
-);
 
 export default GoogleAutoComplete;

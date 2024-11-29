@@ -51,6 +51,7 @@ export const searchAddress = async (address) => {
 
     if (results.length > 0) {
       console.log("Address Found:", results);
+      return results
     } else {
       console.log("Address Not Found in Dataset");
     }

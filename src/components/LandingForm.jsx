@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
 import { GiSolarPower } from "react-icons/gi";
-// import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DateForm from "./DateForm";
 import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
+import { useState } from "react";
+import { APIProvider } from "@vis.gl/react-google-maps";
+
+const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
 export default function TestValidate() {
+  const [address, setAddress] = useState("");
   let userSchema = yup
     .object({
       firstName: yup.string().required("First Name Required"),
@@ -48,6 +52,11 @@ export default function TestValidate() {
     console.log(data);
     localStorage.setItem("userInput", JSON.stringify(data));
   };
+
+  if (address) {
+    register("address", { required: "Address is required" });
+    setValue("address", address);
+  }
 
   return (
     <div className="w-full  flex flex-col gap-4 items-start justify-between   pt-8">
@@ -113,18 +122,9 @@ export default function TestValidate() {
             </div>
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">Address *</p>
-              <GoogleAutoComplete />
-              {/* keeping now just for reference, i pretty much have the styling down but want to leave until im done w auto c */}
-              {/* <input
-                className={`w-full  pl-2 py-2 border mb-4   rounded-lg focus:outline-slate-400  ${
-                  errors.address
-                    ? "border-red-500 placeholder-red-500"
-                    : "border-slate-300 "
-                }`}
-                type="text"
-                {...register("address")}
-                placeholder={errors.address?.message || "Enter Your Address"}
-              /> */}
+              <APIProvider apiKey={GOOGLE_API_KEY}>
+                <GoogleAutoComplete setAddress={setAddress} />
+              </APIProvider>
             </div>
           </div>
 
