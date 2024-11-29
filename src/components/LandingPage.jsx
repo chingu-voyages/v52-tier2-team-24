@@ -1,12 +1,15 @@
-import LandingForm from "./LandingForm";
-import { NavBar } from "./NavBar";
-import { Button } from "./Button";
-import { Arrow } from "./Arrow";
-import wfhPic from "../images/workinginhome-cropped.svg";
-import piggyBankImg from "../images/piggy-bank.png";
-import billImg from "../images/bill.png";
-import hugImg from "../images/hug.png";
-import lightbulbImg from "../images/renewable-energy.png";
+
+import LandingForm from './LandingForm';
+import { NavBar } from './NavBar';
+import { Button } from './Button';
+import {Arrow} from './Arrow';
+import wfhPic from '../images/workinginhome-cropped.svg';
+import piggyBankImg from '../images/piggy-bank.png';
+import billImg from '../images/bill.png';
+import hugImg from '../images/hug.png';
+import lightbulbImg from '../images/renewable-energy.png'
+import Footer from '../pages/Footer';
+
 
 export const LandingPage = () => {
   return (
@@ -112,9 +115,12 @@ export const LandingPage = () => {
           Save the planet. Save your wallet.
         </h2>
       </div>
-      <div className="flex border-t border-t-gray-300 w-screen mt-8 p-8 justify-end items-center">
-        <p className="font-extralight">© Chingu Team24 F/W 2024</p>
-      </div>
+
+      {/* <div className='flex border-t border-t-gray-300 w-screen mt-8 p-8 justify-end items-center'>
+        <p className='font-extralight'>© Chingu Team24 F/W 2024</p>
+      </div> */}
+      <Footer/>
+
     </div>
   );
 };
