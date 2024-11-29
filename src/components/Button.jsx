@@ -1,4 +1,5 @@
 export const Button = ({ text, isTransparent, isButtonLarge, onClick }) => {
+
   const size = isButtonLarge
     ? "text-xl min-w-72 max-w-max px-10 py-3"
     : "min-w-28 max-w-64 px-6 py-1.5";
