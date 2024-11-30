@@ -10,3 +10,24 @@ export const formatStreet = (input) => {
     .trim()
     .toUpperCase();
 };
+
+export const getAddressComponents = (address) => {
+  let streetNumber = "";
+  let postcode = "";
+
+  address.forEach((component) => {
+    const componentType = component.types[0];
+    switch (componentType) {
+      case "street_number":
+        streetNumber = component.long_name;
+        break;
+      case "postal_code":
+        postcode = component.long_name;
+        break;
+      default:
+        break;
+    }
+  });
+
+  return { streetNumber, postcode };
+};

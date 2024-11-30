@@ -1,10 +1,15 @@
 import { useRef, useEffect, useState } from "react";
 import { useMapsLibrary } from "@vis.gl/react-google-maps";
-import { formatStreet } from "../../helpers/formatAddress";
+import {
+  formatStreet,
+  getAddressComponents,
+} from "../../helpers/formatAddress";
 
 import { searchAddress } from "../../utils/axios-data";
 
-const GoogleAutoComplete = (setAddress) => {
+import PropTypes from "prop-types";
+
+const GoogleAutoComplete = ({setValue}) => {
   const [placeAutocomplete, setPlaceAutocomplete] = useState(null);
 
   const [message, setMessage] = useState("");
@@ -13,19 +18,17 @@ const GoogleAutoComplete = (setAddress) => {
   const inputRef = useRef(null);
   const places = useMapsLibrary("places");
 
-  const cityLimits = {
-    north: 34.342452,
-    south: 33.692558,
-    east: -117.679592,
-    west: -118.682393,
-  };
-
   useEffect(() => {
     if (!places || !inputRef.current) return;
 
     const options = {
       fields: ["address_components", "name", "formatted_address"],
-      bounds: cityLimits,
+      bounds: {
+        north: 34.342452,
+        south: 33.692558,
+        east: -117.679592,
+        west: -118.682393,
+      },
       strictBounds: true,
       types: ["address"],
     };
@@ -39,27 +42,14 @@ const GoogleAutoComplete = (setAddress) => {
     const handlePlaceChanged = async () => {
       const selectedPlace = placeAutocomplete.getPlace();
       console.log("Sel place", selectedPlace);
-      const stName = formatStreet(selectedPlace.name);
-      let streetNumber = "";
-      let postcode = "";
 
-      for (const component of selectedPlace.address_components) {
-        const componentType = component.types[0];
-        switch (componentType) {
-          case "street_number":
-            streetNumber = `${component.long_name}${streetNumber}`;
-            break;
-          case "postal_code":
-            postcode = `${component.long_name}${postcode}`;
-            break;
-          default:
-            break;
-        }
-      }
+      const { streetNumber, postcode } = getAddressComponents(
+        selectedPlace.address_components
+      );
 
       const validationAddress = {
         house_number: streetNumber,
-        street_name: stName,
+        street_name: formatStreet(selectedPlace.name),
         zip_code: postcode,
       };
 
@@ -68,6 +58,7 @@ const GoogleAutoComplete = (setAddress) => {
         if (results) {
           setStatus(true);
           setMessage("Address Validated");
+          setValue("address", selectedPlace.formatted_address);
         } else {
           setStatus(false);
           setMessage("Address Not Found in Dataset");
@@ -81,7 +72,7 @@ const GoogleAutoComplete = (setAddress) => {
     placeAutocomplete.addListener("place_changed", handlePlaceChanged);
 
     return () => placeAutocomplete.unbindAll();
-  }, [placeAutocomplete]);
+  }, [placeAutocomplete, setValue]);
 
   const handleInputChange = () => {
     setMessage("");
@@ -103,6 +94,10 @@ const GoogleAutoComplete = (setAddress) => {
       )}
     </div>
   );
+};
+
+GoogleAutoComplete.propTypes = {
+  setValue: PropTypes.func.isRequired,
 };
 
 export default GoogleAutoComplete;

@@ -4,13 +4,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DateForm from "./DateForm";
 import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
-import { useState } from "react";
+
 import { APIProvider } from "@vis.gl/react-google-maps";
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
 export default function TestValidate() {
-  const [address, setAddress] = useState("");
   let userSchema = yup
     .object({
       firstName: yup.string().required("First Name Required"),
@@ -52,11 +51,6 @@ export default function TestValidate() {
     console.log(data);
     localStorage.setItem("userInput", JSON.stringify(data));
   };
-
-  if (address) {
-    register("address", { required: "Address is required" });
-    setValue("address", address);
-  }
 
   return (
     <div className="w-full  flex flex-col gap-4 items-start justify-between   pt-8">
@@ -123,7 +117,7 @@ export default function TestValidate() {
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">Address *</p>
               <APIProvider apiKey={GOOGLE_API_KEY}>
-                <GoogleAutoComplete setAddress={setAddress} />
+                <GoogleAutoComplete setValue={setValue} />
               </APIProvider>
             </div>
           </div>
