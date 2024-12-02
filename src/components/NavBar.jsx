@@ -1,19 +1,31 @@
 import { Button } from "./Button";
 import logo from "../images/sun.png";
+
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import LoginModal from "./LoginModal";
 
 export const NavBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isAdminRoute = location.pathname === "/admin";
 
+
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   const handleClick = () => {
     if (isAdminRoute) {
       navigate("/");
     } else {
       navigate("/admin");
+      setIsLoginOpen(!isLoginOpen);
     }
   };
+
+  function handleClose() {
+    setIsLoginOpen(!isLoginOpen);
+  }
+
   return (
     <div
       id="navbar"
@@ -28,6 +40,7 @@ export const NavBar = () => {
         isTransparent={!isAdminRoute}
         onClick={handleClick}
       />
+      <LoginModal isLoginOpen={isLoginOpen} handleClose={handleClose} />
     </div>
   );
 };
