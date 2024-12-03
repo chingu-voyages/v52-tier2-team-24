@@ -11,7 +11,7 @@ import Footer from "../pages/Footer";
 
 const TestLanding = () => {
   return (
-    <main className="bg-gradient-to-t from-white to-landing-blue w-full">
+    <main className="bg-gradient-to-t from-white to-landing-blue ">
       {/* <NavBar /> */}
       {/* HERO */}
       {/* <section>
@@ -52,7 +52,7 @@ const TestLanding = () => {
       {/* CATCH AND PICTURES - Main area that I had to switch */}
       <section className="flex flex-col justify-center py-20 border border-red-500 w-full">
         {/* PICTURE CONTAINER */}
-        <div className="flex flex-row lg:flex-row lg:text-start text-center justify-around flex-wrap gap-2 mb-14 border border-green-500">
+        <div className="flex flex-col lg:flex-row lg:text-start text-center justify-around flex-wrap gap-6 mb-14 border border-green-500">
           {/* BILL */}
           <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={billImg} className="h-32 self-center mb-5" />
