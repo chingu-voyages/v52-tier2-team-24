@@ -14,7 +14,7 @@ const TestLanding = () => {
     <main className="bg-gradient-to-t from-white to-landing-blue ">
       <NavBar />
       {/* HERO */}
-      {/* <section>
+      <section>
         <div className="flex flex-col flex-wrap lg:flex-row justify-around items-center">
           <div className="flex flex-col w-full lg:w-3/6 px-12 py-14 md:py-20 xl:pl-56 sm:mt-10 text-center 2xl:text-start">
             <h1 className="text-4xl md:text-5xl lg:max-w-lg w-full text-gray-800 mb-8 align-center md:leading-snug">
@@ -30,8 +30,8 @@ const TestLanding = () => {
                 costs with a free evaluation.
               </h2>
 
-              <div className="flex justify-center 2xl:justify-normal">
-                <Button text={"Schedule an appointment"} isButtonLarge={true} />
+              <div className="flex flex-col justify-center items-center md:flex-row gap-2 ">
+                <Button  text={"Schedule an appointment"} isButtonLarge={true} />
 
                 <span className="flex items-center">
                   <a href="" className="text-xl ml-8">
@@ -47,12 +47,67 @@ const TestLanding = () => {
             <img src={wfhPic} className="size-5/6 justify-self-center" />
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* CATCH AND PICTURES - Main area that I had to switch */}
+<section className="flex flex-col justify-center py-20 border border-red-500 mx-auto lg:max-w-screen-lg">
+  {/* PICTURE CONTAINER */}
+  <div className="flex flex-row lg:flex-row lg:text-start text-center flex-wrap  justify-evenly   mb-14 border border-green-500">
+    {/* BILL */}
+    <div className="flex flex-col lg:border border-gray-300 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+      <img src={billImg} className="h-32 self-center mb-5" />
+      <div className="w-full flex flex-col items-center lg:items-start">
+        <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
+          Lower energy bills
+        </h3>
+        <p className="text-lg font-light">
+          Reduce your monthly electric costs
+        </p>
+      </div>
+    </div>
+    {/* HUG */}
+    <div className="flex flex-col lg:border border-gray-300 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+      <img src={hugImg} className="h-32 self-center mb-5" />
+      <div className="w-full flex flex-col items-center lg:items-start">
+        <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
+          Eco-friendly impact
+        </h3>
+        <p className="text-lg font-light">
+          Smaller carbon footprint with clean, renewable energy
+        </p>
+      </div>
+    </div>
+    {/* PIG */}
+    <div className="flex flex-col lg:border border-gray-300 lg:w-1/5   p-10 lg:rounded-2xl lg:shadow-md mb-5">
+      <img src={piggyBankImg} className="h-32 self-center mb-5" />
+      <div className="w-full flex flex-col items-center lg:items-start">
+        <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
+          Claim tax incentives
+        </h3>
+        <p className="text-lg font-light">
+          Taxpayers can claim the federal solar energy tax credit
+        </p>
+      </div>
+    </div>
+    {/* LIGHT */}
+    <div className="flex flex-col lg:border border-gray-300  lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+      <img src={lightbulbImg} className="h-32 self-center mb-5" />
+      <div className="w-full flex flex-col items-center lg:items-start">
+        <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
+          Energy security
+        </h3>
+        <p className="text-lg font-light">
+          Backup power during outages when pair with battery storage{" "}
+        </p>
+      </div>
+    </div>
+  </div>
 
-
-
+  <p className="text-2xl font-light lg:mb-14  p-10 mx-auto text-center">
+    Join Los Angeles’ effort to combat global warming by switching to
+    solar power!
+  </p>
+</section>
       {/* FORM */}
       {/* <section>
         <LandingForm />
@@ -69,61 +124,4 @@ const TestLanding = () => {
 };
 
 export default TestLanding;
-      // <section className="flex flex-col justify-center py-20 border border-red-500 mx-auto lg:max-w-screen-lg">
-      //   {/* PICTURE CONTAINER */}
-      //   <div className="flex flex-row lg:flex-row lg:text-start text-center flex-wrap  justify-evenly   mb-14 border border-green-500">
-      //     {/* BILL */}
-      //     <div className="flex flex-col lg:border border-gray-300 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
-      //       <img src={billImg} className="h-32 self-center mb-5" />
-      //       <div className="w-full flex flex-col items-center lg:items-start">
-      //         <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
-      //           Lower energy bills
-      //         </h3>
-      //         <p className="text-lg font-light">
-      //           Reduce your monthly electric costs
-      //         </p>
-      //       </div>
-      //     </div>
-      //     {/* HUG */}
-      //     <div className="flex flex-col lg:border border-gray-300 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
-      //       <img src={hugImg} className="h-32 self-center mb-5" />
-      //       <div className="w-full flex flex-col items-center lg:items-start">
-      //         <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
-      //           Eco-friendly impact
-      //         </h3>
-      //         <p className="text-lg font-light">
-      //           Smaller carbon footprint with clean, renewable energy
-      //         </p>
-      //       </div>
-      //     </div>
-      //     {/* PIG */}
-      //     <div className="flex flex-col lg:border border-gray-300 lg:w-1/5   p-10 lg:rounded-2xl lg:shadow-md mb-5">
-      //       <img src={piggyBankImg} className="h-32 self-center mb-5" />
-      //       <div className="w-full flex flex-col items-center lg:items-start">
-      //         <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
-      //           Claim tax incentives
-      //         </h3>
-      //         <p className="text-lg font-light">
-      //           Taxpayers can claim the federal solar energy tax credit
-      //         </p>
-      //       </div>
-      //     </div>
-      //     {/* LIGHT */}
-      //     <div className="flex flex-col lg:border border-gray-300  lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
-      //       <img src={lightbulbImg} className="h-32 self-center mb-5" />
-      //       <div className="w-full flex flex-col items-center lg:items-start">
-      //         <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
-      //           Energy security
-      //         </h3>
-      //         <p className="text-lg font-light">
-      //           Backup power during outages when pair with battery storage{" "}
-      //         </p>
-      //       </div>
-      //     </div>
-      //   </div>
 
-      //   <p className="text-2xl font-light lg:mb-14  p-10 mx-auto text-center">
-      //     Join Los Angeles’ effort to combat global warming by switching to
-      //     solar power!
-      //   </p>
-      // </section>

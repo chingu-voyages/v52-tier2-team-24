@@ -28,7 +28,7 @@ export const NavBar = () => {
   return (
     <nav
       id="navbar"
-      className="flex justify-between items-center w-full h-18 px-10 md:px-20 lg:px-10 py-6"
+      className="flex flex-col gap-5 md:flex-row md:justify-around items-center w-full h-18 px-10 md:px-20 lg:px-10 py-6 "
     >
       <div className="flex gap-2 items-center min-w-44">
         <img src={logo} className="size-7 " />
