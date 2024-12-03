@@ -1,17 +1,18 @@
-import LandingForm from "./LandingForm";
-import { NavBar } from "./NavBar";
-import { Button } from "./Button";
-import { Arrow } from "./Arrow";
-import wfhPic from "../images/workinginhome-cropped.svg";
-import piggyBankImg from "../images/piggy-bank.png";
-import billImg from "../images/bill.png";
-import hugImg from "../images/hug.png";
-import lightbulbImg from "../images/renewable-energy.png";
-import Footer from "../pages/Footer";
+import LandingForm from './LandingForm';
+import { NavBar } from './NavBar';
+import { Button } from './Button';
+import {Arrow} from './Arrow';
+import wfhPic from '../images/workinginhome-cropped.svg';
+import piggyBankImg from '../images/piggy-bank.png';
+import billImg from '../images/bill.png';
+import hugImg from '../images/hug.png';
+import lightbulbImg from '../images/renewable-energy.png'
+import Footer from '../pages/Footer';
+
 
 export const LandingPage = () => {
   return (
-    <div className="w-full border border-green-500">
+    <div className="">
       <div className="bg-gradient-to-t from-white to-landing-blue w-full">
         <NavBar />
 
@@ -105,17 +106,20 @@ export const LandingPage = () => {
           solar power!
         </p>
 
-        {/* <div className="flex justify-center">
+        <div className="flex justify-center">
           <LandingForm />
-        </div> */}
+        </div>
 
         <h2 className="flex text-3xl self-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mt-20">
           Save the planet. Save your wallet.
         </h2>
       </div>
 
-      <LandingForm />
-      <Footer />
+      {/* <div className='flex border-t border-t-gray-300 w-screen mt-8 p-8 justify-end items-center'>
+        <p className='font-extralight'>© Chingu Team24 F/W 2024</p>
+      </div> */}
+      <Footer/>
+
     </div>
   );
 };
