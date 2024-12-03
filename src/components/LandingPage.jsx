@@ -48,8 +48,7 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
-      {/* CATCH AND PICTURES - Main area that I had to switch */}
+      {/* CATCH AND PICTURES */}
       <section className="flex flex-col justify-center py-20  mx-auto lg:max-w-screen-lg">
         {/* PICTURE CONTAINER */}
         <div className="flex flex-row lg:flex-row lg:text-start text-center flex-wrap  justify-evenly   mb-14 ">
