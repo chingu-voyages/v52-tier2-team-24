@@ -6,7 +6,7 @@ export default function RootLayout() {
     return (
       <div className="min-h-screen bg-white">
         <NavBar />
-        <main className="flex-grow">
+        <main>
           <Outlet />
         </main>
         <Footer/>

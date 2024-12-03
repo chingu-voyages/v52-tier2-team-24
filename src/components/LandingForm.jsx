@@ -72,7 +72,7 @@ export default function TestValidate() {
   };
 
   return (
-    <div className="w-full  flex flex-col gap-4 items-start justify-between   pt-8">
+    <div className="w-full flex flex-col gap-4 items-start justify-between border border-red-500     pt-8">
       {/* <header className="h-[20vh] flex items-center gap-5 ">
         <GiSolarPower className="w-28 h-28" />
         <div>
@@ -83,12 +83,12 @@ export default function TestValidate() {
         </div>
       </header> */}
 
-      <div className="w-full  py-10  items-center flex flex-col justify-center">
+      {/* <div className="w-full  py-10 border border-red-500   items-center flex flex-col justify-center"> */}
         <form
           onSubmit={handleSubmit((data) => {
             handleFormSubmit(data);
           })}
-          className=" sm:ml-5 sm:items-start flex text-lg  flex-col w-11/12 mx-auto"
+          className=" sm:ml-5 sm:items-start flex text-lg  flex-col w-11/12 border border-red-500 mx-auto"
         >
           <div className="sm:flex-row gap-2  flex-grow w-full flex flex-col   ">
             <div className="sm:w-1/2 ">
@@ -177,7 +177,7 @@ export default function TestValidate() {
 
         {/* Show AppointmentConfirmation Modal after form submission */}
         {isAppointmentModalOpen && <AppointmentConfirmation closeModal={() => setIsAppointmentModalOpen(false)} />}
-      </div >
+      {/* </div > */}
     </div >
   );
 }
