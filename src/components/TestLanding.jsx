@@ -9,7 +9,7 @@ import hugImg from "../images/hug.png";
 import lightbulbImg from "../images/renewable-energy.png";
 import Footer from "../pages/Footer";
 
-export const LandingPage = () => {
+const TestLanding = () => {
   return (
     <div className="w-full border border-green-500">
       <div className="bg-gradient-to-t from-white to-landing-blue w-full">
@@ -119,3 +119,5 @@ export const LandingPage = () => {
     </div>
   );
 };
+
+export default TestLanding;

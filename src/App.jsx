@@ -8,12 +8,14 @@ import RootLayout from "./pages/Root";
 // import ErrorPage from "./pages/Error";
 import Appointments from "./pages/Appointments";
 import Planning from "./pages/Planning";
+import TestLanding from "./components/TestLanding";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LandingPage />,
+      // element: <LandingPage />,
+      element: <TestLanding />,
     },
     {
       path: "/admin",

@@ -4,6 +4,7 @@ import Footer from "./Footer.jsx";
 
 export default function RootLayout() {
     return (
+      // This is the admin section
       <div className="min-h-screen bg-white">
         <NavBar />
         <main>
