@@ -1,6 +1,7 @@
 import { useState } from 'react';
 // import sun from "../images/weather.png";
-import AppointmentsList from "../helper functions/AppointmentsList"
+import AppointmentsList from "../helper functions/AppointmentsList";
+import { GoogleMap } from "../components/GoogleMap";
 
 export default function Planning () {
   const [timePeriod, setTimePeriod] = useState('daily');
@@ -61,17 +62,17 @@ export default function Planning () {
       case 'map':
         return (
           <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
-            <p>Map view</p>
+            <GoogleMap />
           </div>
         );
       case 'both':
         return (
           <div>
             <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
-              <p>Map view</p>
+              <GoogleMap />
             </div>
             <div className="space-y-4">
-          <AppointmentsList appointments={filteredAppointments}/>
+              <AppointmentsList appointments={filteredAppointments}/>
             </div>
           </div>
         );
