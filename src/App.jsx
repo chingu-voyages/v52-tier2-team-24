@@ -1,6 +1,6 @@
 import "./App.css";
 
-import {LandingPage} from './components/LandingPage';
+import LandingPage from './components/LandingPage';
 import { BrowserRouter as Router, Routes, Route, Navigate, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AdminPage from "./pages/AdminPage";
@@ -8,14 +8,12 @@ import RootLayout from "./pages/Root";
 // import ErrorPage from "./pages/Error";
 import Appointments from "./pages/Appointments";
 import Planning from "./pages/Planning";
-import TestLanding from "./components/TestLanding";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      // element: <LandingPage />,
-      element: <TestLanding />,
+      element: <LandingPage />,
     },
     {
       path: "/admin",
