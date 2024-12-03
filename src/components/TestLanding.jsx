@@ -50,11 +50,11 @@ const TestLanding = () => {
       </section> */}
 
       {/* CATCH AND PICTURES - Main area that I had to switch */}
-      <section className="flex flex-col justify-center py-20 border border-red-500 w-full">
+      <section className="flex flex-col justify-center py-20 border border-red-500 mx-auto max-w-screen-lg">
         {/* PICTURE CONTAINER */}
-        <div className="flex flex-col lg:flex-row lg:text-start text-center justify-around flex-wrap gap-6 mb-14 border border-green-500">
+        <div className="flex flex-row lg:flex-row lg:text-start text-center flex-wrap  justify-evenly   mb-14 border border-green-500">
           {/* BILL */}
-          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+          <div className="flex flex-col lg:border border-gray-300 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={billImg} className="h-32 self-center mb-5" />
             <div className="w-full flex flex-col items-center lg:items-start">
               <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
@@ -66,7 +66,7 @@ const TestLanding = () => {
             </div>
           </div>
           {/* HUG */}
-          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+          <div className="flex flex-col lg:border border-gray-300 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={hugImg} className="h-32 self-center mb-5" />
             <div className="w-full flex flex-col items-center lg:items-start">
               <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
@@ -78,7 +78,7 @@ const TestLanding = () => {
             </div>
           </div>
           {/* PIG */}
-          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+          <div className="flex flex-col lg:border border-gray-300 lg:w-1/5   p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={piggyBankImg} className="h-32 self-center mb-5" />
             <div className="w-full flex flex-col items-center lg:items-start">
               <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
@@ -90,7 +90,7 @@ const TestLanding = () => {
             </div>
           </div>
           {/* LIGHT */}
-          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/4 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+          <div className="flex flex-col lg:border border-gray-300  lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={lightbulbImg} className="h-32 self-center mb-5" />
             <div className="w-full flex flex-col items-center lg:items-start">
               <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
