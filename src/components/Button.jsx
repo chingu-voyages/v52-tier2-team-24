@@ -1,3 +1,4 @@
+
 export const Button = ({ text, isTransparent, isButtonLarge, onClick }) => {
 
   const size = isButtonLarge
@@ -8,7 +9,9 @@ export const Button = ({ text, isTransparent, isButtonLarge, onClick }) => {
     return (
       <button
         className={`text-black border solid border-slate-500 hover:bg-slate-600 hover:text-white ${size} rounded-3xl`}
+
         onClick={() => onClick()}
+
       >
         {text}
       </button>

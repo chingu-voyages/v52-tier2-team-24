@@ -1,5 +1,6 @@
 import { Button } from "./Button";
 import logo from "../images/sun.png";
+
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
@@ -9,12 +10,14 @@ export const NavBar = () => {
   const navigate = useNavigate();
   const isAdminRoute = location.pathname === "/admin";
 
+
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const handleClick = () => {
     if (isAdminRoute) {
       navigate("/");
     } else {
+      navigate("/admin");
       setIsLoginOpen(!isLoginOpen);
     }
   };

@@ -1,11 +1,16 @@
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { GiSolarPower } from "react-icons/gi";
-// import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DateForm from "./DateForm";
-import GoogleNew from "./AutoComplete";
+
+import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
+
+import { APIProvider } from "@vis.gl/react-google-maps";
+
+const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+
 import { AppointmentConfirmation } from './AppointmentConfirmation'
 import { TimeslotConfirmation } from './TimeslotConfirmation'
 
@@ -27,7 +32,9 @@ export default function TestValidate() {
         .min(5, "Address must be at least 10 characters long")
         .required("Address Required"),
       // Adding date and time validation for the dateform
-      dateTime: yup.string().required("Date and time are required")
+
+      dateTime: yup.string().required("Date and time are required"),
+
     })
     .required();
 
@@ -37,6 +44,7 @@ export default function TestValidate() {
     reset,
     formState: { errors },
     setError, //to manually set errors
+
     clearErrors,//to clear errors
     setValue,//to set value
   } = useForm({
@@ -124,17 +132,11 @@ export default function TestValidate() {
             </div>
             <div className="sm:w-1/2 ">
               <p className="ml-2 font-bold mb-2">Address *</p>
-              {/* commented out in prod */}
-              {/* <GoogleNew /> */}
-              <input
-                className={`w-full  pl-2 py-2 border mb-4   rounded-lg focus:outline-slate-400  ${errors.address
-                  ? "border-red-500 placeholder-red-500"
-                  : "border-slate-300 "
-                  }`}
-                type="text"
-                {...register("address")}
-                placeholder={errors.address?.message || "Enter Your Address"}
-              />
+
+              <APIProvider apiKey={GOOGLE_API_KEY}>
+                <GoogleAutoComplete setValue={setValue} />
+              </APIProvider>
+
             </div>
           </div>
 
@@ -143,7 +145,9 @@ export default function TestValidate() {
             setValue={setValue} //passing setValues and registering function to DateFomr
             clearErrors={clearErrors}
             register={register}
+
             openTimeSlotModal={openTimeSlotModal}
+
           />
           {/* Error message will pop up if date/time hasn't been picket */}
           {errors.dateTime && (

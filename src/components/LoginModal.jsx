@@ -4,6 +4,7 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -65,20 +66,19 @@ export default function LoginModal({ isLoginOpen, handleClose }) {
               Please enter your approved email to access the Admin page.
             </Description>
 
+
             <div className="flex flex-col w-5/6">
               {isInvalid && (
                 <p className="self-center text-red-600">
                   The email you have entered is invalid.
                 </p>
               )}
-
               <input
                 className={inputBorder}
                 value={email}
                 placeholder="Email"
                 onChange={(event) => setEmail(event.target.value)}
               />
-
               <div className="flex justify-center mt-4">
                 <button
                   className="w-3/4 mt-1 py-4 bg-green-600 rounded-lg text-slate-50"

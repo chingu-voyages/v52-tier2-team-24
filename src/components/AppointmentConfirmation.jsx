@@ -1,5 +1,6 @@
-import React from 'react'
-import { Button } from './Button.jsx'
+import React from "react";
+import { Button } from "./Button.jsx";
+
 
 export const AppointmentConfirmation = ({ closeModal }) => {
     return (

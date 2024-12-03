@@ -124,7 +124,9 @@ const AdminPage = () => {
             </NavLink>
             <NavLink className={getNavLinkClass} to={`planning`}>
               Planning
+
             </NavLink>
+
           </div>
           <Outlet />
         </div>

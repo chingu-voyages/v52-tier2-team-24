@@ -1,6 +1,8 @@
 import "./App.css";
+
 import {LandingPage} from './components/LandingPage';
 import { BrowserRouter as Router, Routes, Route, Navigate, createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import AdminPage from "./pages/AdminPage";
 import RootLayout from "./pages/Root";
 // import ErrorPage from "./pages/Error";
@@ -40,7 +42,9 @@ function App() {
     }
   ]);
   return (
+
   <RouterProvider router={router} />
+
   );
 }
 
