@@ -14,7 +14,7 @@ const TestLanding = () => {
     <main className="bg-gradient-to-t from-white to-landing-blue ">
       {/* <NavBar /> */}
       {/* HERO */}
-      {/* <section>
+      <section>
         <div className="flex flex-col flex-wrap lg:flex-row justify-around items-center">
           <div className="flex flex-col w-full lg:w-3/6 px-12 py-14 md:py-20 xl:pl-56 sm:mt-10 text-center 2xl:text-start">
             <h1 className="text-4xl md:text-5xl lg:max-w-lg w-full text-gray-800 mb-8 align-center md:leading-snug">
@@ -47,10 +47,10 @@ const TestLanding = () => {
             <img src={wfhPic} className="size-5/6 justify-self-center" />
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* CATCH AND PICTURES - Main area that I had to switch */}
-      <section className="flex flex-col justify-center py-20 border border-red-500 mx-auto max-w-screen-lg">
+      <section className="flex flex-col justify-center py-20 border border-red-500 mx-auto lg:max-w-screen-lg">
         {/* PICTURE CONTAINER */}
         <div className="flex flex-row lg:flex-row lg:text-start text-center flex-wrap  justify-evenly   mb-14 border border-green-500">
           {/* BILL */}
