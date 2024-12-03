@@ -49,10 +49,10 @@ const TestLanding = () => {
         </div>
       </section> */}
 
-      {/* CATCH AND PICTURES */}
-      <section className="flex flex-col justify-center  py-20 border border-red-500 w-full">
+      {/* CATCH AND PICTURES - Main area that I had to switch */}
+      <section className="flex flex-col justify-center py-20 border border-red-500 w-full">
         {/* PICTURE CONTAINER */}
-        <div className="flex w-inherit flex-col lg:flex-row lg:text-start text-center justify-around mb-14  border border-green-500 ">
+        <div className="flex flex-row lg:flex-row lg:text-start text-center justify-around flex-wrap gap-2 mb-14 border border-green-500">
           {/* BILL */}
           <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={billImg} className="h-32 self-center mb-5" />
@@ -90,7 +90,7 @@ const TestLanding = () => {
             </div>
           </div>
           {/* LIGHT */}
-          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/4 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={lightbulbImg} className="h-32 self-center mb-5" />
             <div className="w-full flex flex-col items-center lg:items-start">
               <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
@@ -103,7 +103,7 @@ const TestLanding = () => {
           </div>
         </div>
 
-        <p className="text-2xl font-light lg:mb-14 w-svw self-center p-10">
+        <p className="text-2xl font-light lg:mb-14  p-10 mx-auto text-center">
           Join Los Angeles’ effort to combat global warming by switching to
           solar power!
         </p>
