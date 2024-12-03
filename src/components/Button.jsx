@@ -1,6 +1,4 @@
-
 export const Button = ({ text, isTransparent, isButtonLarge, onClick }) => {
-
   const size = isButtonLarge
     ? "text-xl min-w-72 max-w-max px-10 py-3"
     : "min-w-28 max-w-64 px-6 py-1.5";
@@ -8,10 +6,8 @@ export const Button = ({ text, isTransparent, isButtonLarge, onClick }) => {
   if (isTransparent) {
     return (
       <button
-        className={`text-black border solid border-slate-500 hover:bg-slate-600 hover:text-white ${size} rounded-3xl`}
-
+        className="text-black border solid border-slate-500   hover:bg-slate-600 hover:text-white  rounded-3xl text-sm inline-flex items-center justify-center whitespace-nowrap px-6 py-3"
         onClick={() => onClick()}
-
       >
         {text}
       </button>
