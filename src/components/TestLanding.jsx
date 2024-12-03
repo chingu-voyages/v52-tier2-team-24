@@ -50,9 +50,9 @@ const TestLanding = () => {
       </section> */}
 
       {/* CATCH AND PICTURES */}
-      <section className="flex flex-col justify-center  py-20 border border-red-500 text-center w-full">
+      <section className="flex flex-col justify-center  py-20 border border-red-500 w-full">
         {/* PICTURE CONTAINER */}
-        <div className="flex w-inherit flex-col lg:flex-row text-start justify-around mb-14 self-center border border-green-500 ">
+        <div className="flex w-inherit flex-col lg:flex-row lg:text-start text-center justify-around mb-14  border border-green-500 ">
           {/* BILL */}
           <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={billImg} className="h-32 self-center mb-5" />
