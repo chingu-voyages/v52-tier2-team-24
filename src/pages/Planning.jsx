@@ -2,7 +2,7 @@ import { useState } from "react";
 // import sun from "../images/weather.png";
 import AppointmentsList from "../helper functions/AppointmentsList";
 import { GoogleMap } from "../components/GoogleMap";
-import PDFButton from "../components/PDFButton";
+import PDFButton from "../components/PDF/PDFButton";
 
 export default function Planning() {
   const [timePeriod, setTimePeriod] = useState("daily");
