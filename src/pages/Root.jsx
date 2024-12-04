@@ -4,6 +4,7 @@ import Footer from "./Footer.jsx";
 
 export default function RootLayout() {
     return (
+      //Admin Route
       <div className="min-h-screen bg-white">
         <NavBar />
         <main className="flex-grow">

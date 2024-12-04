@@ -1,6 +1,6 @@
 import "./App.css";
 
-import {LandingPage} from './components/LandingPage';
+import LandingPage from './components/LandingPage';
 import { BrowserRouter as Router, Routes, Route, Navigate, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AdminPage from "./pages/AdminPage";

@@ -1,22 +1,20 @@
+import LandingForm from "./LandingForm";
+import { NavBar } from "./NavBar";
+import { Button } from "./Button";
+import { Arrow } from "./Arrow";
+import wfhPic from "../images/workinginhome-cropped.svg";
+import piggyBankImg from "../images/piggy-bank.png";
+import billImg from "../images/bill.png";
+import hugImg from "../images/hug.png";
+import lightbulbImg from "../images/renewable-energy.png";
+import Footer from "../pages/Footer";
 
-import LandingForm from './LandingForm';
-import { NavBar } from './NavBar';
-import { Button } from './Button';
-import {Arrow} from './Arrow';
-import wfhPic from '../images/workinginhome-cropped.svg';
-import piggyBankImg from '../images/piggy-bank.png';
-import billImg from '../images/bill.png';
-import hugImg from '../images/hug.png';
-import lightbulbImg from '../images/renewable-energy.png'
-import Footer from '../pages/Footer';
-
-
-export const LandingPage = () => {
+const LandingPage = () => {
   return (
-    <div className="">
-      <div className="bg-gradient-to-t from-white to-landing-blue w-full">
-        <NavBar />
-
+    <main className="bg-gradient-to-t from-white to-landing-blue ">
+      <NavBar />
+      {/* HERO */}
+      <section>
         <div className="flex flex-col flex-wrap lg:flex-row justify-around items-center">
           <div className="flex flex-col w-full lg:w-3/6 px-12 py-14 md:py-20 xl:pl-56 sm:mt-10 text-center 2xl:text-start">
             <h1 className="text-4xl md:text-5xl lg:max-w-lg w-full text-gray-800 mb-8 align-center md:leading-snug">
@@ -32,7 +30,7 @@ export const LandingPage = () => {
                 costs with a free evaluation.
               </h2>
 
-              <div className="flex justify-center 2xl:justify-normal">
+              <div className="flex flex-col justify-center items-center md:flex-row gap-2 ">
                 <Button text={"Schedule an appointment"} isButtonLarge={true} />
 
                 <span className="flex items-center">
@@ -49,11 +47,13 @@ export const LandingPage = () => {
             <img src={wfhPic} className="size-5/6 justify-self-center" />
           </div>
         </div>
-      </div>
-
-      <div className="flex flex-col justify-center px-56 py-20 text-center w-full">
-        <div className="flex w-inherit flex-col lg:flex-row text-start justify-around mb-14 self-center">
-          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+      </section>
+      {/* CATCH AND PICTURES */}
+      <section className="flex flex-col justify-center py-20  mx-auto lg:max-w-screen-lg">
+        {/* PICTURE CONTAINER */}
+        <div className="flex flex-row lg:flex-row lg:text-start text-center flex-wrap  justify-evenly   mb-14 ">
+          {/* BILL */}
+          <div className="flex flex-col lg:border border-gray-300 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={billImg} className="h-32 self-center mb-5" />
             <div className="w-full flex flex-col items-center lg:items-start">
               <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
@@ -64,8 +64,8 @@ export const LandingPage = () => {
               </p>
             </div>
           </div>
-
-          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+          {/* HUG */}
+          <div className="flex flex-col lg:border border-gray-300 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={hugImg} className="h-32 self-center mb-5" />
             <div className="w-full flex flex-col items-center lg:items-start">
               <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
@@ -76,8 +76,8 @@ export const LandingPage = () => {
               </p>
             </div>
           </div>
-
-          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+          {/* PIG */}
+          <div className="flex flex-col lg:border border-gray-300 lg:w-1/5   p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={piggyBankImg} className="h-32 self-center mb-5" />
             <div className="w-full flex flex-col items-center lg:items-start">
               <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
@@ -88,8 +88,8 @@ export const LandingPage = () => {
               </p>
             </div>
           </div>
-
-          <div className="flex flex-col lg:border border-gray-300 min-w-60 lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
+          {/* LIGHT */}
+          <div className="flex flex-col lg:border border-gray-300  lg:w-1/5 p-10 lg:rounded-2xl lg:shadow-md mb-5">
             <img src={lightbulbImg} className="h-32 self-center mb-5" />
             <div className="w-full flex flex-col items-center lg:items-start">
               <h3 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
@@ -102,25 +102,24 @@ export const LandingPage = () => {
           </div>
         </div>
 
-        <p className="text-2xl font-light lg:mb-14 w-svw self-center p-10">
+        <p className="text-2xl font-light lg:mb-14  p-10 mx-auto text-center">
           Join Los Angeles’ effort to combat global warming by switching to
           solar power!
         </p>
-
-        <div className="flex justify-center">
-          <LandingForm />
-        </div>
-
-        <h2 className="flex text-3xl self-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mt-20">
+      </section>
+      {/* FORM */}
+      <section>
+        <LandingForm />
+      </section>
+      {/* FOOTER */}
+      <footer className="mx-auto">
+        <h2 className="flex text-center text-3xl self-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mt-20">
           Save the planet. Save your wallet.
         </h2>
-      </div>
-
-      {/* <div className='flex border-t border-t-gray-300 w-screen mt-8 p-8 justify-end items-center'>
-        <p className='font-extralight'>© Chingu Team24 F/W 2024</p>
-      </div> */}
-      <Footer/>
-
-    </div>
+        <Footer />
+      </footer>
+    </main>
   );
 };
+
+export default LandingPage;

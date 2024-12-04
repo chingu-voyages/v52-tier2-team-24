@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
 // import TimePicker from 'react-time-picker';
-import 'react-datepicker/dist/react-datepicker.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
   const [appointmentDate, setAppointmentDate] = useState(new Date());
@@ -37,8 +37,8 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
   };
 
   const formatDate = (date) => {
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
     const year = date.getFullYear();
     return `${month}/${day}/${year}`;
   };
@@ -78,7 +78,8 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
   return (
     <div className="sm:flex-row sm:w-1/2 flex flex-col w-full gap-2">
       <div>
-        <DatePicker className="w-full py-1.5 pl-2 rounded-lg border border-slate-400"
+        <DatePicker
+          className="w-full py-1.5 pl-2 rounded-lg border border-slate-400"
           selected={appointmentDate}
           onChange={handleDateChange}
           dateFormat="MMMM d, yyyy"
@@ -93,7 +94,7 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
           //   id="appointmentTime"
           value={appointmentTime}
           onChange={handleTimeChange}
-        //   required
+          //   required
         >
           {/* <option value="">Select Time</option> */}
           {generateTimeOptions().map((time) => (
@@ -106,7 +107,13 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
       <input
         type="hidden"
         {...register("dateTime")}
-        value={appointmentDate && appointmentTime ? `${appointmentDate.toISOString().split("T")[0]} ${appointmentTime}` : ""}
+        value={
+          appointmentDate && appointmentTime
+            ? `${
+                appointmentDate.toISOString().split("T")[0]
+              } ${appointmentTime}`
+            : ""
+        }
       />
     </div>
   );
