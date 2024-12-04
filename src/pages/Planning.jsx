@@ -4,7 +4,6 @@ import AppointmentsList from "../helper functions/AppointmentsList";
 import { GoogleMap } from "../components/GoogleMap";
 import PDFButton from "../components/PDF/PDFButton";
 
-
 export default function Planning() {
   const [timePeriod, setTimePeriod] = useState("daily");
   const [outputType, setOutputType] = useState("list");
@@ -12,10 +11,7 @@ export default function Planning() {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [hasInitialFetch, setHasInitialFetch] = useState(false);
 
-
-
   const handleExportPDF = () => {
-
     window.open("/appointmentPDF", "_blank");
   };
 
@@ -141,7 +137,7 @@ export default function Planning() {
           >
             Retrieve Planning
           </button>
-          <PDFButton handleExportPDF={handleExportPDF}  />
+          <PDFButton handleExportPDF={handleExportPDF} />
         </div>
       </div>
 

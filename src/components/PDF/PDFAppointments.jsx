@@ -8,7 +8,6 @@ import {
 } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
 
-
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#ffffff",
@@ -47,7 +46,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 function PDFAppointments() {
   const [appointmentData, setAppointmentData] = useState(null);
 
@@ -64,9 +62,8 @@ function PDFAppointments() {
   return (
     <PDFViewer style={styles.viewer}>
       <Document>
-
         <Page size="A4" style={styles.page}>
-        <View style={styles.headerRow}>
+          <View style={styles.headerRow}>
             <Text style={styles.column}>Name</Text>
             <Text style={styles.column}>Email</Text>
             <Text style={styles.column}>Address</Text>
