@@ -8,12 +8,17 @@ import RootLayout from "./pages/Root";
 // import ErrorPage from "./pages/Error";
 import Appointments from "./pages/Appointments";
 import Planning from "./pages/Planning";
+import PDFAppointments from "./components/PDF/PDFAppointments";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <LandingPage />,
+    },
+    {
+      path: "/appointmentPDF",
+      element: <PDFAppointments />,
     },
     {
       path: "/admin",
@@ -35,7 +40,7 @@ function App() {
             {
               path: "planning",
               element: <Planning />
-            }
+            },
           ]
         }
       ]
