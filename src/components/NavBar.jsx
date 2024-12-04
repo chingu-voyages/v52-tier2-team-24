@@ -16,8 +16,7 @@ export const NavBar = () => {
     if (isAdminRoute) {
       navigate("/");
     } else {
-      navigate("/admin");
-      setIsLoginOpen(!isLoginOpen);
+      setIsLoginOpen(true);
     }
   };
 
@@ -39,7 +38,9 @@ export const NavBar = () => {
         isTransparent={!isAdminRoute}
         onClick={handleClick}
       />
-      {/* <LoginModal isLoginOpen={isLoginOpen} handleClose={handleClose} /> */}
+      {isLoginOpen && (
+        <LoginModal isLoginOpen={isLoginOpen} handleClose={handleClose} />
+      )}
     </nav>
   );
 };
