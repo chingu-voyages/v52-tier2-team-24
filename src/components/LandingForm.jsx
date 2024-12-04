@@ -124,7 +124,7 @@ export default function TestValidate() {
             <p className="ml-2 font-bold mb-2">Address *</p>
 
             <APIProvider apiKey={GOOGLE_API_KEY}>
-              <GoogleAutoComplete setValue={setValue} />
+              <GoogleAutoComplete setValue={setValue} errors={errors.address} />
             </APIProvider>
           </div>
         </div>

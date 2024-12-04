@@ -9,7 +9,7 @@ import { searchAddress } from "../../utils/axios-data";
 
 import PropTypes from "prop-types";
 
-const GoogleAutoComplete = ({setValue}) => {
+const GoogleAutoComplete = ({setValue, errors}) => {
   const [placeAutocomplete, setPlaceAutocomplete] = useState(null);
 
   const [message, setMessage] = useState("");
@@ -83,7 +83,11 @@ const GoogleAutoComplete = ({setValue}) => {
     <div>
       <input
         onInput={handleInputChange}
-        className="w-full pl-2 border mb-4  py-2 rounded-lg border-slate-300  focus:outline-slate-400 "
+        className={`w-full  border mb-4   rounded-lg pl-2 py-2 focus:outline-slate-400 ${
+          errors
+            ? "border-red-500 placeholder-red-500"
+            : "border-slate-300"
+        }`}
         ref={inputRef}
         placeholder="Enter Your Address"
       />
