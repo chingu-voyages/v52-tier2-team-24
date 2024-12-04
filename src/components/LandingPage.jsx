@@ -11,7 +11,7 @@ import Footer from "../pages/Footer";
 
 const LandingPage = () => {
   return (
-    <main className="bg-gradient-to-t from-white to-landing-blue ">
+    <main className="bg-gradient-to-t from-white to-landing-blue border border-red-600 ">
       <NavBar />
       {/* HERO */}
       <section>
