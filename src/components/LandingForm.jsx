@@ -60,7 +60,7 @@ export default function TestValidate() {
     }
     console.log(data);
     localStorage.setItem("userInput", JSON.stringify(data));
-
+    reset();
     //show appointment confirmation modal after form submission
     setIsAppointmentModalOpen(true);
   };
