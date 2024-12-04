@@ -6,36 +6,80 @@ import {
   StyleSheet,
   PDFViewer,
 } from "@react-pdf/renderer";
-// Create styles
+import { useEffect, useState } from "react";
+
+
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "#d11fb6",
-    color: "white",
+    backgroundColor: "#ffffff",
+    color: "#000",
+    padding: 20,
   },
-  section: {
-    margin: 10,
-    padding: 10,
+  headerRow: {
+    display: "flex",
+    flexDirection: "row",
+    borderBottom: "1px solid #000",
+    marginBottom: 10,
+    paddingBottom: 5,
+    fontStyle: "bold",
+  },
+  dataRow: {
+    display: "flex",
+    flexDirection: "row",
+    borderBottom: "1px solid #ddd",
+    marginBottom: 5,
+    paddingBottom: 5,
+  },
+  column: {
+    flex: 1,
+    fontSize: 12,
+    textAlign: "left",
+    paddingRight: 10,
   },
   viewer: {
-    width: window.innerWidth, //the pdf viewer will take up all of the width and height
-    height: window.innerHeight,
+    width: "100vw",
+    height: "100vh",
+  },
+  title: {
+    fontSize: 18,
+    marginBottom: 10,
+    textAlign: "center",
   },
 });
 
-// Create Document Component
+
 function PDFAppointments() {
+  const [appointmentData, setAppointmentData] = useState(null);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("appointments");
+    if (storedData) {
+      setAppointmentData(JSON.parse(storedData));
+    }
+  }, []);
+
+  if (!appointmentData) {
+    return <Text>Loading...</Text>;
+  }
   return (
     <PDFViewer style={styles.viewer}>
-      {/* Start of the document*/}
       <Document>
-        {/*render a single page*/}
+
         <Page size="A4" style={styles.page}>
-          <View style={styles.section}>
-            <Text>Hello</Text>
+        <View style={styles.headerRow}>
+            <Text style={styles.column}>Name</Text>
+            <Text style={styles.column}>Email</Text>
+            <Text style={styles.column}>Address</Text>
+            <Text style={styles.column}>Preferred Timeslot</Text>
           </View>
-          <View style={styles.section}>
-            <Text>World</Text>
-          </View>
+          {appointmentData.map((appointment, index) => (
+            <View key={index} style={styles.dataRow}>
+              <Text style={styles.column}>{appointment.name}</Text>
+              <Text style={styles.column}>{appointment.email}</Text>
+              <Text style={styles.column}>{appointment.address}</Text>
+              <Text style={styles.column}>{appointment.time}</Text>
+            </View>
+          ))}
         </Page>
       </Document>
     </PDFViewer>
