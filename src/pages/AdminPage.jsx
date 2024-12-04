@@ -18,6 +18,7 @@ const AdminPage = () => {
         name: `${data.firstName} ${data.lastName}`,
         time: data.dateTime,
         address: data.address,
+        email: data.email,
         isVisited: false,
         isNew: true,
       };
