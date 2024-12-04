@@ -113,7 +113,7 @@ const LandingPage = () => {
       </section>
       {/* FOOTER */}
       <footer className="mx-auto">
-        <h2 className="flex text-center text-3xl self-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mt-20">
+        <h2 className="flex text-center text-3xl self-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mt-20 md:ml-5">
           Save the planet. Save your wallet.
         </h2>
         <Footer />
