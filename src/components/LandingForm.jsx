@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { GiSolarPower } from "react-icons/gi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DateForm from "./DateForm";
@@ -61,7 +60,7 @@ export default function TestValidate() {
     }
     console.log(data);
     localStorage.setItem("userInput", JSON.stringify(data));
-
+    reset();
     //show appointment confirmation modal after form submission
     setIsAppointmentModalOpen(true);
   };
@@ -71,12 +70,12 @@ export default function TestValidate() {
   };
 
   return (
-    <div className="w-full flex flex-col gap-4 items-start justify-between    pt-8">
+    <div className="w-full flex flex-col gap-4 items-center     pt-8">
       <form
         onSubmit={handleSubmit((data) => {
           handleFormSubmit(data);
         })}
-        className=" sm:ml-5 sm:items-start flex text-lg  flex-col w-11/12 border p-2 mx-auto"
+        className=" sm:ml-5 sm:items-start flex text-lg  flex-col w-11/12 border p-2  max-w-3xl"
       >
         <div className="sm:flex-row gap-2  flex-grow w-full flex flex-col   ">
           <div className="sm:w-1/2 ">
@@ -125,7 +124,7 @@ export default function TestValidate() {
             <p className="ml-2 font-bold mb-2">Address *</p>
 
             <APIProvider apiKey={GOOGLE_API_KEY}>
-              <GoogleAutoComplete setValue={setValue} />
+              <GoogleAutoComplete setValue={setValue} errors={errors.address} />
             </APIProvider>
           </div>
         </div>
@@ -141,7 +140,7 @@ export default function TestValidate() {
         {errors.dateTime && (
           <p className="text-red-500 ml-2 mt-1">{errors.dateTime?.message}</p>
         )}
-        <div className="sm:flex-row sm:w-1/2 sm:mx-auto sm:mt-10  flex flex-col gap-2  mt-5">
+        <div className="sm:flex-row sm:w-1/2 sm:mx-auto sm:mt-10 flex flex-col gap-2  mt-5">
           <button
             type="submit"
             className=" w-full font-bold  bg-green-600 rounded-lg text-slate-50 text-xl  py-4 "
