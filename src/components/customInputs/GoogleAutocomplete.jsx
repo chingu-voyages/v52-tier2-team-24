@@ -75,8 +75,10 @@ const GoogleAutoComplete = ({ setValue, errors }) => {
   }, [placeAutocomplete, setValue]);
 
   const handleInputChange = () => {
-    setMessage("");
-    setStatus(null);
+    if (message || status !== null) {
+      setMessage("");
+      setStatus(null);
+    }
   };
 
   return (
@@ -89,11 +91,11 @@ const GoogleAutoComplete = ({ setValue, errors }) => {
         ref={inputRef}
         placeholder="Enter Your Address"
       />
-      {message && (
-        <p className={`mt-2 ${status ? "text-green-500" : "text-red-500"}`}>
-          {message}
-        </p>
-      )}
+{message && status !== null && (
+  <p className={`mt-2 ${status ? "text-green-500" : "text-red-500"}`}>
+    {message}
+  </p>
+)}
     </div>
   );
 };

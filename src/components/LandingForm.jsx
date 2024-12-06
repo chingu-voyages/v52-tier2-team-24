@@ -10,6 +10,7 @@ import { APIProvider } from "@vis.gl/react-google-maps";
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
+
 import { AppointmentConfirmation } from "./AppointmentConfirmation";
 import { TimeslotConfirmation } from "./TimeslotConfirmation";
 
@@ -17,6 +18,7 @@ export default function TestValidate() {
   //states for appointment and timeslot modals
   const [isTimeslotModalOpen, setIsTimeslotModalOpen] = useState(false);
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
+  const [addressStatus, setAddressStatus] = useState(null);
 
   let userSchema = yup
     .object({
@@ -68,6 +70,12 @@ export default function TestValidate() {
   const openTimeSlotModal = () => {
     setIsTimeslotModalOpen(true);
   };
+
+  const handleCancel = () => {
+    setAddressStatus(null)
+    reset();
+    setIsAppointmentModalOpen(false);
+  }
 
   return (
     <div className="w-full flex flex-col gap-4 items-center     pt-8">
@@ -149,10 +157,7 @@ export default function TestValidate() {
           </button>
           <button
             type="button"
-            onClick={() => {
-              reset();
-              setIsAppointmentModalOpen(false);
-            }}
+            onClick={handleCancel}
             className=" border-2 border-slate-600  w-full  rounded-lg  text-xl font-bold  py-4 "
           >
             Cancel{" "}
