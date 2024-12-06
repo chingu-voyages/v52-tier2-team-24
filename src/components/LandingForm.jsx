@@ -71,10 +71,13 @@ export default function TestValidate() {
   };
 
   const handleCancel = () => {
+    setAddressMessage(null);
     setAddressStatus(null);
     reset();
     setIsAppointmentModalOpen(false);
   };
+
+  console.log("Status", addressStatus);
 
   return (
     <div className="w-full flex flex-col gap-4 items-center     pt-8">
@@ -129,7 +132,6 @@ export default function TestValidate() {
           </div>
           <div className="sm:w-1/2 ">
             <p className="ml-2 font-bold mb-2">Address *</p>
-
             <APIProvider apiKey={GOOGLE_API_KEY}>
               <GoogleAutoComplete
                 setAddressStatus={setAddressStatus}
@@ -138,10 +140,24 @@ export default function TestValidate() {
                 errors={errors.address}
               />
             </APIProvider>
-            {addressMessage && (
+            {addressStatus && (
+              <span className="loading loading-spinner loading-sm"></span>
+            )}{" "}
+            {addressMessage !== null && (
               <p
-                className={`mt-2 ${status ? "text-green-500" : "text-red-500"}`}
+                className={`mt-2 ${
+                  addressMessage === true
+                    ? "text-green-500"
+                    : addressMessage === false
+                    ? "text-red-500"
+                    : "text-yellow-500"
+                }`}
               >
+                {addressMessage === true
+                  ? "Address Validated"
+                  : addressMessage === false
+                  ? "Address Not Validated"
+                  : addressMessage}{" "}
               </p>
             )}
           </div>
