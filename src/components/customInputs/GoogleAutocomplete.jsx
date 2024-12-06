@@ -9,11 +9,13 @@ import { searchAddress } from "../../utils/axios-data";
 
 import PropTypes from "prop-types";
 
-const GoogleAutoComplete = ({ setValue, errors }) => {
+const GoogleAutoComplete = ({
+  setValue,
+  errors,
+  setAddressStatus,
+  setAddressMessage,
+}) => {
   const [placeAutocomplete, setPlaceAutocomplete] = useState(null);
-
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState(null);
 
   const inputRef = useRef(null);
   const places = useMapsLibrary("places");
@@ -41,7 +43,6 @@ const GoogleAutoComplete = ({ setValue, errors }) => {
 
     const handlePlaceChanged = async () => {
       const selectedPlace = placeAutocomplete.getPlace();
-      console.log("Sel place", selectedPlace);
 
       const { streetNumber, postcode } = getAddressComponents(
         selectedPlace.address_components
@@ -54,29 +55,31 @@ const GoogleAutoComplete = ({ setValue, errors }) => {
       };
 
       try {
+        setAddressStatus(true);
         const results = await searchAddress(validationAddress);
         if (results) {
-          setStatus(true);
-          setMessage("Address Validated");
+          setAddressStatus(false);
+          setAddressMessage(true);
+
           setValue("address", selectedPlace.formatted_address);
         } else {
-          setStatus(false);
-          setMessage("Address Not Found in Dataset");
+          setAddressStatus(false);
+          setAddressMessage(false);
         }
       } catch (error) {
         console.error("Error:", error.message);
-        setStatus(false);
-        setMessage("Address Not Found in Dataset");
+        setAddressStatus(false);
+        setAddressMessage(error.message);
       }
     };
     placeAutocomplete.addListener("place_changed", handlePlaceChanged);
 
     return () => placeAutocomplete.unbindAll();
-  }, [placeAutocomplete, setValue]);
+  }, [placeAutocomplete, setValue, setAddressStatus, setAddressMessage]);
 
   const handleInputChange = () => {
-    setMessage("");
-    setStatus(null);
+    setAddressMessage(null);
+    setAddressStatus(null);
   };
 
   return (
@@ -89,17 +92,14 @@ const GoogleAutoComplete = ({ setValue, errors }) => {
         ref={inputRef}
         placeholder="Enter Your Address"
       />
-      {message && (
-        <p className={`mt-2 ${status ? "text-green-500" : "text-red-500"}`}>
-          {message}
-        </p>
-      )}
     </div>
   );
 };
 
 GoogleAutoComplete.propTypes = {
   setValue: PropTypes.func.isRequired,
+  errors: PropTypes.object,
+  setAddressStatus: PropTypes.func.isRequired,
+  setAddressMessage: PropTypes.func.isRequired,
 };
-
 export default GoogleAutoComplete;

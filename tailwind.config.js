@@ -1,18 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 // import fluid, { extract, screens, fontSize } from 'fluid-tailwind';
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     // screens,
     // fontSize,
     extend: {
       colors: {
-        'red-button': '#FFF1F1',
-        'landing-blue': '#d6eaf2',
+        "red-button": "#FFF1F1",
+        "landing-blue": "#d6eaf2",
       },
       fontFamily: {
-        sans: ['Outfit', 'sans-serif'],
-        geologica: ['Geologica', 'sans-serif'],
+        sans: ["Outfit", "sans-serif"],
+        geologica: ["Geologica", "sans-serif"],
       },
       // fontSize: {
       //   xs: ["0.625rem", "0.75rem"],
@@ -29,12 +29,15 @@ export default {
         bold: 700,
       },
       screens: {
-        xs: '20rem',
+        xs: "20rem",
       },
       rotate: {
-        315: '315deg',
+        315: "315deg",
       },
     },
   },
-  // plugins: [fluid],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light"],
+  },
 };
