@@ -10,7 +10,6 @@ import { APIProvider } from "@vis.gl/react-google-maps";
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
-
 import { AppointmentConfirmation } from "./AppointmentConfirmation";
 import { TimeslotConfirmation } from "./TimeslotConfirmation";
 
@@ -19,7 +18,7 @@ export default function TestValidate() {
   const [isTimeslotModalOpen, setIsTimeslotModalOpen] = useState(false);
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const [addressStatus, setAddressStatus] = useState(null);
-
+  const [addressMessage, setAddressMessage] = useState(null);
   let userSchema = yup
     .object({
       firstName: yup.string().required("First Name Required"),
@@ -72,10 +71,10 @@ export default function TestValidate() {
   };
 
   const handleCancel = () => {
-    setAddressStatus(null)
+    setAddressStatus(null);
     reset();
     setIsAppointmentModalOpen(false);
-  }
+  };
 
   return (
     <div className="w-full flex flex-col gap-4 items-center     pt-8">
@@ -132,8 +131,19 @@ export default function TestValidate() {
             <p className="ml-2 font-bold mb-2">Address *</p>
 
             <APIProvider apiKey={GOOGLE_API_KEY}>
-              <GoogleAutoComplete setValue={setValue} errors={errors.address} />
+              <GoogleAutoComplete
+                setAddressStatus={setAddressStatus}
+                setAddressMessage={setAddressMessage}
+                setValue={setValue}
+                errors={errors.address}
+              />
             </APIProvider>
+            {addressMessage && (
+              <p
+                className={`mt-2 ${status ? "text-green-500" : "text-red-500"}`}
+              >
+              </p>
+            )}
           </div>
         </div>
 

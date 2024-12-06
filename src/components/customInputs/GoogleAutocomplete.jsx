@@ -9,7 +9,7 @@ import { searchAddress } from "../../utils/axios-data";
 
 import PropTypes from "prop-types";
 
-const GoogleAutoComplete = ({ setValue, errors }) => {
+const GoogleAutoComplete = ({ setValue, errors, setAddressStatus, setAddressMessage }) => {
   const [placeAutocomplete, setPlaceAutocomplete] = useState(null);
 
   const [message, setMessage] = useState("");
@@ -55,18 +55,20 @@ const GoogleAutoComplete = ({ setValue, errors }) => {
 
       try {
         const results = await searchAddress(validationAddress);
+        setAddressStatus(true)
         if (results) {
-          setStatus(true);
-          setMessage("Address Validated");
+          setAddressStatus(false)
+          setAddressMessage(true);
+      
           setValue("address", selectedPlace.formatted_address);
         } else {
-          setStatus(false);
-          setMessage("Address Not Found in Dataset");
+          setAddressStatus(false);
+          setAddressMessage(false);
         }
       } catch (error) {
         console.error("Error:", error.message);
-        setStatus(false);
-        setMessage("Address Not Found in Dataset");
+        setAddressStatus(false);
+        setAddressMessage(error.message);
       }
     };
     placeAutocomplete.addListener("place_changed", handlePlaceChanged);
@@ -76,8 +78,8 @@ const GoogleAutoComplete = ({ setValue, errors }) => {
 
   const handleInputChange = () => {
     if (message || status !== null) {
-      setMessage("");
-      setStatus(null);
+      setAddressMessage("");
+      setAddressStatus(null);
     }
   };
 
@@ -91,17 +93,19 @@ const GoogleAutoComplete = ({ setValue, errors }) => {
         ref={inputRef}
         placeholder="Enter Your Address"
       />
-{message && status !== null && (
+{/* {message && (
   <p className={`mt-2 ${status ? "text-green-500" : "text-red-500"}`}>
     {message}
   </p>
-)}
+)} */}
     </div>
   );
 };
 
 GoogleAutoComplete.propTypes = {
   setValue: PropTypes.func.isRequired,
+  errors: PropTypes.bool,
+  setAddressStatus: PropTypes.func.isRequired,
+  setAddressMessage: PropTypes.func.isRequired,
 };
-
 export default GoogleAutoComplete;
