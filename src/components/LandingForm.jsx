@@ -85,7 +85,7 @@ export default function TestValidate() {
         onSubmit={handleSubmit((data) => {
           handleFormSubmit(data);
         })}
-        className=" sm:ml-5 sm:items-start flex text-lg  flex-col w-11/12 border p-2  max-w-3xl"
+        className=" sm:ml-5 sm:items-start flex text-lg  flex-col w-11/12 border p-2  max-w-5xl"
       >
         <div className="sm:flex-row gap-2  flex-grow w-full flex flex-col   ">
           <div className="sm:w-1/2 ">
@@ -140,26 +140,24 @@ export default function TestValidate() {
                 errors={errors.address}
               />
             </APIProvider>
-            {addressStatus && (
-              <span className="loading loading-spinner loading-sm"></span>
-            )}{" "}
-            {addressMessage !== null && (
-              <p
-                className={`mt-2 ${
-                  addressMessage === true
-                    ? "text-green-500"
+            <div className="flex justify-end">
+              {addressStatus && (
+                <span className="loading loading-spinner loading-sm"></span>
+              )}
+              {addressMessage !== null && (
+                <p
+                  className={`${
+                    addressMessage === true ? "text-green-500" : "text-red-500"
+                  }`}
+                >
+                  {addressMessage === true
+                    ? "Address Validated"
                     : addressMessage === false
-                    ? "text-red-500"
-                    : "text-yellow-500"
-                }`}
-              >
-                {addressMessage === true
-                  ? "Address Validated"
-                  : addressMessage === false
-                  ? "Address Not Validated"
-                  : addressMessage}{" "}
-              </p>
-            )}
+                    ? "Address Not Validated"
+                    : addressMessage}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
@@ -174,7 +172,7 @@ export default function TestValidate() {
         {errors.dateTime && (
           <p className="text-red-500 ml-2 mt-1">{errors.dateTime?.message}</p>
         )}
-        <div className="sm:flex-row sm:w-1/2 sm:mx-auto sm:mt-10 flex flex-col gap-2  mt-5">
+        <div className="sm:flex-row sm:w-1/2 sm:mt-10 flex flex-col sm:justify-start gap-2  mt-5">
           <button
             type="submit"
             className=" w-full font-bold  bg-green-600 rounded-lg text-slate-50 text-xl  py-4 "
