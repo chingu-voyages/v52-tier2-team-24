@@ -43,7 +43,6 @@ const GoogleAutoComplete = ({
 
     const handlePlaceChanged = async () => {
       const selectedPlace = placeAutocomplete.getPlace();
-      console.log("Sel place", selectedPlace);
 
       const { streetNumber, postcode } = getAddressComponents(
         selectedPlace.address_components
@@ -99,7 +98,7 @@ const GoogleAutoComplete = ({
 
 GoogleAutoComplete.propTypes = {
   setValue: PropTypes.func.isRequired,
-  errors: PropTypes.bool,
+  errors: PropTypes.object,
   setAddressStatus: PropTypes.func.isRequired,
   setAddressMessage: PropTypes.func.isRequired,
 };

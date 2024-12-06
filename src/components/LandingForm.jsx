@@ -59,7 +59,7 @@ export default function TestValidate() {
       });
       return;
     }
-    console.log(data);
+
     localStorage.setItem("userInput", JSON.stringify(data));
     reset();
     //show appointment confirmation modal after form submission
@@ -76,8 +76,6 @@ export default function TestValidate() {
     reset();
     setIsAppointmentModalOpen(false);
   };
-
-  console.log("Status", addressStatus);
 
   return (
     <div className="w-full flex flex-col gap-4 items-center     pt-8">
