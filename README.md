@@ -11,7 +11,7 @@ The application is designed to provide Los Angeles area Residents to request a s
 
 ## Our Team
 
-**Lidia Prado - SCRUM Master** [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
+**Lidia Prado Peñalver - SCRUM Master** [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
 
 **Peter Eyong - SCRUM Master** [GitHub](https://github.com/pteyong577)
 
