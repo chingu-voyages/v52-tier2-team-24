@@ -5,9 +5,7 @@ import {
 } from '@vis.gl/react-google-maps';
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
-export const GoogleMap = () => {
-  const appointments = JSON.parse(localStorage.getItem('appointments'));
-
+export const GoogleMap = ({appointments}) => {
   const locations = appointments.map(appt => {
     return {
       key: appt.address,
@@ -28,7 +26,7 @@ export const GoogleMap = () => {
       >
         <Map
           style={{width: '80vw', height: '50vh'}}
-          defaultCenter={locations[0].location || {lat: 34.0549, lng: -118.2426}}
+          defaultCenter={locations[0] ? locations[0].location : {lat: 34.0549, lng: -118.2426}}
           defaultZoom={11}
           gestureHandling={'greedy'}
           disableDefaultUI={false}

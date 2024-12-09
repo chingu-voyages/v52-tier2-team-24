@@ -73,14 +73,14 @@ export default function Planning() {
       case "map":
         return (
           <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
-            <GoogleMap appointments={filteredAppointments}/>
+            <GoogleMap appointments={filteredAppointments} />
           </div>
         );
       case "both":
         return (
           <div>
             <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
-              <GoogleMap appointments={filteredAppointments}/>
+              <GoogleMap appointments={filteredAppointments} />
             </div>
             <div className="space-y-4">
               <AppointmentsList appointments={filteredAppointments} />
