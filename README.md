@@ -1,45 +1,89 @@
-# voyage-tasks
+# Solar App Title
 
-Your project's `readme` is as important to success as your code. For
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+The application is designed to provide Los Angeles area Residents to request a solar installation evaluation and to allow company admins to access, plan, and schedule visits. This app was created as part of [Chingu's](https://www.chingu.io/) Voyage 52.
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point -
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+## Features
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
-
-> Own it & Make it your Own!
-
-## Team Documents
-
-You may find these helpful as you work together to organize your project.
-
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
-
-Meeting Agenda templates (located in the `/docs` directory in this repo):
-
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+- **Residents** are able to fill out a form to request an appointment that includes contact details, a timeslot preference, and their address that is Validated against the [LA Dataset](https://catalog.data.gov/dataset/addresses-in-the-city-of-los-angeles/resource/cfcd5dce-b96c-43e8-bd36-aac11d14bf7d)
+- **Admin** can login to access the admin dashboard that allows the user to view requests submitted by the residents and then delete or add the request as an appointment
+- **Admin** can view appointments and then view their route based off of a list or map
+- **Admin** can export their appointment list in PDF format
 
 ## Our Team
 
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team _before_ you start
-coding!
+**Lidia Prado Peñalver - SCRUM Master** [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
 
-- Lindsay Allen: [GitHub](https://github.com/lkallen)
-- Peter Eyong: [GitHub](https://github.com/pteyong577)
-- Benjamin Corbett: [GitHub](https://github.com/bcsurf2822) [LinkedIn](https://www.linkedin.com/in/benjamin-corbett-84822424a/)
-- Lidia Prado: [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
-- Dana Jeon: [GitHub](https://github.com/danajeon) [LinkedIn](https://www.linkedin.com/in/dana-jeon-dev/)
-- Alicia Guirand: [GitHub](https://github.com/aliciaguirand) [LinkedIn](https://www.linkedin.com/in/aliciaguirand)
-- Anna Bowen: [GitHub](https://github.com/bowenanna) [LinkedIn](https://www.linkedin.com/in/realannabowen/)
-- Jessica Beazer [GitHub](https://github.com/jessanagilepmp) [LinkedIn](https://www.linkedin.com/in/jessicabeazer/)
-- Sierra Swaby [GitHub](https://github.com/starkspark) [LinkedIn](https://www.linkedin.com/in/sierra-swaby)
+**Peter Eyong - SCRUM Master** [GitHub](https://github.com/pteyong577)
+
+**Jessica Beazer - Product Owner** [GitHub](https://github.com/jessanagilepmp) [LinkedIn](https://www.linkedin.com/in/jessicabeazer/)
+
+**Alicia Guirand - Product Owner** [GitHub](https://github.com/aliciaguirand) [LinkedIn](https://www.linkedin.com/in/aliciaguirand)
+
+**Lindsay Allen - Developer** [GitHub](https://github.com/lkallen)
+
+**Benjamin Corbett - Developer** [GitHub](https://github.com/bcsurf2822) [LinkedIn](https://www.linkedin.com/in/benjamin-corbett-84822424a/)
+
+**Dana Jeon - Developer** [GitHub](https://github.com/danajeon) [LinkedIn](https://www.linkedin.com/in/dana-jeon-dev/)
+
+**Anna Bowen - Developer** [GitHub](https://github.com/bowenanna) [LinkedIn](https://www.linkedin.com/in/realannabowen/)
+
+**Sierra Swaby - Developer** [GitHub](https://github.com/starkspark) [LinkedIn](https://www.linkedin.com/in/sierra-swaby)
+
+## Dev Dependencies
+
+- [React Google Maps](https://visgl.github.io/react-google-maps/)
+- [React-Router-Dom](https://reactrouter.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [React Datepicker](https://reactdatepicker.com/)
+- [Tailwind Css](https://tailwindcss.com/)
+- [Headless UI](https://headlessui.com/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [Prop Types](https://github.com/facebook/prop-types)
+- [React PDF](https://react-pdf.org/)
+- [Daisy UI](https://daisyui.com/)
+- [ESLint](https://eslint.org/)
+- [Axios](https://axios-http.com/docs/intro)
+- [React](https://react.dev/)
+- [Vite](https://vite.dev/)
+- Webpack
+- Babel
+- React-DOM
+
+## Live Demo
+
+[ISOLAR - DEVELOPMENT!](https://isolar.netlify.app/)
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/chingu-voyages/v52-tier2-team-24.git
+```
+
+Go to the project directory
+
+```bash
+  cd v52-tier2-team-24/
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+## Screenshots
+
+![Landing Page](/screenshots/landing-page.png)
+![Form](/screenshots/user-form.png)
+![New Appointment](/screenshots/new-appt.png)
+![Appointments](/screenshots/all-appt.png)
+![Map](/screenshots/map-view.png)
+![PDF Page](/screenshots/pdf-view.png)

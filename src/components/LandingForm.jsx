@@ -64,6 +64,8 @@ export default function TestValidate() {
     reset();
     //show appointment confirmation modal after form submission
     setIsAppointmentModalOpen(true);
+    setAddressMessage(null);
+    setAddressStatus(null);
   };
 
   const openTimeSlotModal = () => {
