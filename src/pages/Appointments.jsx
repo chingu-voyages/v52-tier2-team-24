@@ -33,7 +33,7 @@ const Appointments = () => {
   console.log("Address", acceptedAppointments);
 
   return (
-    <div className="space-y-6 ">
+    <div className="space-y-2 ">
       {acceptedAppointments.length === 0 ? (
         <p className="text-gray-500">No appointments.</p>
       ) : (
@@ -41,26 +41,43 @@ const Appointments = () => {
           // ENTIRE ROW
           <div
             key={appointment.id}
-            className="flex flex-col border-2 border-green-300 bg-gray-200"
+            className="flex flex-col border-y-2 border-gray-400 bg-gray-200"
           >
             {/* NAME AND LOGO */}
             <div className="flex">
-              <div className="flex w-1/2 items-center gap-2">
-                <img src={sun} className="h-[30px]" />
+              <div className="flex w-1/2 items-center gap-1">
+                <img src={sun} className="h-[30px] " />
 
                 <p className="font-bold">{appointment.name}</p>
-   
               </div>
-              {/* Date | Time | Toggle */}
-              <div className="flex flex-col w-1/2 items-center justify-center">
-                <p className="text-gray-500 text-sm">
+              {/* Toggle */}
+              <div className="flex flex-col w-1/2 items-end justify-center my-2 mr-2 ">
+                <button
+                  className="w-12 h-7 border-2 border-gray-400 rounded-full relative bg-white  transition-colors "
+                  onClick={() => toggleVisitStatus(appointment.id)}
+                >
+                  <div
+                    className={`absolute w-5 h-5 rounded-full top-0.5 left-0.3 transition-transform ${
+                      appointment.isVisited
+                        ? "transform translate-x-6 bg-green-500"
+                        : "bg-red-500"
+                    }`}
+                  />
+                </button>{" "}
+                {/* <p className="text-gray-500 text-sm">
                   {appointment.time} | {appointment.date}
-                </p>
+                </p> */}
               </div>
             </div>
-            <p className="text-md text-center">
-              {formatAddress(appointment.address)}
-            </p>
+            {/* Date | Time | Address */}
+            <div className="ml-2">
+              <p className="text-gray-500 text-sm">
+                {appointment.time} | {appointment.date}
+              </p>
+              <p className="text-md  mr-1">
+                {formatAddress(appointment.address)}
+              </p>
+            </div>
           </div>
         ))
       )}
@@ -70,8 +87,7 @@ const Appointments = () => {
 
 export default Appointments;
 
-{
-  /* <button
+/* <button
                 className="w-12 h-6 rounded-full relative bg-gray-200 transition-colors"
                 onClick={() => toggleVisitStatus(appointment.id)}
               >
@@ -81,4 +97,3 @@ export default Appointments;
                   }`}
                 />
               </button> */
-}
