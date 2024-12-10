@@ -49,17 +49,18 @@ const Appointments = () => {
                 <img src={sun} className="h-[30px]" />
 
                 <p className="font-bold">{appointment.name}</p>
-                {/* <p className="text-gray-500">{appointment.address}</p> */}
+   
               </div>
               {/* Date | Time | Toggle */}
               <div className="flex flex-col w-1/2 items-center justify-center">
                 <p className="text-gray-500 text-sm">
                   {appointment.time} | {appointment.date}
                 </p>
-                {/* <p className="text-gray-500 ">{appointment.time}</p> */}
               </div>
             </div>
-            <p className="text-sm">{formatAddress(appointment.address)}</p>
+            <p className="text-md text-center">
+              {formatAddress(appointment.address)}
+            </p>
           </div>
         ))
       )}
