@@ -65,7 +65,7 @@ const AdminPage = () => {
 
   const getNavLinkClass = ({ isActive }) =>
     `${
-      isActive ? "bg-gray-100 p-2 mr-2 rounded" : "bg-white mr-2 p-2"
+      isActive ? "bg-gray-100 p-2 mr-2 border-2  border-gray-500 rounded" : "bg-white mr-2 p-2"
     } hover:text-tab-text`;
 
   return (
