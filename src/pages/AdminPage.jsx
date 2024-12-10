@@ -16,7 +16,8 @@ const AdminPage = () => {
       const newAppointment = {
         id: Date.now(),
         name: `${data.firstName} ${data.lastName}`,
-        time: data.dateTime,
+        date: data.date,
+        time: data.time,
         address: data.address,
         email: data.email,
         isVisited: false,
@@ -94,6 +95,9 @@ const AdminPage = () => {
                     <h3 className="text-gray-700 text-lg mb-1">
                       {appointment.name}
                     </h3>
+                    <p className="text-gray-500 text-sm mb-2  text-center">
+                      {appointment.date}
+                    </p>
                     <p className="text-gray-500 text-sm mb-2  text-center">
                       {appointment.time}
                     </p>

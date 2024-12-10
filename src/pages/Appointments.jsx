@@ -44,6 +44,7 @@ const Appointments = () => {
               </div>
             </div>
             <div className="flex">
+            <p className="text-gray-500 mr-3">{appointment.date}</p>
               <p className="text-gray-500 mr-3">{appointment.time}</p>
               {/* <button
                 className="w-12 h-6 rounded-full relative bg-gray-200 transition-colors"
