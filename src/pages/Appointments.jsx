@@ -1,50 +1,54 @@
 import { useState, useEffect } from "react";
-import sun from "../images/weather.png"
+import sun from "../images/weather.png";
 
 const Appointments = () => {
   const [acceptedAppointments, setAcceptedAppointments] = useState([]);
 
   useEffect(() => {
-    const existingAppointments = JSON.parse(localStorage.getItem("appointments") || "[]");
-    const acceptedApps = existingAppointments.filter(app => !app.isNew);
+    const existingAppointments = JSON.parse(
+      localStorage.getItem("appointments") || "[]"
+    );
+    const acceptedApps = existingAppointments.filter((app) => !app.isNew);
     setAcceptedAppointments(acceptedApps);
   }, []);
 
   const toggleVisitStatus = (id) => {
-    setAcceptedAppointments(prev => 
-      prev.map(appointment => 
-        appointment.id === id 
-          ? { ...appointment, isVisited: !appointment.isVisited } 
+    setAcceptedAppointments((prev) =>
+      prev.map((appointment) =>
+        appointment.id === id
+          ? { ...appointment, isVisited: !appointment.isVisited }
           : appointment
       )
     );
-    
-    const allAppointments = JSON.parse(localStorage.getItem("appointments") || "[]");
-    const updatedAppointments = allAppointments.map(app => 
+
+    const allAppointments = JSON.parse(
+      localStorage.getItem("appointments") || "[]"
+    );
+    const updatedAppointments = allAppointments.map((app) =>
       app.id === id ? { ...app, isVisited: !app.isVisited } : app
     );
     localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
   };
-  console.log("Address", acceptedAppointments )
+  console.log("Address", acceptedAppointments);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 border-2 border-green-300 ">
       {acceptedAppointments.length === 0 ? (
         <p className="text-gray-500">No appointments.</p>
       ) : (
         acceptedAppointments.map((appointment) => (
           // ENTIRE ROW
-          <div key={appointment.id} className="flex bg-gray-200">
+          <div key={appointment.id} className="flex border-2 border-green-300 bg-gray-200">
             {/* NAME AND LOGO */}
-            <div className="flex bg-green-300 w-1/2 items-center gap-4">
+            <div className="flex w-1/2 items-center gap-4">
               <img src={sun} className="h-[30px]" />
-              <div>
-                <p className="font-medium">{appointment.name}</p>
-                {/* <p className="text-gray-500">{appointment.address}</p> */}
-              </div>
+
+              <p className="font-medium">{appointment.name}</p>
+              {/* <p className="text-gray-500">{appointment.address}</p> */}
             </div>
+            {/* Date | Time | Toggle */}
             <div className="flex">
-            <p className="text-gray-500 mr-3">{appointment.date}</p>
+              <p className="text-gray-500 mr-3">{appointment.date}</p>
               <p className="text-gray-500 mr-3">{appointment.time}</p>
               {/* <button
                 className="w-12 h-6 rounded-full relative bg-gray-200 transition-colors"
