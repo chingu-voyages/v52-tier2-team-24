@@ -127,7 +127,7 @@ const AdminPage = () => {
           )}
         </div>
       </div>
-      <div className="border-t border-2 border-green-300 l">
+      <div className="border-t ">
         <div className="flex mb-8">
           <NavLink className={getNavLinkClass} to={`appointments`}>
             Appointments
