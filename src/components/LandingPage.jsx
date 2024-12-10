@@ -8,8 +8,15 @@ import billImg from "../images/bill.png";
 import hugImg from "../images/hug.png";
 import lightbulbImg from "../images/renewable-energy.png";
 import Footer from "../pages/Footer";
+import { useRef } from "react";
 
 const LandingPage = () => {
+  const formRef = useRef();
+
+  function clickToSchedule() {
+    formRef.current.scrollIntoView({ behavior: "smooth"});
+  }
+
   return (
     <main className="bg-gradient-to-t from-white to-landing-blue border border-red-600 ">
       <NavBar />
@@ -31,7 +38,11 @@ const LandingPage = () => {
               </h2>
 
               <div className="flex flex-col justify-center items-center md:flex-row gap-2 ">
-                <Button text={"Schedule an appointment"} isButtonLarge={true} />
+                <Button
+                  clickToSchedule={clickToSchedule}
+                  text={"Schedule an appointment"}
+                  isButtonLarge={true}
+                />
 
                 <span className="flex items-center">
                   <a href="" className="text-xl ml-8">
@@ -108,7 +119,7 @@ const LandingPage = () => {
         </p>
       </section>
       {/* FORM */}
-      <section>
+      <section ref={formRef}>
         <LandingForm />
       </section>
       {/* FOOTER */}
