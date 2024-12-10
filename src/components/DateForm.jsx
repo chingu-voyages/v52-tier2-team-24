@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -7,11 +8,9 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
   const [appointmentTime, setAppointmentTime] = useState("");
 
   useEffect(() => {
-    // Initial time setup
     const initialTime = getNextAvailableTime(new Date());
     setAppointmentTime(initialTime);
 
-    // Set separate date and time properties
     setValue("date", formatDate(new Date()));
     setValue("time", initialTime);
   }, []);
@@ -21,14 +20,12 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
     const nextAvailableTime = getNextAvailableTime(date);
     setAppointmentTime(nextAvailableTime);
 
-    // Update separate date and time properties
     setValue("date", formatDate(date));
     setValue("time", nextAvailableTime);
 
     clearErrors("date");
     clearErrors("time");
 
-    // Opens timeslot modal once the date is selected
     openTimeSlotModal();
   };
 
@@ -36,7 +33,6 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
     const time = e.target.value;
     setAppointmentTime(time);
 
-    // Update only the time property
     setValue("time", time);
     clearErrors("time");
   };
@@ -51,8 +47,8 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
   const getNextAvailableTime = (date) => {
     const now = new Date();
     const isToday = date.toDateString() === now.toDateString();
-    let hour = isToday ? now.getHours() + 1 : 9; // if today, start from next hour, otherwise 9 AM
-    hour = Math.max(9, Math.min(18, hour)); // hours between 9 AM and 6 PM
+    let hour = isToday ? now.getHours() + 1 : 9;
+    hour = Math.max(9, Math.min(18, hour));
     return `${hour % 12 || 12}:00 ${hour >= 12 ? "PM" : "AM"}`;
   };
 
@@ -60,7 +56,7 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
     const times = [];
     const now = new Date();
     const isToday = appointmentDate.toDateString() === now.toDateString();
-    const startHour = isToday ? now.getHours() + 1 : 9; // start from next hour if today
+    const startHour = isToday ? now.getHours() + 1 : 9;
 
     for (let hour = startHour; hour <= 18; hour++) {
       const suffix = hour < 12 ? "AM" : "PM";
@@ -109,6 +105,13 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
       />
     </div>
   );
+};
+
+DateForm.propTypes = {
+  setValue: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  openTimeSlotModal: PropTypes.func.isRequired,
 };
 
 export default DateForm;
