@@ -41,42 +41,40 @@ const Appointments = () => {
           // ENTIRE ROW
           <div
             key={appointment.id}
-            className="flex flex-col border-y-2 border-gray-400 bg-gray-200"
+            className="flex flex-col  border-y-2 border-gray-400 bg-gray-200  md:flex-row md:items-center md:justify-between relative"
           >
             {/* NAME AND LOGO */}
-            <div className="flex">
-              <div className="flex w-1/2 items-center gap-1">
+            <div className="flex md:w-1/3">
+              <div className="flex items-center gap-1">
                 <img src={sun} className="h-[30px] " />
-
                 <p className="font-bold">{appointment.name}</p>
               </div>
-              {/* Toggle */}
-              <div className="flex flex-col w-1/2 items-end justify-center my-2 mr-2 ">
-                <button
-                  className="w-12 h-7 border-2 border-gray-400 rounded-full relative bg-white  transition-colors "
-                  onClick={() => toggleVisitStatus(appointment.id)}
-                >
-                  <div
-                    className={`absolute w-5 h-5 rounded-full top-0.5 left-0.3 transition-transform ${
-                      appointment.isVisited
-                        ? "transform translate-x-6 bg-green-500"
-                        : "bg-red-500"
-                    }`}
-                  />
-                </button>{" "}
-                {/* <p className="text-gray-500 text-sm">
-                  {appointment.time} | {appointment.date}
-                </p> */}
-              </div>
             </div>
-            {/* Date | Time | Address */}
-            <div className="ml-2">
+
+            {/* DATE TIME ADDRESS */}
+            <div className="ml-2 md:flex md:justify-start md:items-center md:gap-6">
               <p className="text-gray-500 text-sm">
                 {appointment.time} | {appointment.date}
               </p>
               <p className="text-md  mr-1">
                 {formatAddress(appointment.address)}
               </p>
+            </div>
+
+            {/* Toggle */}
+            <div className="sm:flex sm:flex-col sm:items-end sm:static absolute right-2 m-2 ">
+              <button
+                className="w-12 h-7 border-2 border-gray-400 rounded-full relative bg-white  transition-colors "
+                onClick={() => toggleVisitStatus(appointment.id)}
+              >
+                <div
+                  className={`absolute w-5 h-5 rounded-full top-0.5 left-0.3 transition-transform ${
+                    appointment.isVisited
+                      ? "transform translate-x-6 bg-green-500"
+                      : "bg-red-500"
+                  }`}
+                />
+              </button>{" "}
             </div>
           </div>
         ))
