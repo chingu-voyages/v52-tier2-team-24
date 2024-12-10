@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import sun from "../images/weather.png";
+import { formatAddress } from "../helpers/formatAddress";
 
 const Appointments = () => {
   const [acceptedAppointments, setAcceptedAppointments] = useState([]);
@@ -52,11 +53,13 @@ const Appointments = () => {
               </div>
               {/* Date | Time | Toggle */}
               <div className="flex flex-col w-1/2 items-center justify-center">
-                <p className="text-gray-500 text-sm">{appointment.time}  | {appointment.date}</p>
+                <p className="text-gray-500 text-sm">
+                  {appointment.time} | {appointment.date}
+                </p>
                 {/* <p className="text-gray-500 ">{appointment.time}</p> */}
               </div>
             </div>
-            <p className="text-sm">{appointment.address}</p>
+            <p className="text-sm">{formatAddress(appointment.address)}</p>
           </div>
         ))
       )}
