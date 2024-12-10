@@ -25,6 +25,7 @@ const Appointments = () => {
     );
     localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
   };
+  console.log("Address", acceptedAppointments )
 
   return (
     <div className="space-y-6">
@@ -32,17 +33,19 @@ const Appointments = () => {
         <p className="text-gray-500">No appointments.</p>
       ) : (
         acceptedAppointments.map((appointment) => (
-          <div key={appointment.id} className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
+          // ENTIRE ROW
+          <div key={appointment.id} className="flex bg-gray-200">
+            {/* NAME AND LOGO */}
+            <div className="flex bg-green-300 items-center gap-4">
               <img src={sun} className="h-[30px]" />
               <div>
                 <p className="font-medium">{appointment.name}</p>
-                <p className="text-gray-500">{appointment.address}</p>
+                {/* <p className="text-gray-500">{appointment.address}</p> */}
               </div>
             </div>
             <div className="flex">
-              <div className="text-gray-500 mr-3">{appointment.time}</div>
-              <button
+              <p className="text-gray-500 mr-3">{appointment.time}</p>
+              {/* <button
                 className="w-12 h-6 rounded-full relative bg-gray-200 transition-colors"
                 onClick={() => toggleVisitStatus(appointment.id)}
               >
@@ -51,7 +54,7 @@ const Appointments = () => {
                     appointment.isVisited ? 'transform translate-x-6 bg-green-500' : 'bg-red-500'
                   }`}
                 />
-              </button>
+              </button> */}
             </div>
           </div>
         ))

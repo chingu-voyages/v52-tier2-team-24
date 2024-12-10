@@ -72,7 +72,7 @@ const AdminPage = () => {
     <div className="min-h-screen bg-white">
       <div className="pl-8 pr-8">
         <div className="border-b-2 border-gray-600">
-          <h2 className="text-lg font-bold my-4  text-center sm:text-start">New Appointment Requests</h2>
+          <h2 className="text-lg font-bold my-4  text-center sm:text-start underline">New Appointment Requests</h2>
           <div className="flex flex-wrap mb-12 h-[200px] justify-center items-center">
             {/* New appointments */}
             {newAppointments.length === 0 ? (
