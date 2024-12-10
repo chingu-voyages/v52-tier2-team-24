@@ -72,7 +72,7 @@ const AdminPage = () => {
     <div className="min-h-screen bg-white">
       <div className="pl-8 pr-8">
         <div className="">
-          <h2 className="text-lg font-small mb-4">New Appointment Requests</h2>
+          <h2 className="text-lg font-small my-4  text-center">New Appointment Requests</h2>
           <div className="flex flex-wrap mb-12 h-[200px]">
             {/* New appointments */}
             {newAppointments.length === 0 ? (
@@ -81,10 +81,10 @@ const AdminPage = () => {
               newAppointments.map((appointment) => (
                 <div
                   key={appointment.id}
-                  className="flex items-start gap-4 bg-white p-2 min-w-[250px]"
+                  className="flex items-start gap-4 bg-white  p-2 min-w-[250px]"
                 >
                   <div className="flex flex-col items-center">
-                    <div className="flex items-center justify-center bg-gray-100 rounded-full h-[55px] w-[55px] mb-3">
+                    <div className="flex items-center justify-center  bg-gray-100 rounded-full h-[55px] w-[55px] mb-3">
                       <img
                         src={calendar}
                         alt="Calendar"
@@ -94,11 +94,11 @@ const AdminPage = () => {
                     <h3 className="text-gray-700 text-lg mb-1">
                       {appointment.name}
                     </h3>
-                    <p className="text-gray-500 text-sm mb-2">
+                    <p className="text-gray-500 text-sm mb-2  text-center">
                       {appointment.time}
                     </p>
-                    <p className="font-medium text-lg">{appointment.address}</p>
-                    <div className="flex gap-4 mt-4">
+                    <p className="font-medium text-lg text-center">{appointment.address}</p>
+                    <div className="flex gap-4 items-center mt-2">
                       <button
                         className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors"
                         onClick={() => handleApprove(appointment.id)}
