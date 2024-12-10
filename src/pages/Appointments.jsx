@@ -36,7 +36,7 @@ const Appointments = () => {
           // ENTIRE ROW
           <div key={appointment.id} className="flex bg-gray-200">
             {/* NAME AND LOGO */}
-            <div className="flex bg-green-300 items-center gap-4">
+            <div className="flex bg-green-300 w-1/2 items-center gap-4">
               <img src={sun} className="h-[30px]" />
               <div>
                 <p className="font-medium">{appointment.name}</p>

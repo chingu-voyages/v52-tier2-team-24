@@ -31,9 +31,9 @@ export default function TestValidate() {
         .string()
         .min(5, "Address must be at least 10 characters long")
         .required("Address Required"),
-      // Adding date and time validation for the dateform
 
-      dateTime: yup.string().required("Date and time are required"),
+      date: yup.string().required("Date is required"),
+      time: yup.string().required("Time is required"),
     })
     .required();
 
@@ -51,13 +51,22 @@ export default function TestValidate() {
   });
 
   const handleFormSubmit = (data) => {
-    //checking if the time was picked
-    if (!data.dateTime) {
-      setError("dateTime", {
+    if (!data.date) {
+      setError("date", {
         type: "manual",
-        message: "Date and time slot required",
+        message: "Date is required",
       });
-      return;
+    }
+
+    if (!data.time) {
+      setError("time", {
+        type: "manual",
+        message: "Time is required",
+      });
+    }
+
+    if (!data.date || !data.time) {
+      return; // Prevent submission if either is missing
     }
 
     localStorage.setItem("userInput", JSON.stringify(data));
@@ -163,14 +172,17 @@ export default function TestValidate() {
 
         <p className="ml-2 font-bold mb-2">Preferred Timeslot</p>
         <DateForm
-          setValue={setValue} //passing setValues and registering function to DateFomr
+          setValue={setValue} // Pass setValue and other props to DateForm
           clearErrors={clearErrors}
           register={register}
           openTimeSlotModal={openTimeSlotModal}
         />
-        {/* Error message will pop up if date/time hasn't been picket */}
-        {errors.dateTime && (
-          <p className="text-red-500 ml-2 mt-1">{errors.dateTime?.message}</p>
+        {/* Error messages for date and time */}
+        {errors.date && (
+          <p className="text-red-500 ml-2 mt-1">{errors.date?.message}</p>
+        )}
+        {errors.time && (
+          <p className="text-red-500 ml-2 mt-1">{errors.time?.message}</p>
         )}
         <div className="sm:flex-row sm:w-1/2 sm:mt-10 flex flex-col sm:justify-start gap-2  mt-5">
           <button
