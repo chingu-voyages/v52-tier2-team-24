@@ -35,7 +35,9 @@ const Appointments = () => {
   return (
     <div className="space-y-2 ">
       {acceptedAppointments.length === 0 ? (
-        <p className="text-gray-500">No appointments.</p>
+        <p className="text-gray-500 text-center justify-center">
+          No appointments.
+        </p>
       ) : (
         acceptedAppointments.map((appointment) => (
           // ENTIRE ROW
@@ -84,14 +86,3 @@ const Appointments = () => {
 };
 
 export default Appointments;
-
-/* <button
-                className="w-12 h-6 rounded-full relative bg-gray-200 transition-colors"
-                onClick={() => toggleVisitStatus(appointment.id)}
-              >
-                <div 
-                  className={`absolute w-5 h-5 rounded-full top-0.5 left-0.5 transition-transform ${
-                    appointment.isVisited ? 'transform translate-x-6 bg-green-500' : 'bg-red-500'
-                  }`}
-                />
-              </button> */
