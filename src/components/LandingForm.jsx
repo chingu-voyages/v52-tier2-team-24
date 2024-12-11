@@ -14,7 +14,7 @@ import { getCoordinates } from "../api/maps";
 import { AppointmentConfirmation } from "./AppointmentConfirmation";
 import { TimeslotConfirmation } from "./TimeslotConfirmation";
 
-export default  function TestValidate() {
+export default function TestValidate() {
   //states for appointment and timeslot modals
   const [isTimeslotModalOpen, setIsTimeslotModalOpen] = useState(false);
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
@@ -35,6 +35,14 @@ export default  function TestValidate() {
 
       date: yup.string().required("Date is required"),
       time: yup.string().required("Time is required"),
+      latitude: yup
+        .number()
+        .typeError("Latitude must be a valid number")
+        .required("Latitude is required"),
+      longitude: yup
+        .number()
+        .typeError("Longitude must be a valid number")
+        .required("Longitude is required"),
     })
     .required();
 
@@ -51,11 +59,9 @@ export default  function TestValidate() {
     resolver: yupResolver(userSchema),
   });
 
-
   const handleFormSubmit = (data) => {
     if (!data.date) {
       setError("date", {
-
         type: "manual",
         message: "Date is required",
       });
@@ -72,12 +78,7 @@ export default  function TestValidate() {
       return; // Prevent submission if either is missing
     }
 
-    const address = data.address;
-    const {lat, lng} =  getCoordinates(GOOGLE_API_KEY, address);
-    data.latitude = lat;
-    data.longitude = lng;
-
-    localStorage.setItem("userInput", JSON.stringify(data));
+console.log("Data", data)
 
     localStorage.setItem("userInput", JSON.stringify(data));
     reset();

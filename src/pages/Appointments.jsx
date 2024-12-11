@@ -30,7 +30,6 @@ const Appointments = () => {
     );
     localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
   };
-  console.log("Address", acceptedAppointments);
 
   return (
     <div className="space-y-2 ">

@@ -24,7 +24,7 @@ const GoogleAutoComplete = ({
     if (!places || !inputRef.current) return;
 
     const options = {
-      fields: ["address_components", "name", "formatted_address"],
+      fields: ["address_components", "name", "formatted_address", "geometry"],
       bounds: {
         north: 34.342452,
         south: 33.692558,
@@ -43,6 +43,9 @@ const GoogleAutoComplete = ({
 
     const handlePlaceChanged = async () => {
       const selectedPlace = placeAutocomplete.getPlace();
+      console.log("Selected Place Object:", selectedPlace);
+      console.log("Latitude:", selectedPlace.geometry.location.lat());
+      console.log("Longitude:", selectedPlace.geometry.location.lng());
 
       const { streetNumber, postcode } = getAddressComponents(
         selectedPlace.address_components
@@ -62,6 +65,8 @@ const GoogleAutoComplete = ({
           setAddressMessage(true);
 
           setValue("address", selectedPlace.formatted_address);
+          setValue("latitude", selectedPlace.geometry.location.lat())
+          setValue("longitude", selectedPlace.geometry.location.lng())
         } else {
           setAddressStatus(false);
           setAddressMessage(false);

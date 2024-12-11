@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types';
 import {
   APIProvider,
   Map,
@@ -9,6 +9,7 @@ const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const GOOGLE_MAP_ID = import.meta.env.VITE_GOOGLE_MAP_ID;
 
 export const GoogleMap = ({appointments}) => {
+  console.log("MAP APPT_>", appointments)
   const locations = appointments.map(appt => {
     return {
       key: appt.address,
@@ -42,4 +43,14 @@ export const GoogleMap = ({appointments}) => {
       </APIProvider>
     </div>
   );
+};
+
+GoogleMap.propTypes = {
+  appointments: PropTypes.arrayOf(
+    PropTypes.shape({
+      address: PropTypes.string.isRequired,
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
