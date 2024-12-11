@@ -43,7 +43,7 @@ const Appointments = () => {
           // ENTIRE ROW
           <div
             key={appointment.id}
-            className="flex flex-col  border-y-2 border-gray-400 bg-gray-200  md:flex-row md:items-center md:justify-between relative"
+            className="flex flex-col  border-y-2 border-gray-300 bg-gray-100  md:flex-row md:items-center md:justify-between relative"
           >
             {/* NAME AND LOGO */}
             <div className="flex md:w-1/3">
