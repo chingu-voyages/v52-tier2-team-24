@@ -7,6 +7,7 @@ import {
   PDFViewer,
 } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
+import { formatAddress } from "../../helpers/formatAddress";
 
 const styles = StyleSheet.create({
   page: {
@@ -31,6 +32,24 @@ const styles = StyleSheet.create({
   },
   column: {
     flex: 1,
+    fontSize: 12,
+    textAlign: "left",
+    paddingRight: 10,
+  },
+  headerColumn: {
+    flex: 1,
+    fontSize: 12,
+    fontWeight: 900,
+    textAlign: "left",
+    paddingRight: 10,
+  },
+
+  dateColumn: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    flex: 1,
+    gap: 2,
     fontSize: 12,
     textAlign: "left",
     paddingRight: 10,
@@ -64,20 +83,21 @@ function PDFAppointments() {
       <Document>
         <Page size="A4" style={styles.page}>
           <View style={styles.headerRow}>
-          <Text style={styles.column}>Date</Text>
-            <Text style={styles.column}>Name</Text>
-            <Text style={styles.column}>Email</Text>
-            <Text style={styles.column}>Address</Text>
-            <Text style={styles.column}>Time</Text>
+            <Text style={styles.headerColumn}>Date / Time</Text>
+            <Text style={styles.headerColumn}>Name</Text>
+            <Text style={styles.headerColumn}>Email</Text>
+            <Text style={styles.headerColumn}>Address</Text>
           </View>
           {appointmentData.map((appointment, index) => (
-            <View key={index} style={styles.dataRow}>
-                       <Text style={styles.column}>{appointment.date}</Text>
-              <Text style={styles.column}>{appointment.name}</Text>
-              <Text style={styles.column}>{appointment.email}</Text>
-              <Text style={styles.column}>{appointment.address}</Text>
-              <Text style={styles.column}>{appointment.time}</Text>
-            </View>
+ <View key={index} style={styles.dataRow}>
+ <View style={styles.dateColumn}>
+   <Text>{appointment.date}</Text>
+   <Text>{appointment.time}</Text>
+ </View>
+ <Text style={styles.column}>{appointment.name}</Text>
+ <Text style={styles.column}>{appointment.email}</Text>
+ <Text style={styles.column}>{formatAddress(appointment.address)}</Text>
+</View>
           ))}
         </Page>
       </Document>
