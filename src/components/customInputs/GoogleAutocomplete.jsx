@@ -43,9 +43,6 @@ const GoogleAutoComplete = ({
 
     const handlePlaceChanged = async () => {
       const selectedPlace = placeAutocomplete.getPlace();
-      console.log("Selected Place Object:", selectedPlace);
-      console.log("Latitude:", selectedPlace.geometry.location.lat());
-      console.log("Longitude:", selectedPlace.geometry.location.lng());
 
       const { streetNumber, postcode } = getAddressComponents(
         selectedPlace.address_components
