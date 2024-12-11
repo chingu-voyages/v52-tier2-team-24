@@ -14,7 +14,7 @@ import { getCoordinates } from "../api/maps";
 import { AppointmentConfirmation } from "./AppointmentConfirmation";
 import { TimeslotConfirmation } from "./TimeslotConfirmation";
 
-export default function TestValidate() {
+export default  function TestValidate() {
   //states for appointment and timeslot modals
   const [isTimeslotModalOpen, setIsTimeslotModalOpen] = useState(false);
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
@@ -73,7 +73,7 @@ export default function TestValidate() {
     }
 
     const address = data.address;
-    const {lat, lng} = await getCoordinates(GOOGLE_API_KEY, address);
+    const {lat, lng} =  getCoordinates(GOOGLE_API_KEY, address);
     data.latitude = lat;
     data.longitude = lng;
 
