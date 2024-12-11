@@ -19,6 +19,7 @@ export default function Planning() {
     const appointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
+    console.log("APPOINTMENTS", appointments);
     const acceptedAppointments = appointments.filter((app) => !app.isNew);
     const today = new Date();
 
@@ -52,8 +53,9 @@ export default function Planning() {
       default:
         break;
     }
-
+    console.log("Filtered", filtered)
     setFilteredAppointments(filtered);
+    console.log("FILTERED APPT", filteredAppointments);
     setHasInitialFetch(true);
     setOutputType(newOutputType);
   };

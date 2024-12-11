@@ -81,9 +81,9 @@ Start the server
 
 ## Screenshots
 
-![Landing Page](/screenshots/landing-page.png)
-![Form](/screenshots/user-form.png)
-![New Appointment](/screenshots/new-appt.png)
-![Appointments](/screenshots/all-appt.png)
-![Map](/screenshots/map-view.png)
-![PDF Page](/screenshots/pdf-view.png)
+![Landing Page](/public/screenshots/landing-page.png)
+![Form](/public/screenshots/user-form.png)
+![New Appointment](/public/screenshots/new-appt.png)
+![Appointments](/public/screenshots/all-appt.png)
+![Map](/public/screenshots/map-view.png)
+![PDF Page](/public/screenshots/pdf-view.png)

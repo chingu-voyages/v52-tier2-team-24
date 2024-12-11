@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, NavLink, Outlet } from "react-router-dom";
 import calendar from "../images/calendar.png";
+import { formatAddress } from "../helpers/formatAddress";
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ const AdminPage = () => {
       const newAppointment = {
         id: Date.now(),
         name: `${data.firstName} ${data.lastName}`,
-        time: data.dateTime,
+        date: data.date,
+        time: data.time,
         address: data.address,
         email: data.email,
         isVisited: false,
@@ -24,6 +26,7 @@ const AdminPage = () => {
         longitude: data.longitude,
         latitude: data.latitude,
       };
+      console.log("New Appt", newAppointment)
       setNewAppointments((prev) => [...prev, newAppointment]);
       localStorage.setItem(
         "appointments",
@@ -67,70 +70,75 @@ const AdminPage = () => {
 
   const getNavLinkClass = ({ isActive }) =>
     `${
-      isActive ? "bg-gray-100 p-2 mr-2 rounded" : "bg-white mr-2 p-2"
+      isActive
+        ? "bg-gray-100 sm:ml-2 p-2 border-x-2 border-t-2  border-gray-400 rounded"
+        : "bg-white sm:ml-2  p-2 border-x-2 border-t-2  border-gray-300 rounded "
     } hover:text-tab-text`;
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="pl-8 pr-8">
-        <div className="">
-          <h2 className="text-lg font-small mb-4">New Appointment Requests</h2>
-          <div className="flex flex-wrap mb-12 h-[200px]">
-            {/* New appointments */}
-            {newAppointments.length === 0 ? (
-              <p className="text-gray-500">No new appointments.</p>
-            ) : (
-              newAppointments.map((appointment) => (
-                <div
-                  key={appointment.id}
-                  className="flex items-start gap-4 bg-white p-2 min-w-[250px]"
-                >
-                  <div className="flex flex-col items-center">
-                    <div className="flex items-center justify-center bg-gray-100 rounded-full h-[55px] w-[55px] mb-3">
-                      <img
-                        src={calendar}
-                        alt="Calendar"
-                        className="h-[40px] w-[40px]"
-                      />
-                    </div>
-                    <h3 className="text-gray-700 text-lg mb-1">
-                      {appointment.name}
-                    </h3>
-                    <p className="text-gray-500 text-sm mb-2">
-                      {appointment.time}
-                    </p>
-                    <p className="font-medium text-lg">{appointment.address}</p>
-                    <div className="flex gap-4 mt-4">
-                      <button
-                        className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors"
-                        onClick={() => handleApprove(appointment.id)}
-                      >
-                        ✓
-                      </button>
-                      <button
-                        className="w-10 h-10 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
-                        onClick={() => handleCancel(appointment.id)}
-                      >
-                        ✕
-                      </button>
-                    </div>
+      <div className="">
+        <h2 className="text-lg font-bold my-4 sm:ml-2  text-center sm:text-start underline">
+          New Appointment Requests
+        </h2>
+        <div className="flex flex-wrap mb-12 h-[200px] justify-center items-center">
+          {/* New appointments */}
+          {newAppointments.length === 0 ? (
+            <p className="text-gray-500 ">No new appointments.</p>
+          ) : (
+            newAppointments.map((appointment) => (
+              <div
+                key={appointment.id}
+                className="flex items-start gap-4 bg-white  p-2 min-w-[250px]"
+              >
+                <div className="flex flex-col items-center ">
+                  <div className="flex items-center justify-center  bg-gray-100 rounded-full h-[55px] w-[55px] mb-3">
+                    <img
+                      src={calendar}
+                      alt="Calendar"
+                      className="h-[40px] w-[40px]"
+                    />
+                  </div>
+                  <h3 className="text-gray-700 text-lg font-bold ">{appointment.name}</h3>
+                  <p className="text-gray-500 text-sm  text-center">
+                    {appointment.date}
+                  </p>
+                  <p className="text-gray-500 text-sm mb-2  text-center">
+                    {appointment.time}
+                  </p>
+                  <p className="font-medium text-md text-center">
+                    {formatAddress(appointment.address)}
+                  </p>
+                  <div className="flex gap-4 items-center mt-2">
+                    <button
+                      className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors"
+                      onClick={() => handleApprove(appointment.id)}
+                    >
+                      ✓
+                    </button>
+                    <button
+                      className="w-10 h-10 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
+                      onClick={() => handleCancel(appointment.id)}
+                    >
+                      ✕
+                    </button>
                   </div>
                 </div>
-              ))
-            )}
-          </div>
+              </div>
+            ))
+          )}
         </div>
-        <div className="border-t">
-          <div className="flex mb-8">
-            <NavLink className={getNavLinkClass} to={`appointments`}>
-              Appointments
-            </NavLink>
-            <NavLink className={getNavLinkClass} to={`planning`}>
-              Planning
-            </NavLink>
-          </div>
-          <Outlet />
+      </div>
+      <div>
+        <div className="flex justify-center gap-2 sm:justify-start mb-2 border-b-2 border-gray-300">
+          <NavLink className={getNavLinkClass} to={`appointments`}>
+            Appointments
+          </NavLink>
+          <NavLink className={getNavLinkClass} to={`planning`}>
+            Planning
+          </NavLink>
         </div>
+        <Outlet />
       </div>
     </div>
   );

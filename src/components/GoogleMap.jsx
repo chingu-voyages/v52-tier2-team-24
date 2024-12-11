@@ -1,12 +1,15 @@
+import PropTypes from 'prop-types';
 import {
   APIProvider,
   Map,
   AdvancedMarker,
 } from '@vis.gl/react-google-maps';
+
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const GOOGLE_MAP_ID = import.meta.env.VITE_GOOGLE_MAP_ID;
 
 export const GoogleMap = ({appointments}) => {
+  console.log("MAP APPT_>", appointments)
   const locations = appointments.map(appt => {
     return {
       key: appt.address,
@@ -18,6 +21,7 @@ export const GoogleMap = ({appointments}) => {
   })
 
   return (
+
     <div className='flex justify-end bg-gray-300'>
       <APIProvider 
         apiKey={GOOGLE_API_KEY} 
@@ -31,11 +35,22 @@ export const GoogleMap = ({appointments}) => {
           mapId={GOOGLE_MAP_ID}
           defaultZoom={11}
           gestureHandling={'greedy'}
+
           disableDefaultUI={false}
         >
           {locations.map((address, index) => <AdvancedMarker key={index} position={address.location} />)}
         </Map>
       </APIProvider>
     </div>
-  )
+  );
+};
+
+GoogleMap.propTypes = {
+  appointments: PropTypes.arrayOf(
+    PropTypes.shape({
+      address: PropTypes.string.isRequired,
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };

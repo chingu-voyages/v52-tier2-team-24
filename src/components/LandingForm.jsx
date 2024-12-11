@@ -32,9 +32,17 @@ export default function TestValidate() {
         .string()
         .min(5, "Address must be at least 10 characters long")
         .required("Address Required"),
-      // Adding date and time validation for the dateform
 
-      dateTime: yup.string().required("Date and time are required"),
+      date: yup.string().required("Date is required"),
+      time: yup.string().required("Time is required"),
+      latitude: yup
+        .number()
+        .typeError("Latitude must be a valid number")
+        .required("Latitude is required"),
+      longitude: yup
+        .number()
+        .typeError("Longitude must be a valid number")
+        .required("Longitude is required"),
     })
     .required();
 
@@ -51,22 +59,26 @@ export default function TestValidate() {
     resolver: yupResolver(userSchema),
   });
 
-  const handleFormSubmit = async (data) => {
-    //checking if the time was picked
-    if (!data.dateTime) {
-      setError("dateTime", {
+  const handleFormSubmit = (data) => {
+    if (!data.date) {
+      setError("date", {
         type: "manual",
-        message: "Date and time slot required",
+        message: "Date is required",
       });
-      return;
     }
 
-    const address = data.address;
-    const {lat, lng} = await getCoordinates(GOOGLE_API_KEY, address);
-    data.latitude = lat;
-    data.longitude = lng;
+    if (!data.time) {
+      setError("time", {
+        type: "manual",
+        message: "Time is required",
+      });
+    }
 
-    localStorage.setItem("userInput", JSON.stringify(data));
+    if (!data.date || !data.time) {
+      return; // Prevent submission if either is missing
+    }
+
+console.log("Data", data)
 
     localStorage.setItem("userInput", JSON.stringify(data));
     reset();
@@ -171,14 +183,17 @@ export default function TestValidate() {
 
         <p className="ml-2 font-bold mb-2">Preferred Timeslot</p>
         <DateForm
-          setValue={setValue} //passing setValues and registering function to DateFomr
+          setValue={setValue} // Pass setValue and other props to DateForm
           clearErrors={clearErrors}
           register={register}
           openTimeSlotModal={openTimeSlotModal}
         />
-        {/* Error message will pop up if date/time hasn't been picket */}
-        {errors.dateTime && (
-          <p className="text-red-500 ml-2 mt-1">{errors.dateTime?.message}</p>
+        {/* Error messages for date and time */}
+        {errors.date && (
+          <p className="text-red-500 ml-2 mt-1">{errors.date?.message}</p>
+        )}
+        {errors.time && (
+          <p className="text-red-500 ml-2 mt-1">{errors.time?.message}</p>
         )}
         <div className="sm:flex-row sm:w-1/2 sm:mt-10 flex flex-col sm:justify-start gap-2  mt-5">
           <button

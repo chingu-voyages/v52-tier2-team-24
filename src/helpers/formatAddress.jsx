@@ -31,3 +31,6 @@ export const getAddressComponents = (address) => {
 
   return { streetNumber, postcode };
 };
+
+export const formatAddress = (address) =>
+  address.replace(/,?\s?CA/, "").replace(/,?\s?USA/, "");

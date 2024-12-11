@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import sun from "../images/weather.png";
 
 const AppointmentsList = ({ appointments }) => {
@@ -15,8 +16,21 @@ const AppointmentsList = ({ appointments }) => {
         </div>
       </div>
       <p className="text-gray-500">{appointment.time}</p>
+      <p className="text-gray-500">{appointment.date}</p>
     </div>
   ));
+};
+
+AppointmentsList.propTypes = {
+  appointments: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      name: PropTypes.string.isRequired,
+      address: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default AppointmentsList;
