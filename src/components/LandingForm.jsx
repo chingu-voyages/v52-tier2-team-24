@@ -9,6 +9,7 @@ import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
 import { APIProvider } from "@vis.gl/react-google-maps";
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+import { getCoordinates } from "../api/maps";
 
 import { AppointmentConfirmation } from "./AppointmentConfirmation";
 import { TimeslotConfirmation } from "./TimeslotConfirmation";
@@ -50,7 +51,7 @@ export default function TestValidate() {
     resolver: yupResolver(userSchema),
   });
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = async (data) => {
     //checking if the time was picked
     if (!data.dateTime) {
       setError("dateTime", {
@@ -59,6 +60,13 @@ export default function TestValidate() {
       });
       return;
     }
+
+    const address = data.address;
+    const {lat, lng} = await getCoordinates(GOOGLE_API_KEY, address);
+    data.latitude = lat;
+    data.longitude = lng;
+
+    localStorage.setItem("userInput", JSON.stringify(data));
 
     localStorage.setItem("userInput", JSON.stringify(data));
     reset();
