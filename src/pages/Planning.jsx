@@ -53,9 +53,8 @@ export default function Planning() {
       default:
         break;
     }
-    console.log("Filtered", filtered)
+
     setFilteredAppointments(filtered);
-    console.log("FILTERED APPT", filteredAppointments);
     setHasInitialFetch(true);
     setOutputType(newOutputType);
   };

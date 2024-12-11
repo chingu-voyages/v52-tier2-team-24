@@ -26,7 +26,6 @@ const AdminPage = () => {
         longitude: data.longitude,
         latitude: data.latitude,
       };
-      console.log("New Appt", newAppointment)
       setNewAppointments((prev) => [...prev, newAppointment]);
       localStorage.setItem(
         "appointments",
