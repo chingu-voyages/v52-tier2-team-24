@@ -64,13 +64,15 @@ function PDFAppointments() {
       <Document>
         <Page size="A4" style={styles.page}>
           <View style={styles.headerRow}>
+          <Text style={styles.column}>Date</Text>
             <Text style={styles.column}>Name</Text>
             <Text style={styles.column}>Email</Text>
             <Text style={styles.column}>Address</Text>
-            <Text style={styles.column}>Preferred Timeslot</Text>
+            <Text style={styles.column}>Time</Text>
           </View>
           {appointmentData.map((appointment, index) => (
             <View key={index} style={styles.dataRow}>
+                       <Text style={styles.column}>{appointment.date}</Text>
               <Text style={styles.column}>{appointment.name}</Text>
               <Text style={styles.column}>{appointment.email}</Text>
               <Text style={styles.column}>{appointment.address}</Text>
