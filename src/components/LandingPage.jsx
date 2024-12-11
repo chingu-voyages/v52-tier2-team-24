@@ -18,7 +18,7 @@ const LandingPage = () => {
   }
 
   return (
-    <main className="bg-gradient-to-t from-white to-landing-blue border border-red-600 ">
+    <main className="bg-gradient-to-t from-white to-landing-blue ">
       <NavBar />
       {/* HERO */}
       <section>
