@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import sun from "../images/weather.png";
-import AppointmentsList from "../helper functions/AppointmentsList";
+import PlanningAppointmentsList from "../helper functions/PlanningAppointmentsList";
 import { GoogleMap } from "../components/GoogleMap";
 import PDFButton from "../components/PDF/PDFButton";
 
@@ -20,14 +20,15 @@ export default function Planning() {
       localStorage.getItem("appointments") || "[]"
     );
     console.log("APPOINTMENTS", appointments);
-    const acceptedAppointments = appointments.filter((app) => !app.isNew);
+    const acceptedAppointments = appointments.filter((app) => !app.isVisited);
+    console.log("Accepted Appointments", acceptedAppointments)
     const today = new Date();
 
     let filtered = [];
     switch (timePeriod) {
       case "daily":
         filtered = acceptedAppointments.filter((app) => {
-          const appDate = new Date(app.time);
+          const appDate = new Date(app.date);
           return appDate.toDateString() === today.toDateString();
         });
         break;
@@ -37,13 +38,13 @@ export default function Planning() {
         );
         const weekEnd = new Date(today.setDate(today.getDate() + 6));
         filtered = acceptedAppointments.filter((app) => {
-          const appDate = new Date(app.time);
+          const appDate = new Date(app.date);
           return appDate >= weekStart && appDate <= weekEnd;
         });
         break;
       case "monthly":
         filtered = acceptedAppointments.filter((app) => {
-          const appDate = new Date(app.time);
+          const appDate = new Date(app.date);
           return (
             appDate.getMonth() === today.getMonth() &&
             appDate.getFullYear() === today.getFullYear()
@@ -55,6 +56,7 @@ export default function Planning() {
     }
 
     setFilteredAppointments(filtered);
+    console.log("Filtered Appointments--->", filteredAppointments)
     setHasInitialFetch(true);
     setOutputType(newOutputType);
   };
@@ -68,7 +70,7 @@ export default function Planning() {
       case "list":
         return (
           <div className="space-y-4">
-            <AppointmentsList appointments={filteredAppointments} />
+            <PlanningAppointmentsList appointments={filteredAppointments} />
           </div>
         );
       case "map":

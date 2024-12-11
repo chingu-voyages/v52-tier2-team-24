@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import sun from "../images/weather.png";
 
-const AppointmentsList = ({ appointments }) => {
+const PlanningAppointmentsList = ({ appointments }) => {
+  console.log("Planning LIST APPT------------->", appointments)
   if (appointments.length === 0) {
     return <p className="text-center text-gray-500">No appointments found for selected period.</p>;
   }
@@ -21,7 +22,7 @@ const AppointmentsList = ({ appointments }) => {
   ));
 };
 
-AppointmentsList.propTypes = {
+PlanningAppointmentsList.propTypes = {
   appointments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -33,4 +34,4 @@ AppointmentsList.propTypes = {
   ).isRequired,
 };
 
-export default AppointmentsList;
+export default PlanningAppointmentsList;
