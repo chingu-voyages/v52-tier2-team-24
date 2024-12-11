@@ -20,6 +20,7 @@ export default function Planning() {
       localStorage.getItem("appointments") || "[]"
     );
     console.log("APPOINTMENTS", appointments);
+    // REF: Right now appointments that are checked isVisited = false (red toggle) will be filtered and then separated into daily weekly or monthly tabs
     const acceptedAppointments = appointments.filter((app) => !app.isVisited);
     console.log("Accepted Appointments", acceptedAppointments);
     const today = new Date();
