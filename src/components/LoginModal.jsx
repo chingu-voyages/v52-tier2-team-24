@@ -16,9 +16,6 @@ export default function LoginModal({ isLoginOpen, handleClose }) {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
 
-  // TO DO *********
-  //   feedback incorrect?  inform about styling at top center
-
   useEffect(() => {
     if (isLandingPage) {
       setIsOpen(isLoginOpen);
@@ -32,6 +29,8 @@ export default function LoginModal({ isLoginOpen, handleClose }) {
 
   function verifyEmail() {
     if (email === loginEmail) {
+      sessionStorage.setItem("loggedin", true);
+
       navigate("/admin");
       setIsOpen(false);
       setIsInvalid(false);
@@ -65,7 +64,6 @@ export default function LoginModal({ isLoginOpen, handleClose }) {
             <Description>
               Please enter your approved email to access the Admin page.
             </Description>
-
 
             <div className="flex flex-col w-5/6">
               {isInvalid && (

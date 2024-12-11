@@ -23,6 +23,8 @@ const AdminPage = () => {
         email: data.email,
         isVisited: false,
         isNew: true,
+        longitude: data.longitude,
+        latitude: data.latitude,
       };
       setNewAppointments((prev) => [...prev, newAppointment]);
       localStorage.setItem(

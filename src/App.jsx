@@ -1,7 +1,14 @@
 import "./App.css";
 
-import LandingPage from './components/LandingPage';
-import { BrowserRouter as Router, Routes, Route, Navigate, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LandingPage from "./components/LandingPage";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 import AdminPage from "./pages/AdminPage";
 import RootLayout from "./pages/Root";
@@ -9,6 +16,7 @@ import RootLayout from "./pages/Root";
 import Appointments from "./pages/Appointments";
 import Planning from "./pages/Planning";
 import PDFAppointments from "./components/PDF/PDFAppointments";
+import AuthRequired from "./components/AuthRequired";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,16 +25,10 @@ function App() {
       element: <LandingPage />,
     },
     {
-      path: "/appointmentPDF",
-      element: <PDFAppointments />,
-    },
-    {
-      path: "/admin",
-      element: <RootLayout />,
-      // errorElement: <ErrorPage />,
+      element: <AuthRequired />,
       children: [
         {
-          path: "",
+          path: "/admin",
           element: <AdminPage />,
           children: [
             {
@@ -35,22 +37,22 @@ function App() {
             },
             {
               path: "appointments",
-              element: <Appointments />
+              element: <Appointments />,
             },
             {
               path: "planning",
-              element: <Planning />
+              element: <Planning />,
             },
-          ]
-        }
-      ]
-    }
+          ],
+        },
+        {
+          path: "/appointmentPDF",
+          element: <PDFAppointments />,
+        },
+      ],
+    },
   ]);
-  return (
-
-  <RouterProvider router={router} />
-
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
