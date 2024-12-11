@@ -21,18 +21,24 @@ export default function Planning() {
     );
     console.log("APPOINTMENTS", appointments);
     const acceptedAppointments = appointments.filter((app) => !app.isVisited);
-    console.log("Accepted Appointments", acceptedAppointments)
+    console.log("Accepted Appointments", acceptedAppointments);
     const today = new Date();
 
     let filtered = [];
     switch (timePeriod) {
-      case "daily":
+      case "daily": {
+        const normalizeDate = (date) =>
+          new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
         filtered = acceptedAppointments.filter((app) => {
-          const appDate = new Date(app.date);
-          return appDate.toDateString() === today.toDateString();
+          const appDate = normalizeDate(new Date(`${app.date}T00:00:00`));
+          const todayNormalized = normalizeDate(today);
+          return appDate.getTime() === todayNormalized.getTime();
         });
+
         break;
-      case "weekly":
+      }
+      case "weekly": {
         const weekStart = new Date(
           today.setDate(today.getDate() - today.getDay())
         );
@@ -42,7 +48,8 @@ export default function Planning() {
           return appDate >= weekStart && appDate <= weekEnd;
         });
         break;
-      case "monthly":
+      }
+      case "monthly": {
         filtered = acceptedAppointments.filter((app) => {
           const appDate = new Date(app.date);
           return (
@@ -51,12 +58,13 @@ export default function Planning() {
           );
         });
         break;
+      }
       default:
         break;
     }
 
     setFilteredAppointments(filtered);
-    console.log("Filtered Appointments--->", filteredAppointments)
+    console.log("Filtered Appointments--->", filteredAppointments);
     setHasInitialFetch(true);
     setOutputType(newOutputType);
   };
