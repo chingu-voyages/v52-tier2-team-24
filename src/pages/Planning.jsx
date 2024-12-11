@@ -86,7 +86,7 @@ export default function Planning() {
               <GoogleMap appointments={filteredAppointments} />
             </div>
             <div className="space-y-4">
-              <AppointmentsList appointments={filteredAppointments} />
+              <PlanningAppointmentsList appointments={filteredAppointments} />
             </div>
           </div>
         );
