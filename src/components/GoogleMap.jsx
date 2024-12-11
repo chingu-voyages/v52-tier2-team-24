@@ -4,6 +4,7 @@ import {
   AdvancedMarker,
 } from '@vis.gl/react-google-maps';
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+const GOOGLE_MAP_ID = import.meta.env.VITE_GOOGLE_MAP_ID;
 
 export const GoogleMap = ({appointments}) => {
   const locations = appointments.map(appt => {
@@ -27,7 +28,7 @@ export const GoogleMap = ({appointments}) => {
         <Map
           style={{width: '80vw', height: '50vh'}}
           defaultCenter={locations[0] ? locations[0].location : {lat: 34.0549, lng: -118.2426}}
-          mapId='[MAP KEY HERE]'
+          mapId={GOOGLE_MAP_ID}
           defaultZoom={11}
           gestureHandling={'greedy'}
           disableDefaultUI={false}
