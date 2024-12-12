@@ -18,7 +18,7 @@ const PlanningAppointmentsList = ({ appointments }) => {
       className="flex flex-col  border-y-2 border-gray-300 bg-gray-100  md:flex-row md:items-center md:justify-between relative"
     >
       {/* NAME AND LOGO */}
-      <div className="flex md:w-1/3">
+      <div className="flex md:w-1/2">
         <div className="flex items-center gap-1">
           <img src={sun} className="h-[30px] " />
           <p className="font-bold">{appointment.name}</p>
@@ -26,11 +26,20 @@ const PlanningAppointmentsList = ({ appointments }) => {
       </div>
 
       {/* DATE TIME ADDRESS */}
-      <div className="ml-2 md:flex md:justify-start md:items-center md:gap-6">
-        <p className="text-gray-500 text-sm">
-          {appointment.time} | {appointment.date}
-        </p>
-        <p className="text-md  mr-1">{formatAddress(appointment.address)}</p>
+      <div className=" md:flex  md:items-start md:gap-6 md:w-3/4">
+        <div className="flex gap-4">
+          <p className="text-gray-500 text-sm">
+            <span className="text-black font-bold">Date:</span>{" "}
+            {appointment.date}{" "}
+          </p>
+          <p className="text-gray-500 text-sm">
+            {" "}
+            <span className="text-black font-bold"> Time:</span>{" "}
+            {appointment.time}
+          </p>
+        </div>
+
+        <p className="text-md  mr-1  ">{formatAddress(appointment.address)}</p>
       </div>
     </div>
   ));

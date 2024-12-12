@@ -53,20 +53,20 @@ const Appointments = () => {
             </div>
 
             {/* DATE TIME ADDRESS */}
-            <div className=" md:flex  md:items-center md:gap-6 md:w-3/4">
-              <div className="">
+            <div className=" md:flex  md:items-start md:gap-6 md:w-3/4">
+              <div className="flex gap-4">
                 <p className="text-gray-500 text-sm">
                   <span className="text-black font-bold">Date:</span>{" "}
                   {appointment.date}{" "}
                 </p>
-                <p>         
+                <p className="text-gray-500 text-sm">         
                   {" "}
                   <span className="text-black font-bold"> Time:</span>{" "}
                   {appointment.time}
                 </p>
               </div>
 
-              <p className="text-md  mr-1 text-center ">
+              <p className="text-md  mr-1  ">
                 {formatAddress(appointment.address)}
               </p>
             </div>
