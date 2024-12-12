@@ -112,7 +112,9 @@ export default function Planning() {
         <div className="flex gap-6 my-2">
           {/* TIME PERIOD */}
           <div className="bg-white p-2 rounded-lg w-1/2">
-            <h3 className="text-gray-700 mb-2 underline font-bold">Time Period</h3>
+            <h3 className="text-gray-700 mb-2 underline font-bold">
+              Time Period
+            </h3>
             <div className="form-control">
               {["daily", "weekly", "monthly"].map((period) => (
                 <label key={period} className="label cursor-pointer">

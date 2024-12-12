@@ -3,7 +3,6 @@ import sun from "../images/weather.png";
 import { formatAddress } from "../helpers/formatAddress";
 
 const PlanningAppointmentsList = ({ appointments }) => {
-  console.log("Planning LIST APPT------------->", appointments);
   if (appointments.length === 0) {
     return (
       <p className="text-center text-gray-500">
