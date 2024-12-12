@@ -105,44 +105,59 @@ export default function Planning() {
   };
 
   return (
-    <div className="flex flex-col gap-8 p-8">
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="text-gray-700 mb-2">Select Time Period</h3>
-          <div className="flex gap-2">
-            {["daily", "weekly", "monthly"].map((period) => (
-              <button
-                key={period}
-                className={`px-4 py-2 rounded ${
-                  timePeriod === period ? "bg-gray-100" : "bg-white"
-                }`}
-                onClick={() => setTimePeriod(period)}
-              >
-                {period.charAt(0).toUpperCase() + period.slice(1)}
-              </button>
-            ))}
+    <div className="flex flex-col gap-8 ">
+      {/* OUTPUT TIME AND BUTTONS CONTAINER */}
+      <div className="flex flex-col  items-center  bg-slate-200 md:flex-row md:gap-4 md:justify-center ">
+        {/* Time and Output */}
+        <div className="flex gap-6 my-2">
+          {/* TIME PERIOD */}
+          <div className="bg-white p-2 rounded-lg w-1/2">
+            <h3 className="text-gray-700 mb-2 underline">Time Period</h3>
+            <div className="form-control">
+              {["daily", "weekly", "monthly"].map((period) => (
+                <label key={period} className="label cursor-pointer">
+                  <span className="label-text ">
+                    {period.charAt(0).toUpperCase() + period.slice(1)}
+                  </span>
+                  <input
+                    type="radio"
+                    name="timePeriod"
+                    className=" radio radio-success"
+                    checked={timePeriod === period}
+                    onChange={() => setTimePeriod(period)}
+                  />
+                </label>
+              ))}
+            </div>
+          </div>
+          {/* OUTPUT TYPE */}
+          <div className="bg-white p-2 rounded-lg w-1/2">
+            <h3 className="text-gray-700 mb-2 text-center underline font-bold">
+              Output Type
+            </h3>
+            <div className="form-control">
+              {["list", "map", "both"].map((type) => (
+                <label key={type} className="label cursor-pointer">
+                  <span className="label-text pr-2">
+                    {type === "both"
+                      ? "Both"
+                      : `${type.charAt(0).toUpperCase() + type.slice(1)} View`}
+                  </span>
+                  <input
+                    type="radio"
+                    name="outputType"
+                    className="radio  radio-accent"
+                    checked={newOutputType === type}
+                    onChange={() => setNewOutputType(type)}
+                  />
+                </label>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div>
-          <h3 className="text-gray-700 mb-2">Output Type</h3>
-          <div className="flex gap-2">
-            {["list", "map", "both"].map((type) => (
-              <button
-                key={type}
-                className={`px-4 py-2 rounded ${
-                  newOutputType === type ? "bg-gray-100" : "bg-white"
-                }`}
-                onClick={() => setNewOutputType(type)}
-              >
-                {type === "both"
-                  ? "Both"
-                  : `${type.charAt(0).toUpperCase() + type.slice(1)} View`}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-col gap-2">
+        {/* BUTTONS */}
+        <div className="flex flex-col gap-2 mb-2">
           <button
             onClick={handleRetrievePlanning}
             className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"

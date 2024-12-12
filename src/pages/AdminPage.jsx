@@ -83,7 +83,7 @@ const AdminPage = () => {
         <div className="flex flex-wrap mb-12 h-[200px] justify-center items-center">
           {/* New appointments */}
           {newAppointments.length === 0 ? (
-            <p className="text-gray-500 ">No new appointments.</p>
+            <p className="text-gray-500 text-center">No new appointments.</p>
           ) : (
             newAppointments.map((appointment) => (
               <div
