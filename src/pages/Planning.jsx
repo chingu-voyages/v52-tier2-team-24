@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 // import sun from "../images/weather.png";
 import PlanningAppointmentsList from "../helper functions/PlanningAppointmentsList";
 import { GoogleMap } from "../components/GoogleMap";
@@ -15,7 +15,14 @@ export default function Planning() {
     window.open("/appointmentPDF", "_blank");
   };
 
+  const aptRef = useRef()
+
+  function scrollToSection() {
+    aptRef.current.scrollIntoView({ behavior: "smooth"});
+  }
+
   const handleRetrievePlanning = () => {
+  
     const appointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
@@ -68,9 +75,11 @@ export default function Planning() {
     console.log("Filtered Appointments--->", filteredAppointments);
     setHasInitialFetch(true);
     setOutputType(newOutputType);
+    scrollToSection()
   };
 
   const renderContent = () => {
+
     if (!hasInitialFetch) {
       return null;
     }
@@ -78,20 +87,20 @@ export default function Planning() {
     switch (outputType) {
       case "list":
         return (
-          <div className="space-y-4">
+          <div ref={aptRef} className="space-y-4">
             <PlanningAppointmentsList appointments={filteredAppointments} />
           </div>
         );
       case "map":
         return (
-          <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
+          <div ref={aptRef}  className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
             <GoogleMap appointments={filteredAppointments} />
           </div>
         );
       case "both":
         return (
           <div>
-            <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
+            <div ref={aptRef} className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
               <GoogleMap appointments={filteredAppointments} />
             </div>
             <div className="space-y-4">
@@ -171,6 +180,7 @@ export default function Planning() {
       </div>
 
       {renderContent()}
+      <div ref={aptRef}></div>
     </div>
   );
 }
