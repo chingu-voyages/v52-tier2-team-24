@@ -14,7 +14,7 @@ const PlanningAppointmentsList = ({ appointments }) => {
   return appointments.map((appointment) => (
     <div
       key={appointment.id}
-      className="flex flex-col  border-y-2 border-gray-300 bg-gray-100  md:flex-row md:items-center md:justify-between relative"
+      className="flex flex-col  border-b-2 border-gray-300  md:flex-row md:items-center md:justify-between relative"
     >
       {/* NAME AND LOGO */}
       <div className="flex md:w-1/2">

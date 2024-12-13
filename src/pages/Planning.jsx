@@ -15,14 +15,13 @@ export default function Planning() {
     window.open("/appointmentPDF", "_blank");
   };
 
-  const aptRef = useRef()
+  const aptRef = useRef();
 
   function scrollToSection() {
-    aptRef.current.scrollIntoView({ behavior: "smooth"});
+    aptRef.current.scrollIntoView({ behavior: "smooth" });
   }
 
   const handleRetrievePlanning = () => {
-  
     const appointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
@@ -75,11 +74,10 @@ export default function Planning() {
     console.log("Filtered Appointments--->", filteredAppointments);
     setHasInitialFetch(true);
     setOutputType(newOutputType);
-    scrollToSection()
+    scrollToSection();
   };
 
   const renderContent = () => {
-
     if (!hasInitialFetch) {
       return null;
     }
@@ -93,14 +91,20 @@ export default function Planning() {
         );
       case "map":
         return (
-          <div ref={aptRef}  className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
+          <div
+            ref={aptRef}
+            className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center"
+          >
             <GoogleMap appointments={filteredAppointments} />
           </div>
         );
       case "both":
         return (
           <div>
-            <div ref={aptRef} className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
+            <div
+              ref={aptRef}
+              className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center"
+            >
               <GoogleMap appointments={filteredAppointments} />
             </div>
             <div className="space-y-4">
@@ -116,28 +120,27 @@ export default function Planning() {
   return (
     <div className="flex flex-col gap-8 ">
       {/* OUTPUT TIME AND BUTTONS CONTAINER */}
-      <div className="flex flex-col  items-center  bg-slate-200 md:flex-row md:gap-4 md:justify-center ">
+      <div className="flex flex-col  items-center    md:gap-4 md:justify-center ">
         {/* Time and Output */}
-        <div className="flex gap-6 my-2">
+        <div className="flex flex-col md:flex-row items-center gap-3 my-2">
           {/* TIME PERIOD */}
-          <div className="bg-white p-2 rounded-lg w-1/2">
+          <div className="bg-white p-2 rounded-lg w-1/2 flex flex-col items-center">
             <h3 className="text-gray-700 mb-2 underline font-bold">
               Time Period
             </h3>
-            <div className="form-control">
+            <div className="flex justify-center gap-2">
               {["daily", "weekly", "monthly"].map((period) => (
-                <label key={period} className="label cursor-pointer">
-                  <span className="label-text ">
-                    {period.charAt(0).toUpperCase() + period.slice(1)}
-                  </span>
-                  <input
-                    type="radio"
-                    name="timePeriod"
-                    className=" radio radio-success"
-                    checked={timePeriod === period}
-                    onChange={() => setTimePeriod(period)}
-                  />
-                </label>
+                <button
+                  key={period}
+                  className={`btn btn-sm ${
+                    timePeriod === period
+                       ? "bg-gray-700 text-white"
+                      : "bg-gray-200"
+                  }`}
+                  onClick={() => setTimePeriod(period)}
+                >
+                  {period.charAt(0).toUpperCase() + period.slice(1)}
+                </button>
               ))}
             </div>
           </div>
@@ -146,29 +149,28 @@ export default function Planning() {
             <h3 className="text-gray-700 mb-2 text-center underline font-bold">
               Output Type
             </h3>
-            <div className="form-control">
+            <div className="flex justify-center gap-2">
               {["list", "map", "both"].map((type) => (
-                <label key={type} className="label cursor-pointer">
-                  <span className="label-text pr-2">
-                    {type === "both"
-                      ? "Both"
-                      : `${type.charAt(0).toUpperCase() + type.slice(1)} View`}
-                  </span>
-                  <input
-                    type="radio"
-                    name="outputType"
-                    className="radio  radio-accent"
-                    checked={newOutputType === type}
-                    onChange={() => setNewOutputType(type)}
-                  />
-                </label>
+                <button
+                  key={type}
+                  className={`btn btn-sm ${
+                    newOutputType === type
+                      ? "bg-gray-700 text-white"
+                      : "bg-gray-200"
+                  }`}
+                  onClick={() => setNewOutputType(type)}
+                >
+                  {type === "both"
+                    ? "Both"
+                    : `${type.charAt(0).toUpperCase() + type.slice(1)}`}
+                </button>
               ))}
             </div>
           </div>
         </div>
 
         {/* BUTTONS */}
-        <div className="flex flex-col gap-2 mb-2">
+        <div className="flex flex-col md:flex-row gap-2 md:gap-6 mb-2">
           <button
             onClick={handleRetrievePlanning}
             className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
