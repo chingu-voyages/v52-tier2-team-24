@@ -9,7 +9,7 @@ import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
 import { APIProvider } from "@vis.gl/react-google-maps";
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
-import { getCoordinates } from "../api/maps";
+
 
 import { AppointmentConfirmation } from "./AppointmentConfirmation";
 import { TimeslotConfirmation } from "./TimeslotConfirmation";

@@ -73,7 +73,7 @@ const AdminPage = () => {
         ? "bg-gray-100 sm:ml-2 p-2 border-x-2 border-t-2  border-gray-400 rounded"
         : "bg-white sm:ml-2  p-2 border-x-2 border-t-2  border-gray-300 rounded "
     } hover:text-tab-text`;
-
+  console.log("NEW APPT", newAppointments);
   return (
     <div className="min-h-screen bg-white">
       <div className="">
@@ -98,7 +98,9 @@ const AdminPage = () => {
                       className="h-[40px] w-[40px]"
                     />
                   </div>
-                  <h3 className="text-gray-700 text-lg font-bold ">{appointment.name}</h3>
+                  <h3 className="text-gray-700 text-lg font-bold ">
+                    {appointment.name}
+                  </h3>
                   <p className="text-gray-500 text-sm  text-center">
                     {appointment.date}
                   </p>
