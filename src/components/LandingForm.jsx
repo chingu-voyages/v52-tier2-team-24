@@ -76,24 +76,24 @@ export default function TestValidate() {
     }
 
     if (!data.date || !data.time) {
-      return; // Prevent submission if either is missing
+      return;
     }
 
     console.log("Data", data);
 
     try {
-
       const newUserInput = { ...data, id: genId() };
 
-      const existingInputs = JSON.parse(localStorage.getItem("userInput")) || [];
+      const existingInputs =
+        JSON.parse(localStorage.getItem("userInput")) || [];
       const inputsArray = Array.isArray(existingInputs) ? existingInputs : [];
-  
+
       const updatedInputs = [...inputsArray, newUserInput];
-  
+
       localStorage.setItem("userInput", JSON.stringify(updatedInputs));
     } catch (error) {
       console.error("Error accessing localStorage:", error);
- 
+
       localStorage.setItem("userInput", JSON.stringify([data]));
     }
 

@@ -5,30 +5,50 @@ import { formatAddress } from "../helpers/formatAddress";
 const Appointments = () => {
   const [acceptedAppointments, setAcceptedAppointments] = useState([]);
 
-  useEffect(() => {
+  const fetchAcceptedAppointments = () => {
     const existingAppointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
-    const acceptedApps = existingAppointments.filter((app) => !app.isNew);
-    setAcceptedAppointments(acceptedApps);
+    setAcceptedAppointments(existingAppointments);
+  };
+
+  useEffect(() => {
+    fetchAcceptedAppointments();
+
+    const handleStorageChange = (event) => {
+      if (event.key === "appointments" || !event.key) {
+        fetchAcceptedAppointments();
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("appointmentsUpdated", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("appointmentsUpdated", handleStorageChange);
+    };
   }, []);
 
   const toggleVisitStatus = (id) => {
-    setAcceptedAppointments((prev) =>
-      prev.map((appointment) =>
-        appointment.id === id
-          ? { ...appointment, isVisited: !appointment.isVisited }
-          : appointment
-      )
+    const updatedAppointments = acceptedAppointments.map((appointment) =>
+      appointment.id === id
+        ? { ...appointment, isVisited: !appointment.isVisited }
+        : appointment
     );
+
+    setAcceptedAppointments(updatedAppointments);
 
     const allAppointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
-    const updatedAppointments = allAppointments.map((app) =>
+    const updatedAllAppointments = allAppointments.map((app) =>
       app.id === id ? { ...app, isVisited: !app.isVisited } : app
     );
-    localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+    localStorage.setItem(
+      "appointments",
+      JSON.stringify(updatedAllAppointments)
+    );
   };
 
   return (
@@ -48,7 +68,9 @@ const Appointments = () => {
             <div className="flex md:w-1/2">
               <div className="flex items-center gap-1">
                 <img src={sun} className="h-[30px] " />
-                <p className="font-bold">{appointment.firstName} {appointment.lastName}</p>
+                <p className="font-bold">
+                  {appointment.firstName} {appointment.lastName}
+                </p>
               </div>
             </div>
 
@@ -59,7 +81,7 @@ const Appointments = () => {
                   <span className="text-black font-bold">Date:</span>{" "}
                   {appointment.date}{" "}
                 </p>
-                <p className="text-gray-500 text-sm">         
+                <p className="text-gray-500 text-sm">
                   {" "}
                   <span className="text-black font-bold"> Time:</span>{" "}
                   {appointment.time}
