@@ -1,6 +1,8 @@
 import LandingForm from "./LandingForm";
 import { NavBar } from "./NavBar";
 import { Button } from "./Button";
+import { useState } from "react";
+import { ContactForm } from "./ContactForm";
 import { Arrow } from "./Arrow";
 import wfhPic from "../images/workinginhome-cropped.svg";
 import piggyBankImg from "../images/piggy-bank.png";
@@ -16,6 +18,11 @@ const LandingPage = () => {
   function clickToSchedule() {
     formRef.current.scrollIntoView({ behavior: "smooth" });
   }
+
+  // Contact Form visibility
+  const [isContactFormVisible, setIsContactFormVisible] = useState(false);
+  const handleShowContactForm = () => setIsContactFormVisible(true);
+  const handleHideContactForm = () => setIsContactFormVisible(false);
 
   return (
     <main className="bg-gradient-to-t from-white to-landing-blue ">
@@ -43,11 +50,20 @@ const LandingPage = () => {
                   text={"Schedule an appointment"}
                   isButtonLarge={true}
                 />
-
                 <span className="flex items-center">
-                  <a href="" className="text-xl ml-8">
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleShowContactForm();
+                    }}
+                    className="text-xl ml-8"
+                  >
                     Contact Us
                   </a>
+                  {isContactFormVisible && (
+                    <ContactForm handleClose={handleHideContactForm} />
+                  )}
                   <Arrow />
                 </span>
               </div>
