@@ -16,7 +16,6 @@ import { AppointmentConfirmation } from "./AppointmentConfirmation";
 import { TimeslotConfirmation } from "./TimeslotConfirmation";
 
 export default function TestValidate() {
-  //states for appointment and timeslot modals
   const [isTimeslotModalOpen, setIsTimeslotModalOpen] = useState(false);
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const [addressStatus, setAddressStatus] = useState(null);
@@ -52,10 +51,10 @@ export default function TestValidate() {
     handleSubmit,
     reset,
     formState: { errors },
-    setError, //to manually set errors
+    setError,
 
-    clearErrors, //to clear errors
-    setValue, //to set value
+    clearErrors,
+    setValue,
   } = useForm({
     resolver: yupResolver(userSchema),
   });
@@ -78,8 +77,6 @@ export default function TestValidate() {
     if (!data.date || !data.time) {
       return;
     }
-
-    console.log("Data", data);
 
     try {
       const newUserInput = { ...data, id: genId() };
@@ -135,6 +132,12 @@ export default function TestValidate() {
               type="text"
               {...register("firstName")}
               placeholder={errors.firstName?.message || "Enter Your Name"}
+              onChange={(e) => {
+                const value = e.target.value;
+                const upperCaseValue =
+                  value.charAt(0).toUpperCase() + value.slice(1);
+                e.target.value = upperCaseValue;
+              }}
             />
           </div>
           <div className="sm:w-1/2 ">
@@ -148,6 +151,12 @@ export default function TestValidate() {
               type="text"
               {...register("lastName")}
               placeholder={errors.lastName?.message || "Enter Your Last Name"}
+              onChange={(e) => {
+                const value = e.target.value;
+                const upperCaseValue =
+                  value.charAt(0).toUpperCase() + value.slice(1);
+                e.target.value = upperCaseValue;
+              }}
             />
           </div>
         </div>

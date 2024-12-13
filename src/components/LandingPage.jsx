@@ -14,7 +14,7 @@ const LandingPage = () => {
   const formRef = useRef();
 
   function clickToSchedule() {
-    formRef.current.scrollIntoView({ behavior: "smooth"});
+    formRef.current.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
