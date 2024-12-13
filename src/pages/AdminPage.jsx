@@ -3,9 +3,9 @@ import { useNavigate, NavLink, Outlet } from "react-router-dom";
 
 
 import AppointmentCarousel from "./AppointmentCarousel";
-
-import { NavBar } from "../components/NavBar";
-
+import logo from "../images/sun.png";
+// import { NavBar } from "../components/NavBar";
+import Footer from "./Footer";
 
 const AdminPage = () => {
   const isAdminRoute = true;
@@ -78,21 +78,6 @@ const AdminPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-
-      <h2 className="text-lg font-bold my-4 sm:ml-2 text-center sm:text-start underline">
-        New Appointment Requests
-      </h2>
-      {requests.length === 0 ? (
-        <p className="text-red-500 text-center mb-5">No new appointments.</p>
-      ) : (
-        <AppointmentCarousel
-          requests={requests}
-          handleApprove={handleApprove}
-          handleCancel={handleCancel}
-        />
-      )}
-
-
       <nav
         id="navbar"
         className="flex flex-col gap-2 items-center md:flex-row md:justify-between px-10 py-3 "
@@ -109,6 +94,21 @@ const AdminPage = () => {
           Log Out
         </button>
       </nav>
+
+      <h2 className="text-lg font-bold my-4 sm:ml-2 text-center sm:text-start underline">
+        New Appointment Requests
+      </h2>
+      {requests.length === 0 ? (
+        <p className="text-red-500 text-center mb-5">No new appointments.</p>
+      ) : (
+        <AppointmentCarousel
+          requests={requests}
+          handleApprove={handleApprove}
+          handleCancel={handleCancel}
+        />
+      )}
+
+
 
    
       <div>
