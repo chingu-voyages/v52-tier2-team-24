@@ -10,7 +10,6 @@ import { APIProvider } from "@vis.gl/react-google-maps";
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
-
 import { AppointmentConfirmation } from "./AppointmentConfirmation";
 import { TimeslotConfirmation } from "./TimeslotConfirmation";
 
@@ -78,11 +77,28 @@ export default function TestValidate() {
       return; // Prevent submission if either is missing
     }
 
-console.log("Data", data)
+    console.log("Data", data);
 
-    localStorage.setItem("userInput", JSON.stringify(data));
+    try {
+
+      const existingInputs = JSON.parse(localStorage.getItem("userInput")) || [];
+  
+ 
+      const inputsArray = Array.isArray(existingInputs) ? existingInputs : [];
+  
+
+      const updatedInputs = [...inputsArray, data];
+  
+
+      localStorage.setItem("userInput", JSON.stringify(updatedInputs));
+    } catch (error) {
+      console.error("Error accessing localStorage:", error);
+ 
+      localStorage.setItem("userInput", JSON.stringify([data]));
+    }
+
     reset();
-    //show appointment confirmation modal after form submission
+
     setIsAppointmentModalOpen(true);
     setAddressMessage(null);
     setAddressStatus(null);
