@@ -89,15 +89,19 @@ function PDFAppointments() {
             <Text style={styles.headerColumn}>Address</Text>
           </View>
           {appointmentData.map((appointment, index) => (
- <View key={index} style={styles.dataRow}>
- <View style={styles.dateColumn}>
-   <Text>{appointment.date}</Text>
-   <Text>{appointment.time}</Text>
- </View>
- <Text style={styles.column}>{appointment.name}</Text>
- <Text style={styles.column}>{appointment.email}</Text>
- <Text style={styles.column}>{formatAddress(appointment.address)}</Text>
-</View>
+            <View key={index} style={styles.dataRow}>
+              <View style={styles.dateColumn}>
+                <Text>{appointment.date}</Text>
+                <Text>{appointment.time}</Text>
+              </View>
+              <Text style={styles.column}>
+                {appointment.firstName} {appointment.lastName}
+              </Text>
+              <Text style={styles.column}>{appointment.email}</Text>
+              <Text style={styles.column}>
+                {formatAddress(appointment.address)}
+              </Text>
+            </View>
           ))}
         </Page>
       </Document>
