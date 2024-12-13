@@ -3,7 +3,7 @@ import sun from "../images/weather.png";
 import { formatAddress } from "../helpers/formatAddress";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase";
-import fileIcon from "../images/ticket.svg"; 
+import fileIcon from "../images/file-icon.jpg"; 
 
 const Appointments = () => {
   const [acceptedAppointments, setAcceptedAppointments] = useState([]);
