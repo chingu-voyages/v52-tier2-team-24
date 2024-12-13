@@ -109,7 +109,7 @@ const AdminPage = () => {
                   <div className="flex gap-4 items-center mt-2">
                     <button
                       className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors"
-                      onClick={() => handleApprove(appointment.id)}
+                      onClick={() => handleApprove(request.id)}
                     >
                       ✓
                     </button>

@@ -4,6 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DateForm from "./DateForm";
 
+import { v4 as genId } from "uuid"; // Import UUID library for unique IDs
+
 import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
 
 import { APIProvider } from "@vis.gl/react-google-maps";
@@ -81,15 +83,13 @@ export default function TestValidate() {
 
     try {
 
+      const newUserInput = { ...data, id: genId() };
+
       const existingInputs = JSON.parse(localStorage.getItem("userInput")) || [];
-  
- 
       const inputsArray = Array.isArray(existingInputs) ? existingInputs : [];
   
-
-      const updatedInputs = [...inputsArray, data];
+      const updatedInputs = [...inputsArray, newUserInput];
   
-
       localStorage.setItem("userInput", JSON.stringify(updatedInputs));
     } catch (error) {
       console.error("Error accessing localStorage:", error);

@@ -48,7 +48,7 @@ const Appointments = () => {
             <div className="flex md:w-1/2">
               <div className="flex items-center gap-1">
                 <img src={sun} className="h-[30px] " />
-                <p className="font-bold">{appointment.name}</p>
+                <p className="font-bold">{appointment.firstName} {appointment.lastName}</p>
               </div>
             </div>
 
