@@ -31,6 +31,15 @@ const Appointments = () => {
     localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
   };
 
+  const handleFileChange = (event, appointmentId) => {
+    const file = event.target.files[0];
+    if (file) {
+      setReceipt(file); 
+      console.log(`Receipt for appointment ${appointmentId}:`, file);
+    }
+  };
+
+
   return (
     <div className="space-y-2 ">
       {acceptedAppointments.length === 0 ? (
@@ -76,6 +85,16 @@ const Appointments = () => {
                   }`}
                 />
               </button>{" "}
+            </div>
+
+            {/* File Upload Button */}
+            <div className="sm:flex sm:flex-col sm:items-end sm:static absolute right-20 m-2">
+              <input
+                type="file"
+                accept="image/*, .pdf"
+                className="border-2 border-gray-400 rounded-md px-2 py-1 cursor-pointer"
+                onChange={(e) => handleFileChange(e, appointment.id)}
+              />
             </div>
           </div>
         ))
