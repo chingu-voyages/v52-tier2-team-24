@@ -8,7 +8,6 @@ import logo from "../images/sun.png";
 import Footer from "./Footer";
 
 const AdminPage = () => {
-  const isAdminRoute = true;
   const navigate = useNavigate();
 
   const [requests, setRequests] = useState([]);
