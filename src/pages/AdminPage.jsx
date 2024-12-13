@@ -6,12 +6,16 @@ import { formatAddress } from "../helpers/formatAddress";
 const AdminPage = () => {
   const navigate = useNavigate();
   const [newAppointments, setNewAppointments] = useState([]);
+  const [requests, setRequests] = useState([]);
+  const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
     const existingAppointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
+
     const newUserInput = localStorage.getItem("userInput");
+    console.log("NewUserInput", newUserInput)
     if (newUserInput) {
       const data = JSON.parse(newUserInput);
       const newAppointment = {
@@ -108,7 +112,7 @@ const AdminPage = () => {
                     {appointment.time}
                   </p>
                   <p className="font-medium text-md text-center">
-                    {formatAddress(appointment.address)}
+                    {appointment.address}
                   </p>
                   <div className="flex gap-4 items-center mt-2">
                     <button
