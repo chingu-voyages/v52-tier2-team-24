@@ -20,7 +20,9 @@ const PlanningAppointmentsList = ({ appointments }) => {
       <div className="flex md:w-1/2">
         <div className="flex items-center gap-1">
           <img src={sun} className="h-[30px] " />
-          <p className="font-bold">{appointment.firstName} {appointment.lastName}</p>
+          <p className="font-bold">
+            {appointment.firstName} {appointment.lastName}
+          </p>
         </div>
       </div>
 
@@ -48,7 +50,8 @@ PlanningAppointmentsList.propTypes = {
   appointments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      name: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
       address: PropTypes.string.isRequired,
       time: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,

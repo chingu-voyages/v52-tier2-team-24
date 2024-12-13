@@ -25,10 +25,9 @@ export default function Planning() {
     const appointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
-    console.log("APPOINTMENTS", appointments);
-    // REF: Right now appointments that are checked isVisited = false (red toggle) will be filtered and then separated into daily weekly or monthly tabs
+
     const acceptedAppointments = appointments.filter((app) => !app.isVisited);
-    console.log("Accepted Appointments", acceptedAppointments);
+
     const today = new Date();
 
     let filtered = [];
@@ -71,7 +70,7 @@ export default function Planning() {
     }
 
     setFilteredAppointments(filtered);
-    console.log("Filtered Appointments--->", filteredAppointments);
+
     setHasInitialFetch(true);
     setOutputType(newOutputType);
     scrollToSection();
@@ -134,7 +133,7 @@ export default function Planning() {
                   key={period}
                   className={`btn btn-sm ${
                     timePeriod === period
-                       ? "bg-gray-700 text-white"
+                      ? "bg-gray-700 text-white"
                       : "bg-gray-200"
                   }`}
                   onClick={() => setTimePeriod(period)}
