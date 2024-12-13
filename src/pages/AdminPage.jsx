@@ -2,8 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate, NavLink, Outlet } from "react-router-dom";
 import calendar from "../images/calendar.png";
 import { formatAddress } from "../helpers/formatAddress";
+import { NavBar } from "../components/NavBar";
+import Footer from "./Footer";
+import { Button } from "../components/Button";
+
+import logo from "../images/sun.png";
 
 const AdminPage = () => {
+  const isAdminRoute = true;
   const navigate = useNavigate();
   const [newAppointments, setNewAppointments] = useState([]);
 
@@ -26,7 +32,7 @@ const AdminPage = () => {
         longitude: data.longitude,
         latitude: data.latitude,
       };
-      console.log("New Appt", newAppointment)
+      console.log("New Appt", newAppointment);
       setNewAppointments((prev) => [...prev, newAppointment]);
       localStorage.setItem(
         "appointments",
@@ -40,8 +46,8 @@ const AdminPage = () => {
   }, []);
 
   const handleLogout = () => {
-    //logout logic
     navigate("/");
+    sessionStorage.removeItem("loggedin");
   };
 
   const handleApprove = (id) => {
@@ -77,6 +83,23 @@ const AdminPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <nav
+        id="navbar"
+        className="flex flex-col gap-2 items-center md:flex-row md:justify-between px-10 py-3 "
+      >
+        <div className="flex gap-2  items-center  min-w-44">
+          <img src={logo} className="size-7 " />
+          <p className="text-2xl text-center">Solar Panel App</p>
+        </div>
+
+        <button
+          className={`text-black border solid border-slate-500   hover:bg-slate-600 hover:text-white  rounded-3xl text-sm inline-flex items-center justify-center whitespace-nowrap px-6 py-3`}
+          onClick={() => handleLogout()}
+        >
+          Log Out
+        </button>
+      </nav>
+
       <div className="">
         <h2 className="text-lg font-bold my-4 sm:ml-2  text-center sm:text-start underline">
           New Appointment Requests
@@ -99,7 +122,9 @@ const AdminPage = () => {
                       className="h-[40px] w-[40px]"
                     />
                   </div>
-                  <h3 className="text-gray-700 text-lg font-bold ">{appointment.name}</h3>
+                  <h3 className="text-gray-700 text-lg font-bold ">
+                    {appointment.name}
+                  </h3>
                   <p className="text-gray-500 text-sm  text-center">
                     {appointment.date}
                   </p>
@@ -140,6 +165,7 @@ const AdminPage = () => {
         </div>
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 };
