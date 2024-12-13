@@ -25,8 +25,6 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
 
     clearErrors("date");
     clearErrors("time");
-
-    openTimeSlotModal();
   };
 
   const handleTimeChange = (e) => {
@@ -35,6 +33,8 @@ const DateForm = ({ setValue, clearErrors, register, openTimeSlotModal }) => {
 
     setValue("time", time);
     clearErrors("time");
+
+    openTimeSlotModal();
   };
 
   const formatDate = (date) => {
