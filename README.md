@@ -13,7 +13,7 @@ The application is designed to provide Los Angeles area Residents to request a s
 
 **Lidia Prado Peñalver - SCRUM Master** [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
 
-**Peter Eyong - SCRUM Master** [GitHub](https://github.com/pteyong577)
+**Peter Eyong - SCRUM Master** [GitHub](https://github.com/pteyong577) [LinkedIn](https://www.linkedin.com/in/peter-eyong-466299305)
 
 **Jessica Beazer - Product Owner** [GitHub](https://github.com/jessanagilepmp) [LinkedIn](https://www.linkedin.com/in/jessicabeazer/)
 
