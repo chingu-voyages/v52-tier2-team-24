@@ -93,7 +93,7 @@ export default function Planning() {
         return (
           <div
             ref={aptRef}
-            className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center"
+            className=" rounded-lg p-8 min-h-[400px] flex items-center justify-center"
           >
             <GoogleMap appointments={filteredAppointments} />
           </div>
@@ -103,7 +103,7 @@ export default function Planning() {
           <div>
             <div
               ref={aptRef}
-              className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center"
+              className=" rounded-lg p-8 min-h-[400px] flex items-center justify-center"
             >
               <GoogleMap appointments={filteredAppointments} />
             </div>
@@ -124,7 +124,7 @@ export default function Planning() {
         {/* Time and Output */}
         <div className="flex flex-col md:flex-row items-center gap-3 my-2">
           {/* TIME PERIOD */}
-          <div className="bg-white p-2 rounded-lg w-1/2 flex flex-col items-center">
+          <div className="p-2 rounded-lg w-1/2 flex flex-col items-center">
             <h3 className="text-gray-700 mb-2 underline font-bold">
               Time Period
             </h3>
@@ -145,7 +145,7 @@ export default function Planning() {
             </div>
           </div>
           {/* OUTPUT TYPE */}
-          <div className="bg-white p-2 rounded-lg w-1/2">
+          <div className=" p-2 rounded-lg w-1/2">
             <h3 className="text-gray-700 mb-2 text-center underline font-bold">
               Output Type
             </h3>

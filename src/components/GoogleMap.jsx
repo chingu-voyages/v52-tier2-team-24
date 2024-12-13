@@ -22,7 +22,7 @@ export const GoogleMap = ({appointments}) => {
 
   return (
 
-    <div className='flex justify-end bg-gray-300'>
+    <div className='flex justify-end'>
       <APIProvider 
         apiKey={GOOGLE_API_KEY} 
         onLoad={() => {
