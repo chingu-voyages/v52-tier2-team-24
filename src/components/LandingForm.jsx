@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DateForm from "./DateForm";
 
-import { v4 as genId } from "uuid"; // Import UUID library for unique IDs
+import { v4 as genId } from "uuid";
 
 import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
 
@@ -208,12 +208,11 @@ export default function TestValidate() {
 
         <p className="ml-2 font-bold mb-2">Preferred Timeslot</p>
         <DateForm
-          setValue={setValue} // Pass setValue and other props to DateForm
+          setValue={setValue}
           clearErrors={clearErrors}
           register={register}
           openTimeSlotModal={openTimeSlotModal}
         />
-        {/* Error messages for date and time */}
         {errors.date && (
           <p className="text-red-500 ml-2 mt-1">{errors.date?.message}</p>
         )}
@@ -236,20 +235,17 @@ export default function TestValidate() {
           </button>
         </div>
       </form>
-      {/* Show TimeslotConfirmation Modal after date selection */}
       {isTimeslotModalOpen && (
         <TimeslotConfirmation
           closeModal={() => setIsTimeslotModalOpen(false)}
         />
       )}
 
-      {/* Show AppointmentConfirmation Modal after form submission */}
       {isAppointmentModalOpen && (
         <AppointmentConfirmation
           closeModal={() => setIsAppointmentModalOpen(false)}
         />
       )}
-      {/* </div > */}
     </div>
   );
 }

@@ -1,6 +1,7 @@
-import React from 'react'
+
 import { useState } from 'react'
 import contactImg from '../images/contact.png'
+import PropTypes from 'prop-types';
 
 export const ContactForm = ({ handleClose }) => {
     const [formData, setFormData] = useState({
@@ -130,3 +131,8 @@ export const ContactForm = ({ handleClose }) => {
         </div >
     );
 };
+
+
+ContactForm.propTypes = {
+    handleClose: PropTypes.func.isRequired
+  };

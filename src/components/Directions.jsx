@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useMapsLibrary, useMap } from "@vis.gl/react-google-maps";
 import PropTypes from "prop-types";
 
-export default function Directions({addresses}) {
+export default function Directions({ addresses }) {
   const map = useMap();
   const routesLibrary = useMapsLibrary("routes");
   const [directionsService, setDirectionsService] = useState();
@@ -11,19 +11,19 @@ export default function Directions({addresses}) {
   const [routeIndex, setRouteIndex] = useState(0);
 
   const destination = addresses[addresses.length - 1];
-  const waypoints = addresses.slice(0, -1).map(address => ({ location: address }));
+  const waypoints = addresses
+    .slice(0, -1)
+    .map((address) => ({ location: address }));
 
   const selected = routes[routeIndex];
   const leg = selected?.legs[0];
 
-  // Initialize directions service and renderer
   useEffect(() => {
     if (!routesLibrary || !map) return;
     setDirectionsService(new routesLibrary.DirectionsService());
     setDirectionsRenderer(new routesLibrary.DirectionsRenderer({ map }));
   }, [routesLibrary, map]);
 
-  // Use directions service
   useEffect(() => {
     if (!directionsService || !directionsRenderer) return;
 
@@ -51,15 +51,11 @@ export default function Directions({addresses}) {
 
   if (!leg) return null;
 
-  console.log("Select", selected)
+  console.log("Select", selected);
 
-  return (
-    <div className="directions">
-
-    </div>
-  );
+  return <div className="directions"></div>;
 }
 
 Directions.propTypes = {
-  addresses: PropTypes.arrayOf(PropTypes.string).isRequired
+  addresses: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, NavLink, Outlet } from "react-router-dom";
 
-
 import AppointmentCarousel from "./AppointmentCarousel";
 import logo from "../images/sun.png";
-// import { NavBar } from "../components/NavBar";
 import Footer from "./Footer";
 
 const AdminPage = () => {
@@ -29,7 +27,6 @@ const AdminPage = () => {
     );
 
     setAppointments(storedAppointments);
-
   }, []);
 
   const handleLogout = () => {
@@ -37,7 +34,6 @@ const AdminPage = () => {
     sessionStorage.removeItem("loggedin");
   };
 
-  // APPPROVE
   const handleApprove = (id) => {
     const requestToApprove = requests.find((req) => req.id === id);
 
@@ -57,7 +53,6 @@ const AdminPage = () => {
     }
   };
 
-  // CANCEL
   const handleCancel = (id) => {
     const allRequests = JSON.parse(localStorage.getItem("userInput") || "[]");
     const updatedRequests = allRequests.filter((req) => req.id !== id);
@@ -107,9 +102,6 @@ const AdminPage = () => {
         />
       )}
 
-
-
-   
       <div>
         <div className="flex justify-center gap-2 sm:justify-start mb-2 border-b-2 border-gray-300">
           <NavLink className={getNavLinkClass} to={`appointments`}>

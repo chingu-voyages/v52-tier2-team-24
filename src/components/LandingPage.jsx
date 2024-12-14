@@ -19,7 +19,6 @@ const LandingPage = () => {
     formRef.current.scrollIntoView({ behavior: "smooth" });
   }
 
-  // Contact Form visibility
   const [isContactFormVisible, setIsContactFormVisible] = useState(false);
   const handleShowContactForm = () => setIsContactFormVisible(true);
   const handleHideContactForm = () => setIsContactFormVisible(false);

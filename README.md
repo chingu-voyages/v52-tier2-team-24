@@ -101,7 +101,7 @@ Start the server
 ![New Appointments](/public/screenshots/new-appointments.png)
 ![Planning](/public/screenshots/planning.png)
 ![Planning List](/public/screenshots/plan-list.png)
-![Map](/public/screenshots/plan-map-list.png)
+![Map](/public/screenshots/map-list.png)
 ![PDF](/public/screenshots/pdf.png)
 
 This app was created as part of [Chingu's](https://www.chingu.io/) Voyage 52.
