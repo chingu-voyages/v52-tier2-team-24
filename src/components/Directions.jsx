@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMapsLibrary, useMap } from "@vis.gl/react-google-maps";
+import PropTypes from "prop-types";
 
 export default function Directions({addresses}) {
   const map = useMap();
@@ -8,6 +9,9 @@ export default function Directions({addresses}) {
   const [directionsRenderer, setDirectionsRenderer] = useState();
   const [routes, setRoutes] = useState([]);
   const [routeIndex, setRouteIndex] = useState(0);
+
+  const destination = addresses[addresses.length - 1];
+  const waypoints = addresses.slice(0, -1).map(address => ({ location: address }));
 
   const selected = routes[routeIndex];
   const leg = selected?.legs[0];
@@ -26,7 +30,8 @@ export default function Directions({addresses}) {
     directionsService
       .route({
         origin: "6000 Malburg Way, Vernon, CA 90058",
-        destination: addresses[0],
+        destination: destination,
+        waypoints: waypoints,
         travelMode: google.maps.TravelMode.DRIVING,
         provideRouteAlternatives: true,
       })
@@ -46,25 +51,15 @@ export default function Directions({addresses}) {
 
   if (!leg) return null;
 
+  console.log("Select", selected)
+
   return (
     <div className="directions">
-      <h2>{selected.summary}</h2>
-      <p>
-        {leg.start_address.split(",")[0]} to {leg.end_address.split(",")[0]}
-      </p>
-      <p>Distance: {leg.distance?.text}</p>
-      <p>Duration: {leg.duration?.text}</p>
 
-      <h2>Other Routes</h2>
-      <ul>
-        {routes.map((route, index) => (
-          <li key={route.summary}>
-            <button onClick={() => setRouteIndex(index)}>
-              {route.summary}
-            </button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
+
+Directions.propTypes = {
+  addresses: PropTypes.arrayOf(PropTypes.string).isRequired
+};

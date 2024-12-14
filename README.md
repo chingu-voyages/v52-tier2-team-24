@@ -1,6 +1,10 @@
-# Solar App Title
+# SolarRise
 
-The application is designed to provide Los Angeles area Residents to request a solar installation evaluation and to allow company admins to access, plan, and schedule visits. This app was created as part of [Chingu's](https://www.chingu.io/) Voyage 52.
+### Empowering Sustainability Through Accessibility
+
+## Vision
+
+Empowering Los Angles residents to embrace sustainable energy solutions by providing a seamless and efficient platform for solar panel evaluation and installation guidance.
 
 ## Features
 
@@ -84,9 +88,20 @@ Start the server
 
 ## Screenshots
 
+### Landing Page
+
 ![Landing Page](/public/screenshots/landing-page.png)
+![Page Details](/public/screenshots/user-details.png)
 ![Form](/public/screenshots/user-form.png)
-![New Appointment](/public/screenshots/new-appt.png)
-![Appointments](/public/screenshots/all-appt.png)
-![Map](/public/screenshots/map-view.png)
-![PDF Page](/public/screenshots/pdf-view.png)
+![Login](/public/screenshots/admin-login.png)
+![Contact Us](/public/screenshots/contact-us.png)
+
+### Admin Page
+
+![New Appointments](/public/screenshots/new-appointments.png)
+![Planning](/public/screenshots/planning.png)
+![Planning List](/public/screenshots/plan-list.png)
+![Map](/public/screenshots/plan-map-list.png)
+![PDF](/public/screenshots/pdf.png)
+
+This app was created as part of [Chingu's](https://www.chingu.io/) Voyage 52.
