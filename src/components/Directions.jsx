@@ -43,15 +43,12 @@ export default function Directions({ addresses }) {
     return () => directionsRenderer.setMap(null);
   }, [directionsService, directionsRenderer]);
 
-  // Update direction route
   useEffect(() => {
     if (!directionsRenderer) return;
     directionsRenderer.setRouteIndex(routeIndex);
   }, [routeIndex, directionsRenderer]);
 
   if (!leg) return null;
-
-  console.log("Select", selected);
 
   return <div className="directions"></div>;
 }
