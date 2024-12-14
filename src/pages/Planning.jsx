@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 // import sun from "../images/weather.png";
-import AppointmentsList from "../helper functions/AppointmentsList";
+import PlanningAppointmentsList from "../helper functions/PlanningAppointmentsList";
 import { GoogleMap } from "../components/GoogleMap";
 import PDFButton from "../components/PDF/PDFButton";
 
@@ -15,49 +15,65 @@ export default function Planning() {
     window.open("/appointmentPDF", "_blank");
   };
 
+  const aptRef = useRef();
+
+  function scrollToSection() {
+    aptRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+
   const handleRetrievePlanning = () => {
     const appointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
-    console.log("APPOINTMENTS", appointments);
-    const acceptedAppointments = appointments.filter((app) => !app.isNew);
+
+    const acceptedAppointments = appointments.filter((app) => !app.isVisited);
+
     const today = new Date();
 
     let filtered = [];
     switch (timePeriod) {
-      case "daily":
+      case "daily": {
+        const normalizeDate = (date) =>
+          new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
         filtered = acceptedAppointments.filter((app) => {
-          const appDate = new Date(app.time);
-          return appDate.toDateString() === today.toDateString();
+          const appDate = normalizeDate(new Date(`${app.date}T00:00:00`));
+          const todayNormalized = normalizeDate(today);
+          return appDate.getTime() === todayNormalized.getTime();
         });
+
         break;
-      case "weekly":
+      }
+      case "weekly": {
         const weekStart = new Date(
           today.setDate(today.getDate() - today.getDay())
         );
         const weekEnd = new Date(today.setDate(today.getDate() + 6));
         filtered = acceptedAppointments.filter((app) => {
-          const appDate = new Date(app.time);
+          const appDate = new Date(app.date);
           return appDate >= weekStart && appDate <= weekEnd;
         });
         break;
-      case "monthly":
+      }
+      case "monthly": {
         filtered = acceptedAppointments.filter((app) => {
-          const appDate = new Date(app.time);
+          const appDate = new Date(app.date);
           return (
             appDate.getMonth() === today.getMonth() &&
             appDate.getFullYear() === today.getFullYear()
           );
         });
         break;
+      }
       default:
         break;
     }
-    console.log("Filtered", filtered)
+
     setFilteredAppointments(filtered);
-    console.log("FILTERED APPT", filteredAppointments);
+
     setHasInitialFetch(true);
     setOutputType(newOutputType);
+    scrollToSection();
   };
 
   const renderContent = () => {
@@ -68,24 +84,30 @@ export default function Planning() {
     switch (outputType) {
       case "list":
         return (
-          <div className="space-y-4">
-            <AppointmentsList appointments={filteredAppointments} />
+          <div ref={aptRef} className="space-y-4">
+            <PlanningAppointmentsList appointments={filteredAppointments} />
           </div>
         );
       case "map":
         return (
-          <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
+          <div
+            ref={aptRef}
+            className=" rounded-lg p-8 min-h-[400px] flex items-center justify-center"
+          >
             <GoogleMap appointments={filteredAppointments} />
           </div>
         );
       case "both":
         return (
           <div>
-            <div className="bg-gray-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
+            <div
+              ref={aptRef}
+              className=" rounded-lg p-8 min-h-[400px] flex items-center justify-center"
+            >
               <GoogleMap appointments={filteredAppointments} />
             </div>
             <div className="space-y-4">
-              <AppointmentsList appointments={filteredAppointments} />
+              <PlanningAppointmentsList appointments={filteredAppointments} />
             </div>
           </div>
         );
@@ -95,44 +117,59 @@ export default function Planning() {
   };
 
   return (
-    <div className="flex flex-col gap-8 p-8">
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="text-gray-700 mb-2">Select Time Period</h3>
-          <div className="flex gap-2">
-            {["daily", "weekly", "monthly"].map((period) => (
-              <button
-                key={period}
-                className={`px-4 py-2 rounded ${
-                  timePeriod === period ? "bg-gray-100" : "bg-white"
-                }`}
-                onClick={() => setTimePeriod(period)}
-              >
-                {period.charAt(0).toUpperCase() + period.slice(1)}
-              </button>
-            ))}
+    <div className="flex flex-col gap-8 ">
+      {/* OUTPUT TIME AND BUTTONS CONTAINER */}
+      <div className="flex flex-col  items-center    md:gap-4 md:justify-center ">
+        {/* Time and Output */}
+        <div className="flex flex-col md:flex-row items-center gap-3 my-2">
+          {/* TIME PERIOD */}
+          <div className="p-2 rounded-lg w-1/2 flex flex-col items-center">
+            <h3 className="text-gray-700 mb-2 underline font-bold">
+              Time Period
+            </h3>
+            <div className="flex justify-center gap-2">
+              {["daily", "weekly", "monthly"].map((period) => (
+                <button
+                  key={period}
+                  className={`btn btn-sm ${
+                    timePeriod === period
+                      ? "bg-gray-700 text-white"
+                      : "bg-gray-200"
+                  }`}
+                  onClick={() => setTimePeriod(period)}
+                >
+                  {period.charAt(0).toUpperCase() + period.slice(1)}
+                </button>
+              ))}
+            </div>
+          </div>
+          {/* OUTPUT TYPE */}
+          <div className=" p-2 rounded-lg w-1/2">
+            <h3 className="text-gray-700 mb-2 text-center underline font-bold">
+              Output Type
+            </h3>
+            <div className="flex justify-center gap-2">
+              {["list", "map", "both"].map((type) => (
+                <button
+                  key={type}
+                  className={`btn btn-sm ${
+                    newOutputType === type
+                      ? "bg-gray-700 text-white"
+                      : "bg-gray-200"
+                  }`}
+                  onClick={() => setNewOutputType(type)}
+                >
+                  {type === "both"
+                    ? "Both"
+                    : `${type.charAt(0).toUpperCase() + type.slice(1)}`}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div>
-          <h3 className="text-gray-700 mb-2">Output Type</h3>
-          <div className="flex gap-2">
-            {["list", "map", "both"].map((type) => (
-              <button
-                key={type}
-                className={`px-4 py-2 rounded ${
-                  newOutputType === type ? "bg-gray-100" : "bg-white"
-                }`}
-                onClick={() => setNewOutputType(type)}
-              >
-                {type === "both"
-                  ? "Both"
-                  : `${type.charAt(0).toUpperCase() + type.slice(1)} View`}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-col gap-2">
+        {/* BUTTONS */}
+        <div className="flex flex-col md:flex-row gap-2 md:gap-6 mb-2">
           <button
             onClick={handleRetrievePlanning}
             className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
@@ -144,6 +181,7 @@ export default function Planning() {
       </div>
 
       {renderContent()}
+      <div ref={aptRef}></div>
     </div>
   );
 }

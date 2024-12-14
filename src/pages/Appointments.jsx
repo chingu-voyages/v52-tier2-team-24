@@ -13,30 +13,50 @@ const Appointments = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // control modal visibility
   const [fileType, setFileType] = useState("");
 
-  useEffect(() => {
+  const fetchAcceptedAppointments = () => {
     const existingAppointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
-    const acceptedApps = existingAppointments.filter((app) => !app.isNew);
-    setAcceptedAppointments(acceptedApps);
+    setAcceptedAppointments(existingAppointments);
+  };
+
+  useEffect(() => {
+    fetchAcceptedAppointments();
+
+    const handleStorageChange = (event) => {
+      if (event.key === "appointments" || !event.key) {
+        fetchAcceptedAppointments();
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("appointmentsUpdated", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("appointmentsUpdated", handleStorageChange);
+    };
   }, []);
 
   const toggleVisitStatus = (id) => {
-    setAcceptedAppointments((prev) =>
-      prev.map((appointment) =>
-        appointment.id === id
-          ? { ...appointment, isVisited: !appointment.isVisited }
-          : appointment
-      )
+    const updatedAppointments = acceptedAppointments.map((appointment) =>
+      appointment.id === id
+        ? { ...appointment, isVisited: !appointment.isVisited }
+        : appointment
     );
+
+    setAcceptedAppointments(updatedAppointments);
 
     const allAppointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
-    const updatedAppointments = allAppointments.map((app) =>
+    const updatedAllAppointments = allAppointments.map((app) =>
       app.id === id ? { ...app, isVisited: !app.isVisited } : app
     );
-    localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+    localStorage.setItem(
+      "appointments",
+      JSON.stringify(updatedAllAppointments)
+    );
   };
 
   const handleFileChange = async (event, appointmentId) => {
@@ -101,22 +121,33 @@ const Appointments = () => {
           // ENTIRE ROW
           <div
             key={appointment.id}
-            className="flex flex-col  border-y-2 border-gray-300 bg-gray-100  md:flex-row md:items-center md:justify-between relative"
+            className="flex flex-col  border-b-2 border-gray-300 md:flex-row md:items-center md:justify-between relative"
           >
             {/* NAME AND LOGO */}
-            <div className="flex md:w-1/3">
+            <div className="flex md:w-1/2">
               <div className="flex items-center gap-1">
                 <img src={sun} className="h-[30px] " />
-                <p className="font-bold">{appointment.name}</p>
+                <p className="font-bold">
+                  {appointment.firstName} {appointment.lastName}
+                </p>
               </div>
             </div>
 
             {/* DATE TIME ADDRESS */}
-            <div className="ml-2 md:flex md:justify-start md:items-center md:gap-6">
-              <p className="text-gray-500 text-sm">
-                {appointment.time} | {appointment.date}
-              </p>
-              <p className="text-md  mr-1">
+            <div className=" md:flex  md:items-start md:gap-6 md:w-3/4">
+              <div className="flex gap-4">
+                <p className="text-gray-500 text-sm">
+                  <span className="text-black font-bold">Date:</span>{" "}
+                  {appointment.date}{" "}
+                </p>
+                <p className="text-gray-500 text-sm">
+                  {" "}
+                  <span className="text-black font-bold"> Time:</span>{" "}
+                  {appointment.time}
+                </p>
+              </div>
+
+              <p className="text-md  mr-1  ">
                 {formatAddress(appointment.address)}
               </p>
             </div>

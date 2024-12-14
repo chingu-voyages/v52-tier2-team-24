@@ -13,7 +13,7 @@ The application is designed to provide Los Angeles area Residents to request a s
 
 **Lidia Prado Peñalver - SCRUM Master** [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
 
-**Peter Eyong - SCRUM Master** [GitHub](https://github.com/pteyong577)
+**Peter Eyong - SCRUM Master** [GitHub](https://github.com/pteyong577) [LinkedIn](https://www.linkedin.com/in/peter-eyong-466299305)
 
 **Jessica Beazer - Product Owner** [GitHub](https://github.com/jessanagilepmp) [LinkedIn](https://www.linkedin.com/in/jessicabeazer/)
 
@@ -35,6 +35,7 @@ The application is designed to provide Los Angeles area Residents to request a s
 - [React-Router-Dom](https://reactrouter.com/)
 - [React Hook Form](https://react-hook-form.com/)
 - [React Datepicker](https://reactdatepicker.com/)
+- [react-use-measure](https://www.npmjs.com/package/react-use-measure)
 - [Tailwind Css](https://tailwindcss.com/)
 - [Headless UI](https://headlessui.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
@@ -45,6 +46,8 @@ The application is designed to provide Los Angeles area Residents to request a s
 - [Axios](https://axios-http.com/docs/intro)
 - [React](https://react.dev/)
 - [Vite](https://vite.dev/)
+- [uuid](https://github.com/uuidjs/uuid)
+
 - Webpack
 - Babel
 - React-DOM
