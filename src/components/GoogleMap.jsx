@@ -9,7 +9,6 @@ const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const GOOGLE_MAP_ID = import.meta.env.VITE_GOOGLE_MAP_ID;
 
 export const GoogleMap = ({appointments}) => {
-  console.log("MAP APPT_>", appointments)
   const locations = appointments.map(appt => {
     return {
       key: appt.address,
@@ -22,7 +21,7 @@ export const GoogleMap = ({appointments}) => {
 
   return (
 
-    <div className='flex justify-end bg-gray-300'>
+    <div className='flex justify-end'>
       <APIProvider 
         apiKey={GOOGLE_API_KEY} 
         onLoad={() => {

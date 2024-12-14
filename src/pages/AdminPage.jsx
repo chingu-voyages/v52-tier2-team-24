@@ -1,71 +1,71 @@
 import { useState, useEffect } from "react";
 import { useNavigate, NavLink, Outlet } from "react-router-dom";
-import calendar from "../images/calendar.png";
-import { formatAddress } from "../helpers/formatAddress";
+
+
+import AppointmentCarousel from "./AppointmentCarousel";
+import logo from "../images/sun.png";
+// import { NavBar } from "../components/NavBar";
+import Footer from "./Footer";
 
 const AdminPage = () => {
   const navigate = useNavigate();
-  const [newAppointments, setNewAppointments] = useState([]);
+
+  const [requests, setRequests] = useState([]);
+  const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    const existingAppointments = JSON.parse(
+    const storedRequests = JSON.parse(
+      localStorage.getItem("userInput") || "[]"
+    );
+
+    const requestsWithVisited = storedRequests.map((req) => ({
+      ...req,
+      isVisited: req.isVisited || false,
+    }));
+    setRequests(requestsWithVisited);
+
+    const storedAppointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
-    const newUserInput = localStorage.getItem("userInput");
-    if (newUserInput) {
-      const data = JSON.parse(newUserInput);
-      const newAppointment = {
-        id: Date.now(),
-        name: `${data.firstName} ${data.lastName}`,
-        date: data.date,
-        time: data.time,
-        address: data.address,
-        email: data.email,
-        isVisited: false,
-        isNew: true,
-        longitude: data.longitude,
-        latitude: data.latitude,
-      };
-      console.log("New Appt", newAppointment)
-      setNewAppointments((prev) => [...prev, newAppointment]);
-      localStorage.setItem(
-        "appointments",
-        JSON.stringify([...existingAppointments, newAppointment])
-      );
-      localStorage.removeItem("userInput");
-    } else {
-      const newApps = existingAppointments.filter((app) => app.isNew);
-      setNewAppointments(newApps);
-    }
+
+    setAppointments(storedAppointments);
+
   }, []);
 
   const handleLogout = () => {
-    //logout logic
     navigate("/");
+    sessionStorage.removeItem("loggedin");
   };
 
+  // APPPROVE
   const handleApprove = (id) => {
-    const appointmentToAccept = newAppointments.find((app) => app.id === id);
-    if (appointmentToAccept) {
-      const updatedAppointment = { ...appointmentToAccept, isNew: false };
-      setNewAppointments((prev) => prev.filter((app) => app.id !== id));
-      const allAppointments = JSON.parse(
+    const requestToApprove = requests.find((req) => req.id === id);
+
+    if (requestToApprove) {
+      const existingAppointments = JSON.parse(
         localStorage.getItem("appointments") || "[]"
       );
-      const updatedAppointments = allAppointments.map((app) =>
-        app.id === id ? { ...app, isNew: false } : app
-      );
+
+      const updatedAppointments = [...existingAppointments, requestToApprove];
       localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+
+      const updatedRequests = requests.filter((req) => req.id !== id);
+      setRequests(updatedRequests);
+      localStorage.setItem("userInput", JSON.stringify(updatedRequests));
+
+      window.dispatchEvent(new Event("appointmentsUpdated"));
     }
   };
 
+  // CANCEL
   const handleCancel = (id) => {
-    setNewAppointments((prev) => prev.filter((app) => app.id !== id));
-    const allAppointments = JSON.parse(
-      localStorage.getItem("appointments") || "[]"
-    );
-    const updatedAppointments = allAppointments.filter((app) => app.id !== id);
-    localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+    const allRequests = JSON.parse(localStorage.getItem("userInput") || "[]");
+    const updatedRequests = allRequests.filter((req) => req.id !== id);
+    localStorage.setItem("userInput", JSON.stringify(updatedRequests));
+
+    setRequests(updatedRequests);
+
+    window.dispatchEvent(new Event("requestsUpdated"));
   };
 
   const getNavLinkClass = ({ isActive }) =>
@@ -77,58 +77,39 @@ const AdminPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="">
-        <h2 className="text-lg font-bold my-4 sm:ml-2  text-center sm:text-start underline">
-          New Appointment Requests
-        </h2>
-        <div className="flex flex-wrap mb-12 h-[200px] justify-center items-center">
-          {/* New appointments */}
-          {newAppointments.length === 0 ? (
-            <p className="text-gray-500 ">No new appointments.</p>
-          ) : (
-            newAppointments.map((appointment) => (
-              <div
-                key={appointment.id}
-                className="flex items-start gap-4 bg-white  p-2 min-w-[250px]"
-              >
-                <div className="flex flex-col items-center ">
-                  <div className="flex items-center justify-center  bg-gray-100 rounded-full h-[55px] w-[55px] mb-3">
-                    <img
-                      src={calendar}
-                      alt="Calendar"
-                      className="h-[40px] w-[40px]"
-                    />
-                  </div>
-                  <h3 className="text-gray-700 text-lg font-bold ">{appointment.name}</h3>
-                  <p className="text-gray-500 text-sm  text-center">
-                    {appointment.date}
-                  </p>
-                  <p className="text-gray-500 text-sm mb-2  text-center">
-                    {appointment.time}
-                  </p>
-                  <p className="font-medium text-md text-center">
-                    {formatAddress(appointment.address)}
-                  </p>
-                  <div className="flex gap-4 items-center mt-2">
-                    <button
-                      className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors"
-                      onClick={() => handleApprove(appointment.id)}
-                    >
-                      ✓
-                    </button>
-                    <button
-                      className="w-10 h-10 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
-                      onClick={() => handleCancel(appointment.id)}
-                    >
-                      ✕
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))
-          )}
+      <nav
+        id="navbar"
+        className="flex flex-col gap-2 items-center md:flex-row md:justify-between px-10 py-3 "
+      >
+        <div className="flex gap-2  items-center  min-w-44">
+          <img src={logo} className="size-7 " />
+          <p className="text-2xl text-center">Solar Panel App</p>
         </div>
-      </div>
+
+        <button
+          className={`text-black border solid border-slate-500   hover:bg-slate-600 hover:text-white  rounded-3xl text-sm inline-flex items-center justify-center whitespace-nowrap px-6 py-3`}
+          onClick={() => handleLogout()}
+        >
+          Log Out
+        </button>
+      </nav>
+
+      <h2 className="text-lg font-bold my-4 sm:ml-2 text-center sm:text-start underline">
+        New Appointment Requests
+      </h2>
+      {requests.length === 0 ? (
+        <p className="text-red-500 text-center mb-5">No new appointments.</p>
+      ) : (
+        <AppointmentCarousel
+          requests={requests}
+          handleApprove={handleApprove}
+          handleCancel={handleCancel}
+        />
+      )}
+
+
+
+   
       <div>
         <div className="flex justify-center gap-2 sm:justify-start mb-2 border-b-2 border-gray-300">
           <NavLink className={getNavLinkClass} to={`appointments`}>
@@ -140,6 +121,7 @@ const AdminPage = () => {
         </div>
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 };
