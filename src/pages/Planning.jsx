@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-// import sun from "../images/weather.png";
 import PlanningAppointmentsList from "../helper functions/PlanningAppointmentsList";
 import { GoogleMap } from "../components/GoogleMap";
 import PDFButton from "../components/PDF/PDFButton";

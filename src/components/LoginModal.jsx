@@ -4,6 +4,7 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+import PropTypes from "prop-types";
 
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -92,3 +93,8 @@ export default function LoginModal({ isLoginOpen, handleClose }) {
     </div>
   );
 }
+
+LoginModal.propTypes = {
+  isLoginOpen: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+};
