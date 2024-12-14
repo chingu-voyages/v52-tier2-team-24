@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const Button = ({ text, isTransparent, isButtonLarge, onClick, clickToSchedule }) => {
   const size = isButtonLarge
     ? "text-xl min-w-72 max-w-max px-10 py-3"
@@ -22,4 +24,12 @@ export const Button = ({ text, isTransparent, isButtonLarge, onClick, clickToSch
       {text}
     </button>
   );
+};
+
+Button.propTypes = {
+  text: PropTypes.string.isRequired,
+  isTransparent: PropTypes.bool,
+  isButtonLarge: PropTypes.bool,
+  onClick: PropTypes.func,
+  clickToSchedule: PropTypes.func
 };

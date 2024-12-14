@@ -1,4 +1,5 @@
-import React from "react";
+
+import PropTypes from "prop-types";
 import { Button } from "./Button.jsx";
 
 export const AppointmentConfirmation = ({ closeModal }) => {
@@ -22,4 +23,8 @@ export const AppointmentConfirmation = ({ closeModal }) => {
       </div>
     </div>
   );
+};
+
+AppointmentConfirmation.propTypes = {
+  closeModal: PropTypes.func.isRequired
 };

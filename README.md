@@ -1,15 +1,19 @@
-# Solar App Title
+# SolarRise
 
-The application is designed to provide Los Angeles area Residents to request a solar installation evaluation and to allow company admins to access, plan, and schedule visits. This app was created as part of [Chingu's](https://www.chingu.io/) Voyage 52.
+### Empowering Sustainability Through Accessibility
+
+## Vision
+
+Empowering Los Angles residents to embrace sustainable energy solutions by providing a seamless and efficient platform for solar panel evaluation and installation guidance.
 
 ## Features
 
 - **Residents** are able to fill out a form to request an appointment that includes contact details, a timeslot preference, and their address that is Validated against the [LA Dataset](https://catalog.data.gov/dataset/addresses-in-the-city-of-los-angeles/resource/cfcd5dce-b96c-43e8-bd36-aac11d14bf7d)
 - **Admin** can login to access the admin dashboard that allows the user to view requests submitted by the residents and then delete or add the request as an appointment
-- **Admin** can view appointments and then view their route based off of a list or map
+- **Admin** can view appointments, select if the appointment has been visited or not, and then view their route on a map or list based on a daily weekly or monthly selection
 - **Admin** can export their appointment list in PDF format
 
-## Our Team
+## Team 24
 
 **Lidia Prado Peñalver - SCRUM Master** [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
 
@@ -19,7 +23,7 @@ The application is designed to provide Los Angeles area Residents to request a s
 
 **Alicia Guirand - Product Owner** [GitHub](https://github.com/aliciaguirand) [LinkedIn](https://www.linkedin.com/in/aliciaguirand)
 
-**Lindsay Allen - Developer** [GitHub](https://github.com/lkallen)
+**Lindsay Allen - Developer** [GitHub](https://github.com/lkallen)[LinkedIn](https://www.linkedin.com/in/lindsay-allen-54b46937/)
 
 **Benjamin Corbett - Developer** [GitHub](https://github.com/bcsurf2822) [LinkedIn](https://www.linkedin.com/in/benjamin-corbett-84822424a/)
 
@@ -54,7 +58,7 @@ The application is designed to provide Los Angeles area Residents to request a s
 
 ## Live Demo
 
-[ISOLAR - DEVELOPMENT!](https://isolar.netlify.app/)
+[SolarRise (Dev Deployment)](https://isolar.netlify.app/)
 
 ## Run Locally
 
@@ -84,9 +88,20 @@ Start the server
 
 ## Screenshots
 
+### Landing Page
+
 ![Landing Page](/public/screenshots/landing-page.png)
+![Page Details](/public/screenshots/user-details.png)
 ![Form](/public/screenshots/user-form.png)
-![New Appointment](/public/screenshots/new-appt.png)
-![Appointments](/public/screenshots/all-appt.png)
-![Map](/public/screenshots/map-view.png)
-![PDF Page](/public/screenshots/pdf-view.png)
+![Login](/public/screenshots/admin-login.png)
+![Contact Us](/public/screenshots/contact-us.png)
+
+### Admin Page
+
+![New Appointments](/public/screenshots/new-appointments.png)
+![Planning](/public/screenshots/planning.png)
+![Planning List](/public/screenshots/plan-list.png)
+![Map](/public/screenshots/map-list.png)
+![PDF](/public/screenshots/pdf.png)
+
+This app was created as part of [Chingu's](https://www.chingu.io/) Voyage 52.

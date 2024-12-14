@@ -1,9 +1,4 @@
-// When employee selects export file is generated in selected in format complete with resident
-//     name
-//     email
-//     phone number
-//     address
-//     preferred timeslot
+import PropTypes from "prop-types";
 
 export default function PDFButton({ handleExportPDF }) {
   return (
@@ -29,3 +24,7 @@ export default function PDFButton({ handleExportPDF }) {
     </button>
   );
 }
+
+PDFButton.propTypes = {
+  handleExportPDF: PropTypes.func.isRequired
+};
