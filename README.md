@@ -10,10 +10,10 @@ Empowering Los Angles residents to embrace sustainable energy solutions by provi
 
 - **Residents** are able to fill out a form to request an appointment that includes contact details, a timeslot preference, and their address that is Validated against the [LA Dataset](https://catalog.data.gov/dataset/addresses-in-the-city-of-los-angeles/resource/cfcd5dce-b96c-43e8-bd36-aac11d14bf7d)
 - **Admin** can login to access the admin dashboard that allows the user to view requests submitted by the residents and then delete or add the request as an appointment
-- **Admin** can view appointments and then view their route based off of a list or map
+- **Admin** can view appointments, select if the appointment has been visited or not, and then view their route on a map or list based on a daily weekly or monthly selection
 - **Admin** can export their appointment list in PDF format
 
-## Our Team
+## Team 24
 
 **Lidia Prado Peñalver - SCRUM Master** [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
 
@@ -58,7 +58,7 @@ Empowering Los Angles residents to embrace sustainable energy solutions by provi
 
 ## Live Demo
 
-[ISOLAR - DEVELOPMENT!](https://isolar.netlify.app/)
+[SolarRise (Dev Deployment)](https://isolar.netlify.app/)
 
 ## Run Locally
 

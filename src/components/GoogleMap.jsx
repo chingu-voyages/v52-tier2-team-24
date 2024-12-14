@@ -1,47 +1,27 @@
-import PropTypes from 'prop-types';
-import {
-  APIProvider,
-  Map,
-  AdvancedMarker,
-  useMapsLibrary,
-  useMap
-} from '@vis.gl/react-google-maps';
-import Directions from './Directions';
+import PropTypes from "prop-types";
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import Directions from "./Directions";
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const GOOGLE_MAP_ID = import.meta.env.VITE_GOOGLE_MAP_ID;
 
-export const GoogleMap = ({appointments}) => {
-
-  const locations = appointments.map(appt => {
-    return {
-      key: appt.address,
-      location: {
-        lat: appt.latitude,
-        lng: appt.longitude,
-      }
-    }
-  })
-
-  const addresses = appointments.map(appt => appt.address)
-  console.log("Addresses", addresses)
+export const GoogleMap = ({ appointments }) => {
+  const addresses = appointments.map((appt) => appt.address);
 
   return (
-
-    <div className='flex justify-end'>
-      <APIProvider 
-        apiKey={GOOGLE_API_KEY} 
+    <div className="flex justify-end">
+      <APIProvider
+        apiKey={GOOGLE_API_KEY}
         onLoad={() => {
-          console.log('Maps API has loaded.')
+          console.log("Maps API has loaded.");
         }}
       >
         <Map
-          style={{width: '80vw', height: '50vh'}}
-          defaultCenter={{lat: 34.0549, lng: -118.2426}}
+          style={{ width: "80vw", height: "50vh" }}
+          defaultCenter={{ lat: 34.0549, lng: -118.2426 }}
           mapId={GOOGLE_MAP_ID}
           defaultZoom={11}
-          gestureHandling={'greedy'}
-
+          gestureHandling={"greedy"}
           disableDefaultUI={false}
         >
           <Directions addresses={addresses} />
