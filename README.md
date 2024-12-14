@@ -19,7 +19,7 @@ The application is designed to provide Los Angeles area Residents to request a s
 
 **Alicia Guirand - Product Owner** [GitHub](https://github.com/aliciaguirand) [LinkedIn](https://www.linkedin.com/in/aliciaguirand)
 
-**Lindsay Allen - Developer** [GitHub](https://github.com/lkallen)
+**Lindsay Allen - Developer** [GitHub](https://github.com/lkallen)[LinkedIn](https://www.linkedin.com/in/lindsay-allen-54b46937/)
 
 **Benjamin Corbett - Developer** [GitHub](https://github.com/bcsurf2822) [LinkedIn](https://www.linkedin.com/in/benjamin-corbett-84822424a/)
 
