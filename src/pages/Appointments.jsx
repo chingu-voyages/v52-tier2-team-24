@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import sun from "../images/weather.png";
 import { formatAddress } from "../helpers/formatAddress";
 import FileUpload from "../components/FileUpload";
+import FileDownload from "../components/FileUpload";
 
 const Appointments = () => {
   const [acceptedAppointments, setAcceptedAppointments] = useState([]);
@@ -53,7 +54,7 @@ const Appointments = () => {
   };
   
   return (
-    <div className="space-y-2 ">
+    <div className="space-y-2">
       {acceptedAppointments.length === 0 ? (
         <p className="text-gray-500 text-center justify-center">
           No appointments.
@@ -63,7 +64,7 @@ const Appointments = () => {
           // ENTIRE ROW
           <div
             key={appointment.id}
-            className="flex flex-col  border-b-2 border-gray-300 md:flex-row md:items-center md:justify-between relative"
+            className="flex ml-2 mr-2 flex-col  border-b-2 border-gray-300 md:flex-row md:items-center md:justify-between relative"
           >
             {/* NAME AND LOGO */}
             <div className="flex md:w-1/2">
@@ -98,7 +99,9 @@ const Appointments = () => {
             <div className="sm:flex sm:flex-col sm:items-end sm:static absolute right-2 m-2 ">
               <button
                 className="w-12 h-7 border-2 border-gray-400 rounded-full relative bg-white  transition-colors "
-                onClick={() => toggleVisitStatus(appointment.id)}
+                onClick={() => {toggleVisitStatus(appointment.id)
+            
+                }}
               >
                 <div
                   className={`absolute w-5 h-5 rounded-full top-0.5 left-0.3 transition-transform ${
@@ -109,7 +112,7 @@ const Appointments = () => {
                 />
               </button>{" "}
             </div>
-            <FileUpload/>
+            {appointment.isVisited && <FileUpload />}
           </div>
         ))
       )}
