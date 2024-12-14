@@ -30,16 +30,13 @@ const getDatasetUrl = (streetName) => {
 export const searchAddress = async (address) => {
   const { house_number, street_name, zip_code } = address;
   const datasetUrl = getDatasetUrl(street_name);
-  console.log("URL", datasetUrl);
   if (!datasetUrl) {
     console.error("Please Enter a valid los angelos address");
     return;
   }
 
   try {
-    console.log("To Res");
     const response = await axios.get(datasetUrl);
-    console.log("Response", response);
     const data = response.data;
 
     const results = data.filter(
@@ -51,7 +48,7 @@ export const searchAddress = async (address) => {
 
     if (results.length > 0) {
       console.log("Address Found:", results);
-      return results
+      return results;
     } else {
       console.log("Address Not Found in Dataset");
     }

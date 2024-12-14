@@ -4,18 +4,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DateForm from "./DateForm";
 
+import { v4 as genId } from "uuid"; // Import UUID library for unique IDs
+
 import GoogleAutoComplete from "./customInputs/GoogleAutocomplete";
 
 import { APIProvider } from "@vis.gl/react-google-maps";
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
-import { getCoordinates } from "../api/maps";
 
 import { AppointmentConfirmation } from "./AppointmentConfirmation";
 import { TimeslotConfirmation } from "./TimeslotConfirmation";
 
 export default function TestValidate() {
-  //states for appointment and timeslot modals
   const [isTimeslotModalOpen, setIsTimeslotModalOpen] = useState(false);
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const [addressStatus, setAddressStatus] = useState(null);
@@ -51,10 +51,10 @@ export default function TestValidate() {
     handleSubmit,
     reset,
     formState: { errors },
-    setError, //to manually set errors
+    setError,
 
-    clearErrors, //to clear errors
-    setValue, //to set value
+    clearErrors,
+    setValue,
   } = useForm({
     resolver: yupResolver(userSchema),
   });
@@ -75,14 +75,27 @@ export default function TestValidate() {
     }
 
     if (!data.date || !data.time) {
-      return; // Prevent submission if either is missing
+      return;
     }
 
-console.log("Data", data)
+    try {
+      const newUserInput = { ...data, id: genId() };
 
-    localStorage.setItem("userInput", JSON.stringify(data));
+      const existingInputs =
+        JSON.parse(localStorage.getItem("userInput")) || [];
+      const inputsArray = Array.isArray(existingInputs) ? existingInputs : [];
+
+      const updatedInputs = [...inputsArray, newUserInput];
+
+      localStorage.setItem("userInput", JSON.stringify(updatedInputs));
+    } catch (error) {
+      console.error("Error accessing localStorage:", error);
+
+      localStorage.setItem("userInput", JSON.stringify([data]));
+    }
+
     reset();
-    //show appointment confirmation modal after form submission
+
     setIsAppointmentModalOpen(true);
     setAddressMessage(null);
     setAddressStatus(null);
@@ -119,6 +132,12 @@ console.log("Data", data)
               type="text"
               {...register("firstName")}
               placeholder={errors.firstName?.message || "Enter Your Name"}
+              onChange={(e) => {
+                const value = e.target.value;
+                const upperCaseValue =
+                  value.charAt(0).toUpperCase() + value.slice(1);
+                e.target.value = upperCaseValue;
+              }}
             />
           </div>
           <div className="sm:w-1/2 ">
@@ -132,6 +151,12 @@ console.log("Data", data)
               type="text"
               {...register("lastName")}
               placeholder={errors.lastName?.message || "Enter Your Last Name"}
+              onChange={(e) => {
+                const value = e.target.value;
+                const upperCaseValue =
+                  value.charAt(0).toUpperCase() + value.slice(1);
+                e.target.value = upperCaseValue;
+              }}
             />
           </div>
         </div>
