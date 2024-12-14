@@ -8,29 +8,9 @@ const Appointments = () => {
   const [acceptedAppointments, setAcceptedAppointments] = useState([]);
 
   const fetchAcceptedAppointments = () => {
-  const fetchAcceptedAppointments = () => {
     const existingAppointments = JSON.parse(
       localStorage.getItem("appointments") || "[]"
     );
-    setAcceptedAppointments(existingAppointments);
-  };
-
-  useEffect(() => {
-    fetchAcceptedAppointments();
-
-    const handleStorageChange = (event) => {
-      if (event.key === "appointments" || !event.key) {
-        fetchAcceptedAppointments();
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("appointmentsUpdated", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("appointmentsUpdated", handleStorageChange);
-    };
     setAcceptedAppointments(existingAppointments);
   };
 
@@ -57,13 +37,7 @@ const Appointments = () => {
       appointment.id === id
         ? { ...appointment, isVisited: !appointment.isVisited }
         : appointment
-    const updatedAppointments = acceptedAppointments.map((appointment) =>
-      appointment.id === id
-        ? { ...appointment, isVisited: !appointment.isVisited }
-        : appointment
     );
-
-    setAcceptedAppointments(updatedAppointments);
 
     setAcceptedAppointments(updatedAppointments);
 
@@ -71,12 +45,7 @@ const Appointments = () => {
       localStorage.getItem("appointments") || "[]"
     );
     const updatedAllAppointments = allAppointments.map((app) =>
-    const updatedAllAppointments = allAppointments.map((app) =>
       app.id === id ? { ...app, isVisited: !app.isVisited } : app
-    );
-    localStorage.setItem(
-      "appointments",
-      JSON.stringify(updatedAllAppointments)
     );
     localStorage.setItem(
       "appointments",
@@ -99,12 +68,8 @@ const Appointments = () => {
           >
             {/* NAME AND LOGO */}
             <div className="flex md:w-1/2">
-            <div className="flex md:w-1/2">
               <div className="flex items-center gap-1">
                 <img src={sun} className="h-[30px] " />
-                <p className="font-bold">
-                  {appointment.firstName} {appointment.lastName}
-                </p>
                 <p className="font-bold">
                   {appointment.firstName} {appointment.lastName}
                 </p>
@@ -112,20 +77,6 @@ const Appointments = () => {
             </div>
 
             {/* DATE TIME ADDRESS */}
-            <div className=" md:flex  md:items-start md:gap-6 md:w-3/4">
-              <div className="flex gap-4">
-                <p className="text-gray-500 text-sm">
-                  <span className="text-black font-bold">Date:</span>{" "}
-                  {appointment.date}{" "}
-                </p>
-                <p className="text-gray-500 text-sm">
-                  {" "}
-                  <span className="text-black font-bold"> Time:</span>{" "}
-                  {appointment.time}
-                </p>
-              </div>
-
-              <p className="text-md  mr-1  ">
             <div className=" md:flex  md:items-start md:gap-6 md:w-3/4">
               <div className="flex gap-4">
                 <p className="text-gray-500 text-sm">
