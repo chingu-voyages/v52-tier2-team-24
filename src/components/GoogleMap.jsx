@@ -3,12 +3,19 @@ import {
   APIProvider,
   Map,
   AdvancedMarker,
+  useMapsLibrary,
+  useMap
 } from '@vis.gl/react-google-maps';
+import Directions from './Directions';
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const GOOGLE_MAP_ID = import.meta.env.VITE_GOOGLE_MAP_ID;
 
 export const GoogleMap = ({appointments}) => {
+
+  // DIRECTIONS FUNCTION
+  
+
   const locations = appointments.map(appt => {
     return {
       key: appt.address,
@@ -18,6 +25,11 @@ export const GoogleMap = ({appointments}) => {
       }
     }
   })
+
+  const addresses = appointments.map(appt => appt.address)
+  console.log("Addresses", addresses)
+
+  console.log("LOCATION KEY", locations)
 
   return (
 
@@ -37,7 +49,8 @@ export const GoogleMap = ({appointments}) => {
 
           disableDefaultUI={false}
         >
-          {locations.map((address, index) => <AdvancedMarker key={index} position={address.location} />)}
+          {/* {locations.map((address, index) => <AdvancedMarker key={index} position={address.location} />)} */}
+          <Directions addresses={addresses} />
         </Map>
       </APIProvider>
     </div>
