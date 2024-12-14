@@ -1,9 +1,0 @@
-[
-    {
-      "origin": ["https://isolar-testing.netlify.app/"],
-      "method": ["GET", "POST", "PUT", "DELETE"],
-      "maxAgeSeconds": 3600,
-      "responseHeader": ["Content-Type", "Authorization"]
-    }
-  ]
-  
