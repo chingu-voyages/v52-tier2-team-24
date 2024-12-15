@@ -1,41 +1,107 @@
-# voyage-tasks
+# SolarRise
 
-Your project's `readme` is as important to success as your code. For 
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+### Empowering Sustainability Through Accessibility
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+## Vision
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+Empowering Los Angles residents to embrace sustainable energy solutions by providing a seamless and efficient platform for solar panel evaluation and installation guidance.
 
-> Own it & Make it your Own!
+## Features
 
-## Team Documents
+- **Residents** are able to fill out a form to request an appointment that includes contact details, a timeslot preference, and their address that is Validated against the [LA Dataset](https://catalog.data.gov/dataset/addresses-in-the-city-of-los-angeles/resource/cfcd5dce-b96c-43e8-bd36-aac11d14bf7d)
+- **Admin** can login to access the admin dashboard that allows the user to view requests submitted by the residents and then delete or add the request as an appointment
+- **Admin** can view appointments, select if the appointment has been visited or not, and then view their route on a map or list based on a daily weekly or monthly selection
+- **Admin** can export their appointment list in PDF format
 
-You may find these helpful as you work together to organize your project.
+## Team 24
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
+**Lidia Prado Peñalver - SCRUM Master** [GitHub](https://github.com/LidiaIleana) [LinkedIn](https://www.linkedin.com/in/lidiaprado/)
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
+**Peter Eyong - SCRUM Master** [GitHub](https://github.com/pteyong577) [LinkedIn](https://www.linkedin.com/in/peter-eyong-466299305)
 
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+**Jessica Beazer - Product Owner** [GitHub](https://github.com/jessanagilepmp) [LinkedIn](https://www.linkedin.com/in/jessicabeazer/)
 
-## Our Team
+**Alicia Guirand - Product Owner** [GitHub](https://github.com/aliciaguirand) [LinkedIn](https://www.linkedin.com/in/aliciaguirand)
 
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team *before* you start
-coding!
+**Lindsay Allen - Developer** [GitHub](https://github.com/lkallen)[LinkedIn](https://www.linkedin.com/in/lindsay-allen-54b46937/)
 
-- Benjamin Corbett: [GitHub](https://github.com/bcsurf2822) / [LinkedIn](https://www.linkedin.com/in/benjamin-corbett-84822424a/)
-- Teammate name #2: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+**Benjamin Corbett - Developer** [GitHub](https://github.com/bcsurf2822) [LinkedIn](https://www.linkedin.com/in/benjamin-corbett-84822424a/)
 
-   ...
-- Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+**Dana Jeon - Developer** [GitHub](https://github.com/danajeon) [LinkedIn](https://www.linkedin.com/in/dana-jeon-dev/)
+
+**Anna Bowen - Developer** [GitHub](https://github.com/bowenanna) [LinkedIn](https://www.linkedin.com/in/realannabowen/)
+
+**Sierra Swaby - Developer** [GitHub](https://github.com/starkspark) [LinkedIn](https://www.linkedin.com/in/sierra-swaby)
+
+## Dev Dependencies
+
+- [React Google Maps](https://visgl.github.io/react-google-maps/)
+- [React-Router-Dom](https://reactrouter.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [React Datepicker](https://reactdatepicker.com/)
+- [react-use-measure](https://www.npmjs.com/package/react-use-measure)
+- [Tailwind Css](https://tailwindcss.com/)
+- [Headless UI](https://headlessui.com/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [Prop Types](https://github.com/facebook/prop-types)
+- [React PDF](https://react-pdf.org/)
+- [Daisy UI](https://daisyui.com/)
+- [ESLint](https://eslint.org/)
+- [Axios](https://axios-http.com/docs/intro)
+- [React](https://react.dev/)
+- [Vite](https://vite.dev/)
+- [uuid](https://github.com/uuidjs/uuid)
+
+- Webpack
+- Babel
+- React-DOM
+
+## Live Demo
+
+[SolarRise (Dev Deployment)](https://isolar.netlify.app/)
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/chingu-voyages/v52-tier2-team-24.git
+```
+
+Go to the project directory
+
+```bash
+  cd v52-tier2-team-24/
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+## Screenshots
+
+### Landing Page
+
+![Landing Page](/public/screenshots/landing-page.png)
+![Page Details](/public/screenshots/user-details.png)
+![Form](/public/screenshots/user-form.png)
+![Login](/public/screenshots/admin-login.png)
+![Contact Us](/public/screenshots/contact-us.png)
+
+### Admin Page
+
+![New Appointments](/public/screenshots/new-appointments.png)
+![Planning](/public/screenshots/planning.png)
+![Planning List](/public/screenshots/plan-list.png)
+![Map](/public/screenshots/map-list.png)
+![PDF](/public/screenshots/pdf.png)
+
+This app was created as part of [Chingu's](https://www.chingu.io/) Voyage 52.
