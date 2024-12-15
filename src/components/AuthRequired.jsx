@@ -6,6 +6,5 @@ export default function AuthRequired() {
   if (!isLoggedIn) {
     return <Navigate to="/" />;
   }
-
   return <Outlet />;
 }
