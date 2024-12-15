@@ -31,7 +31,7 @@ export const NavBar = () => {
     >
       <div className="flex gap-2  items-center  min-w-44">
         <img src={logo} className="size-7 " />
-        <p className="text-2xl text-center">Solar Panel App</p>
+        <p className="text-2xl text-center">SolarRise</p>
       </div>
       <Button
         text={isAdminRoute ? "Log Out" : "Sign In"}
