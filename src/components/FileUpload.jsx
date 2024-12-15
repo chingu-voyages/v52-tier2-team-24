@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AWS from "aws-sdk";
-// import {
-//   AWS_ACCESS_KEY_ID,
-//   AWS_SECRET_ACCESS_KEY,
-//   AWS_REGION,
-//   AWS_BUCKET_NAME,
-// } from "../../aws-config";
+import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import receipt from "../images/Ticket.svg";
 import upload from "../images/Upload.svg";
 
@@ -14,10 +8,10 @@ const FileUpload = () => {
   const [uploading, setUploading] = useState(false);
   const [uploadedFileKey, setUploadedFileKey] = useState("");
 
-    const AWS_ACCESS_KEY_ID = import.meta.env.VITE_AWS_ACCESS_KEY_ID;
-    const AWS_SECRET_ACCESS_KEY = import.meta.env.VITE_AWS_SECRET_ACCESS_KEY;
-    const AWS_REGION = import.meta.env.VITE_AWS_REGION;
-    const AWS_BUCKET_NAME = import.meta.env.VITE_AWS_BUCKET_NAME;
+  const AWS_ACCESS_KEY_ID = import.meta.env.VITE_AWS_ACCESS_KEY_ID;
+  const AWS_SECRET_ACCESS_KEY = import.meta.env.VITE_AWS_SECRET_ACCESS_KEY;
+  const AWS_REGION = import.meta.env.VITE_AWS_REGION;
+  const AWS_BUCKET_NAME = import.meta.env.VITE_AWS_BUCKET_NAME;
 
   useEffect(() => {
     const storedFileKey = localStorage.getItem("uploadedFileKey");
@@ -26,13 +20,14 @@ const FileUpload = () => {
     }
   }, []);
 
-  const configureAWS = () => {
-    AWS.config.update({
+  // Create an S3 Client instance
+  const s3Client = new S3Client({
+    region: AWS_REGION,
+    credentials: {
       accessKeyId: AWS_ACCESS_KEY_ID,
       secretAccessKey: AWS_SECRET_ACCESS_KEY,
-      region: AWS_REGION,
-    });
-  };
+    },
+  });
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -45,9 +40,7 @@ const FileUpload = () => {
     }
 
     setUploading(true);
-    configureAWS();
 
-    const s3 = new AWS.S3();
     const fileKey = `receipts/${Date.now()}-${file.name}`;
 
     const params = {
@@ -57,7 +50,7 @@ const FileUpload = () => {
     };
 
     try {
-      await s3.upload(params).promise();
+      await s3Client.send(new PutObjectCommand(params));
       setUploadedFileKey(fileKey);
       localStorage.setItem("uploadedFileKey", fileKey);
       alert("File uploaded successfully");
@@ -75,17 +68,15 @@ const FileUpload = () => {
       return;
     }
 
-    configureAWS();
-    const s3 = new AWS.S3();
-
     const params = {
       Bucket: AWS_BUCKET_NAME,
       Key: uploadedFileKey,
     };
 
     try {
-      const { Body } = await s3.getObject(params).promise();
-      const blob = new Blob([Body]);
+      const data = await s3Client.send(new GetObjectCommand(params));
+      const body = data.Body;
+      const blob = await new Response(body).blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -119,7 +110,7 @@ const FileUpload = () => {
       )}
       {uploadedFileKey && (
         <button onClick={downloadFile}>
-          <img src={receipt} />
+          <img src={receipt} alt="Download Receipt" />
         </button>
       )}
     </div>
