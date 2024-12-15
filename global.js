@@ -1,2 +1,2 @@
 window.global = window;
-export default global;
+export default window.global;

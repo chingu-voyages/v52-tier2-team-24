@@ -5,5 +5,5 @@ const connectorConfig = {
   service: 'chingu-solar_app',
   location: 'us-central1'
 };
-exports.connectorConfig = connectorConfig;
+module.exportsexports.connectorConfig = connectorConfig;
 
