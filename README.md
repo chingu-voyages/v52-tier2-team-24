@@ -58,7 +58,7 @@ Empowering Los Angles residents to embrace sustainable energy solutions by provi
 
 ## Live Demo
 
-[SolarRise (Dev Deployment)](https://isolar.netlify.app/)
+[SolarRise](https://isolar.netlify.app/)
 
 ## Run Locally
 
