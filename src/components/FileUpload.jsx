@@ -46,6 +46,7 @@ const FileUpload = () => {
       Bucket: AWS_BUCKET_NAME,
       Key: fileKey,
       Body: file,
+      Region: AWS_REGION,
     };
 
     try {
