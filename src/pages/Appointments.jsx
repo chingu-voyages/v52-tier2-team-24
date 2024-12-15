@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import sun from "../images/weather.png";
 import { formatAddress } from "../helpers/formatAddress";
 import FileUpload from "../components/FileUpload";
-import FileDownload from "../components/FileUpload";
 
 const Appointments = () => {
   const [acceptedAppointments, setAcceptedAppointments] = useState([]);
