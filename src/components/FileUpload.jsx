@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import receipt from "../images/Ticket.svg";
 import upload from "../images/Upload.svg";
@@ -20,7 +20,6 @@ const FileUpload = () => {
     }
   }, []);
 
-  // Create an S3 Client instance
   const s3Client = new S3Client({
     region: AWS_REGION,
     credentials: {
